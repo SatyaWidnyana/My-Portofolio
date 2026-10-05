@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <pre id="output" style="font-family: monospace; font-size: 10px;"></pre>
+  <script>
+    const img = new Image();
+    img.src = 'image/itb-stikom-bali.png';
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      // resize to 40x30 roughly
+      const width = 40;
+      const height = Math.floor((img.height / img.width) * width * 0.5); // 0.5 because chars are taller than wide
+      canvas.width = width;
+      canvas.height = height;
+      ctx.drawImage(img, 0, 0, width, height);
+      
+      const imgData = ctx.getImageData(0, 0, width, height).data;
+      let ascii = '';
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const idx = (y * width + x) * 4;
+          const r = imgData[idx];
+          const g = imgData[idx+1];
+          const b = imgData[idx+2];
+          const a = imgData[idx+3];
+          
+          if (a < 128) {
+            ascii += ' ';
+          } else {
+            // let's use R G B to approximate color character
+            if (r > 150 && g < 100 && b < 100) ascii += 'R';
+            else if (r > 150 && g > 150 && b < 100) ascii += 'Y';
+            else if (r < 100 && g > 100 && b < 100) ascii += 'G';
+            else if (r < 100 && g < 100 && b > 150) ascii += 'B';
+            else if (r < 100 && g > 100 && b > 150) ascii += 'C';
+            else if (r > 200 && g > 200 && b > 200) ascii += 'W';
+            else ascii += '#';
+          }
+        }
+        ascii += '\\n';
+      }
+      document.getElementById('output').innerText = ascii;
+    };
+  </script>
+</body>
+</html>

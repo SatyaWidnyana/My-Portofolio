@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portofolio Satya Widnyana, UI/UX Designer & Web Creator.">
+  <title>Satya Widnyana — Creative Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Outfit:wght@300;400;500;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=118">
+  <script src="script.js?v=56" defer></script>
+</head>
+<body>
+  <!-- Intro Animation Overlay -->
+  <div class="intro-overlay" id="intro-overlay">
+    <div class="intro-content">
+      <div class="intro-greeting" id="intro-greeting">Hello</div>
+      <div class="intro-loading-wrapper" id="intro-loading-wrapper">
+        <div class="intro-percent" id="intro-percent">0%</div>
+        <div class="intro-loading-bar">
+          <div class="intro-progress" id="intro-progress"></div>
+        </div>
+      </div>
+      <div class="intro-welcome" id="intro-welcome" hidden>
+        <img src="image/Logo.png" alt="Satya Logo" class="intro-logo" id="intro-logo">
+        <span>welcome to my</span>
+        <span class="serif-italic">portfolio.</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="transition-grid" id="transition-grid">
+    <div class="transition-col"></div>
+    <div class="transition-col"></div>
+    <div class="transition-col"></div>
+    <div class="transition-col"></div>
+  </div>
+
+  <!-- Navigation moved outside main-wrapper to fix backdrop-filter bug during transform -->
+  <header class="navbar hidden-on-load" id="navbar">
+    <a href="#" class="brand">
+      <img src="image/Logo.png" alt="Satya Logo" class="brand-logo">
+    </a>
+    <nav class="nav-links" id="nav-links">
+      <div class="glass-pill-bg" id="glass-pill-bg"></div>
+      <a href="#projects">Selected Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-action">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+      <div class="nav-divider"></div>
+      <a href="#contact" class="btn-primary">Let's Talk</a>
+    </div>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open Menu">
+      <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </header>
+
+  <div class="main-wrapper" id="main-wrapper" inert>
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        
+        <div class="hero-content">
+          <div class="hero-text">
+            <h2 class="hero-subtitle" style="position: relative;">
+              <!-- Placeholder tersembunyi untuk mem-booking ukuran tinggi dan lebar yang akurat 100% -->
+              <div style="visibility: hidden; pointer-events: none;" aria-hidden="true">
+                <span class="script-font-dummy">HELLO, MY NAME IS...</span>
+                <span class="name-solid">SATYA</span><br>
+                <span class="name-solid" id="widnyana-dummy">WIDNYANA</span>
+              </div>
+              
+              <!-- Teks asli yang di-animasikan -->
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <span class="script-font"></span>
+                <span class="name-solid">SATYA</span><br>
+                <span class="name-solid">WIDNYANA</span>
+              </div>
+            </h2>
+            <div class="terminal-box" id="termV2">
+              <div class="term-header">
+                 <div class="term-dots">
+                   <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                 </div>
+                 <span class="term-title">guest@satya:~</span>
+              </div>
+              <div class="term-body">
+                <div class="term-input-line" id="termInputLine">
+                  <span class="term-prompt">guest@satya:~$</span>
+                  <span class="term-cmd">./load_profile</span><span class="term-cursor" id="mainCursor"></span>
+                  <div class="term-btn-group">
+                    <button class="term-run-btn" id="termRunBtn">ENTER ↵</button>
+                    <button class="term-del-btn" id="termDelBtn" style="display: none;">DELETE ⌫</button>
+                  </div>
+                </div>
+                <div class="term-logs" id="termLogs"></div>
+                <div class="term-final-text" id="termFinalText"></div>
+                <div id="termSourceHtml" style="display: none;">
+                  <p class="term-desc" style="margin-top: 15px;">
+                    As a <strong>Web Designer & Digital Creator</strong>, I design digital experiences that <em>inspire</em> and <em>connect</em>. I focus on crafting elegant, functional, and user-centered interfaces.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="hero-image" id="lanyard">
+            <!-- Ghost image to maintain container dimensions -->
+            <img src="image/lanyard new lightmode.png" class="lanyard-card" style="visibility: hidden;" draggable="false" />
+            
+            <!-- Strap Part (Top 30%) -->
+            <div class="lanyard-strap" id="lanyard-strap">
+              <img src="image/lanyard new lightmode.png" alt="" class="lanyard-card lanyard-light" draggable="false" />
+              <img src="image/lanyard new darkmode.png" alt="" class="lanyard-card lanyard-dark" draggable="false" />
+            </div>
+            
+            <!-- Card Body Part (Bottom 70%) -->
+            <div class="lanyard-body" id="lanyard-body">
+              <img src="image/lanyard new lightmode.png" alt="Satya Widnyana Name Tag Light" class="lanyard-card lanyard-light" draggable="false" />
+              <img src="image/lanyard new darkmode.png" alt="Satya Widnyana Name Tag Dark" class="lanyard-card lanyard-dark" draggable="false" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="marquee-container">
+          <div class="marquee-mask">
+            <div class="marquee-content">
+            <span class="m-solid">WEB DEVELOPMENT</span><span class="m-dot">✦</span>
+            <span class="m-outline">INTERACTIVE DESIGN</span><span class="m-dot">✦</span>
+            <span class="m-solid">UI/UX DESIGNER</span><span class="m-dot">✦</span>
+            <span class="m-outline">PROMPT ENGINEERING</span><span class="m-dot">✦</span>
+            <span class="m-solid">MUSIC (HOBBY)</span><span class="m-dot">✦</span>
+            <span class="m-outline">VIBE CODING</span><span class="m-dot">✦</span>
+            <span class="m-solid">WEB DEVELOPMENT</span><span class="m-dot">✦</span>
+            <span class="m-outline">INTERACTIVE DESIGN</span><span class="m-dot">✦</span>
+            <span class="m-solid">UI/UX DESIGNER</span><span class="m-dot">✦</span>
+            <span class="m-outline">PROMPT ENGINEERING</span><span class="m-dot">✦</span>
+            <span class="m-solid">MUSIC (HOBBY)</span><span class="m-dot">✦</span>
+            <span class="m-outline">VIBE CODING</span><span class="m-dot">✦</span>
+            <span class="m-solid">WEB DEVELOPMENT</span><span class="m-dot">✦</span>
+            <span class="m-outline">INTERACTIVE DESIGN</span><span class="m-dot">✦</span>
+            <span class="m-solid">UI/UX DESIGNER</span><span class="m-dot">✦</span>
+            <span class="m-outline">PROMPT ENGINEERING</span><span class="m-dot">✦</span>
+            <span class="m-solid">MUSIC (HOBBY)</span><span class="m-dot">✦</span>
+            <span class="m-outline">VIBE CODING</span><span class="m-dot">✦</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="projects" id="projects">
+        <div class="section-header">
+          <h2 class="section-title">SELECTED PROJECTS</h2>
+          <a href="#projects" class="view-all">VIEW ALL PROJECTS ⟶</a>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800" alt="Project 1" />
+            </div>
+            <div class="project-info">
+              <span class="project-num">01</span>
+              <div>
+                <h3>VELOCE BIKES</h3>
+                <p>E-COMMERCE WEBSITE</p>
+              </div>
+              <span class="arrow">⟶</span>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800" alt="Project 2" />
+            </div>
+            <div class="project-info">
+              <span class="project-num">02</span>
+              <div>
+                <h3>WOODCRAFT</h3>
+                <p>FURNITURE WEBSITE</p>
+              </div>
+              <span class="arrow">⟶</span>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800" alt="Project 3" />
+            </div>
+            <div class="project-info">
+              <span class="project-num">03</span>
+              <div>
+                <h3>URBANIC</h3>
+                <p>FASHION MAGAZINE</p>
+              </div>
+              <span class="arrow">⟶</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Work Process & Skills Section -->
+      <section class="process-skills" id="about">
+        <div class="skills-col">
+          <h2 class="section-title">EDUCATION & SKILLS</h2>
+          <div class="education">
+             <h4 class="sub-heading">EDUCATION</h4>
+             <div class="edu-item">
+               <div>
+                 <h5>B.Sc. in Visual Communication Design</h5>
+                 <p>Binus University</p>
+               </div>
+               <span class="year">2018 - 2022</span>
+             </div>
+             <div class="edu-item">
+               <div>
+                 <h5>UI/UX Design Certification</h5>
+                 <p>Google Career Certificates</p>
+               </div>
+               <span class="year">2023</span>
+             </div>
+          </div>
+          <div class="skills">
+            <h4 class="sub-heading">SKILLS</h4>
+            <div class="skills-tags">
+              <span>WEB DESIGN</span>
+              <span>UI/UX DESIGN</span>
+              <span>FIGMA</span>
+              <span>FRAMER</span>
+              <span>JAVASCRIPT</span>
+              <span>HTML / CSS</span>
+              <span>GSAP ANIMATION</span>
+              <span>SEO BASICS</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="process-col">
+           <h2 class="section-title">WORK PROCESS</h2>
+           <div class="process-list">
+             <div class="process-item">
+               <span class="num">01</span>
+               <div class="icon">🔍</div>
+               <div class="process-text">
+                 <h4>DISCOVER</h4>
+                 <p>Understanding goals, audience, and project requirements.</p>
+               </div>
+             </div>
+             <div class="process-item">
+               <span class="num">02</span>
+               <div class="icon">💡</div>
+               <div class="process-text">
+                 <h4>IDEATE</h4>
+                 <p>Planning, wireframing, and creating the right concept.</p>
+               </div>
+             </div>
+             <div class="process-item">
+               <span class="num">03</span>
+               <div class="icon">✏️</div>
+               <div class="process-text">
+                 <h4>DESIGN</h4>
+                 <p>Crafting visual design with a focus on user experience.</p>
+               </div>
+             </div>
+             <div class="process-item">
+               <span class="num">04</span>
+               <div class="icon">&lt;/&gt;</div>
+               <div class="process-text">
+                 <h4>DEVELOP</h4>
+                 <p>Building fast, responsive, and high-performing websites.</p>
+               </div>
+             </div>
+           </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact" id="contact">
+        <div class="contact-wrap">
+          <div class="contact-left">
+             <h2 class="contact-title">LET'S WORK<br><em>TOGETHER</em><span class="sparkle">✦</span></h2>
+             <p>I'm currently open for new projects and collaborations. Let's create something amazing that drives results.</p>
+          </div>
+          <div class="contact-right">
+             <a href="mailto:hello@satyawidnyana.com" class="contact-link">
+               <span class="icon">✉</span> hello@satyawidnyana.com
+             </a>
+             <a href="#" class="contact-link">
+               <span class="icon">🌐</span> www.satyawidnyana.com
+             </a>
+             <a href="#" class="contact-link">
+               <span class="icon">📍</span> Jakarta, Indonesia
+             </a>
+          </div>
+        </div>
+      </section>
+      
+      <footer class="footer">
+        <div class="footer-brand">Satya<span>.</span></div>
+        <div class="footer-links">
+          <a href="#">LinkedIn</a>
+          <a href="#">Instagram</a>
+          <a href="#">Dribbble</a>
+        </div>
+        <div class="footer-copy">© 2024 Satya Widnyana. All rights reserved.</div>
+      </footer>
+    </main>
+    </div>
+</body>
+</html>
