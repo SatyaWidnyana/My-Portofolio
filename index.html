@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Outfit:wght@300;400;500;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=118">
-  <script src="script.js?v=56" defer></script>
+  <link rel="stylesheet" href="styles.css?v=128">
+  <script src="script.js?v=59" defer></script>
 </head>
 <body>
   <!-- Intro Animation Overlay -->
@@ -157,52 +157,44 @@
         </div>
       </section>
 
-      <!-- Projects Section -->
+      <!-- Portfolio Section: folder popup -->
       <section class="projects" id="projects">
-        <div class="section-header">
-          <h2 class="section-title">SELECTED PROJECTS</h2>
-          <a href="#projects" class="view-all">VIEW ALL PROJECTS ⟶</a>
-        </div>
-        <div class="project-grid">
-          <article class="project-card">
-            <div class="project-image">
-              <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800" alt="Project 1" />
-            </div>
-            <div class="project-info">
-              <span class="project-num">01</span>
-              <div>
-                <h3>VELOCE BIKES</h3>
-                <p>E-COMMERCE WEBSITE</p>
-              </div>
-              <span class="arrow">⟶</span>
-            </div>
-          </article>
-          <article class="project-card">
-            <div class="project-image">
-              <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800" alt="Project 2" />
-            </div>
-            <div class="project-info">
-              <span class="project-num">02</span>
-              <div>
-                <h3>WOODCRAFT</h3>
-                <p>FURNITURE WEBSITE</p>
-              </div>
-              <span class="arrow">⟶</span>
-            </div>
-          </article>
-          <article class="project-card">
-            <div class="project-image">
-              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800" alt="Project 3" />
-            </div>
-            <div class="project-info">
-              <span class="project-num">03</span>
-              <div>
-                <h3>URBANIC</h3>
-                <p>FASHION MAGAZINE</p>
-              </div>
-              <span class="arrow">⟶</span>
-            </div>
-          </article>
+        <div class="folder-stage" id="folder-stage">
+          <button class="portfolio-folder" id="portfolio-folder" type="button" aria-label="Click to open portfolio">
+            <span class="folder-3d">
+              <span class="folder-shadow" aria-hidden="true"></span>
+              <span class="folder-back" aria-hidden="true"></span>
+              <span class="folder-tab" aria-hidden="true">
+                <span class="red-accent-tab"></span>
+                <span class="folder-tab-text">WORK ARCHIVE</span>
+              </span>
+              <span class="folder-paper folder-paper-1" aria-hidden="true"></span>
+              <span class="folder-paper folder-paper-2" aria-hidden="true"></span>
+              <span class="folder-paper folder-paper-3" aria-hidden="true"></span>
+              <span class="folder-clip" aria-hidden="true"></span>
+              <span class="folder-front">
+                <div class="folder-front-content">
+                  <div class="folder-top-meta">
+                    <span class="red-accent-line"></span>
+                    <span class="meta-text">SW / PORTFOLIO</span>
+                  </div>
+                  <div class="folder-title-area">
+                    <h2 class="folder-huge-title">Selected Works</h2>
+                    <p class="folder-sub-title">Web development &amp; digital design</p>
+                  </div>
+                  <div class="folder-bottom-meta">
+                    <span class="meta-num">01</span>
+                    <div class="folder-action swipe-container" id="swipe-container">
+                      <div class="swipe-thumb" id="swipe-thumb">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                      </div>
+                      <span class="swipe-text">SWIPE TO OPEN</span>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </span>
+          </button>
         </div>
       </section>
 
