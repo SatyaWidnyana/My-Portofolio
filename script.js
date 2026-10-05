@@ -763,6 +763,11 @@
   if (folderBtn && window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     folderBtn.addEventListener('pointermove', (e) => {
+      if (folderBtn.classList.contains('is-open')) {
+        folderBtn.style.setProperty('--ry', '0deg');
+        folderBtn.style.setProperty('--rx', '0deg');
+        return;
+      }
       const r = folderBtn.getBoundingClientRect();
       const px = ((e.clientX - r.left) / r.width - 0.5) * 2;  // -1..1
       const py = ((e.clientY - r.top) / r.height - 0.5) * 2;  // -1..1
@@ -801,8 +806,14 @@
       if (currentX >= maxDist * 0.95) {
         isDragging = false;
         swipeThumb.classList.remove('swiping');
+        
         // Action to open portfolio goes here
         console.log('Portfolio Opened!');
+        const folderBtn = document.getElementById('portfolio-folder');
+        if(folderBtn) folderBtn.classList.add('is-open');
+        const projectsSec = document.getElementById('projects');
+        if(projectsSec) projectsSec.classList.add('is-open');
+        
         swipeThumb.style.transition = 'transform 0.3s ease';
         swipeThumb.style.transform = 'translateX(0px)';
         currentX = 0;

@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Outfit:wght@300;400;500;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=128">
-  <script src="script.js?v=59" defer></script>
+  <link rel="stylesheet" href="styles.css?v=177">
+  <script src="script.js?v=77" defer></script>
 </head>
 <body>
   <!-- Intro Animation Overlay -->
@@ -160,30 +160,41 @@
       <!-- Portfolio Section: folder popup -->
       <section class="projects" id="projects">
         <div class="folder-stage" id="folder-stage">
-          <button class="portfolio-folder" id="portfolio-folder" type="button" aria-label="Click to open portfolio">
-            <span class="folder-3d">
-              <span class="folder-shadow" aria-hidden="true"></span>
-              <span class="folder-back" aria-hidden="true"></span>
-              <span class="folder-tab" aria-hidden="true">
-                <span class="red-accent-tab"></span>
-                <span class="folder-tab-text">WORK ARCHIVE</span>
-              </span>
-              <span class="folder-paper folder-paper-1" aria-hidden="true"></span>
-              <span class="folder-paper folder-paper-2" aria-hidden="true"></span>
-              <span class="folder-paper folder-paper-3" aria-hidden="true"></span>
-              <span class="folder-clip" aria-hidden="true"></span>
-              <span class="folder-front">
+          <div class="portfolio-folder" id="portfolio-folder" role="button" tabindex="0" aria-label="Click to open portfolio">
+            <div class="folder-3d">
+
+              <div class="folder-back" aria-hidden="true"></div>
+              <div class="folder-back-right" aria-hidden="true"></div>
+              <div class="folder-back-left" aria-hidden="true"></div>
+              <div class="folder-tab" aria-hidden="true">
+                <div class="red-accent-tab"></div>
+                <div class="folder-tab-text">WORK ARCHIVE</div>
+              </div>
+              <div class="folder-paper folder-paper-1" aria-hidden="true">
+                <img src="image portofolio/WGA OCEAN/cover.jpeg" alt="WGA Ocean">
+              </div>
+              <div class="folder-paper folder-paper-2" aria-hidden="true">
+                <img src="image portofolio/WGA DEKORASI/cover.jpeg" alt="WGA Dekorasi">
+              </div>
+              <div class="folder-paper folder-paper-3" aria-hidden="true">
+                <img src="image portofolio/BALI ADVENTURE/cover.jpeg" alt="Bali Adventure">
+              </div>
+              <div class="folder-paper folder-paper-4" aria-hidden="true">
+                <img src="image portofolio/MY PORTOFOLIO/cover.jpeg" alt="My Portfolio">
+              </div>
+              <div class="folder-clip" aria-hidden="true"></div>
+              <div class="folder-front">
                 <div class="folder-front-content">
                   <div class="folder-top-meta">
-                    <span class="red-accent-line"></span>
-                    <span class="meta-text">SW / PORTFOLIO</span>
+                    <div class="red-accent-line"></div>
+                    <div class="meta-text">SW / PORTFOLIO</div>
                   </div>
                   <div class="folder-title-area">
                     <h2 class="folder-huge-title">Selected Works</h2>
                     <p class="folder-sub-title">Web development &amp; digital design</p>
                   </div>
                   <div class="folder-bottom-meta">
-                    <span class="meta-num">01</span>
+                    <div class="meta-num">01</div>
                     <div class="folder-action swipe-container" id="swipe-container">
                       <div class="swipe-thumb" id="swipe-thumb">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -192,9 +203,9 @@
                     </div>
                   </div>
                 </div>
-              </span>
-            </span>
-          </button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
