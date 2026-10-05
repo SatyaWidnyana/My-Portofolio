@@ -13,5 +13,15 @@ File ini berisi pengingat (rules) agar agent AI tidak mengulangi kesalahan yang 
 3. **Gunakan Elemen yang Ada Sebaik Mungkin:**
    Hindari menduplikasi tombol atau elemen navigasi yang punya ID spesifik (misal `#theme-toggle`) hanya untuk membuat versi mobile-nya, karena ini akan merusak JavaScript yang memanggil berdasarkan ID. Gunakan pendekatan CSS murni (seperti `flex-wrap` dan `order`) untuk mengubah layout pada breakpoint mobile.
 
+4. **Sistem Save Point (Git):**
+   Project ini sudah memakai Git. Save point = commit + tag dengan nama `save-N-deskripsi`.
+   - **Perintah singkat:** jika user hanya mengetik **"save point"** (atau "save dulu"), langsung buat save point tanpa bertanya. Nomor N = nomor tag terakhir + 1 (cek dengan `git tag`). Deskripsi diambil dari kondisi/fitur terakhir yang baru selesai.
+   - **Cara save:** jalankan `git add -A`, `git commit -m "SAVE: <deskripsi>"`, lalu `git tag save-N-<deskripsi>`. Setelah itu laporkan nama tag ke user.
+   - **Rollback total ke save point:** `git reset --hard <nama-tag>` lalu `git clean -fd` (membuang semua perubahan dan file baru setelah save). Konfirmasi dulu ke user sebelum menjalankan.
+   - **Rollback hanya 1 file:** `git checkout <nama-tag> -- <file>`.
+   - **Lihat daftar save point:** `git tag` dan `git log --oneline`.
+   - **Lihat apa yang berubah sejak save:** `git diff <nama-tag> --stat`.
+   - Setelah rollback, tetap ingat aturan cache busting (naikkan versi di index.html).
+
 ---
 *Pengingat ini dibuat atas permintaan Satya untuk memastikan efisiensi proses coding.*
