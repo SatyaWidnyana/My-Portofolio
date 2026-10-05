@@ -1214,6 +1214,8 @@ body:has(.main-wrapper[inert]) {
   cursor: pointer;
   perspective: 1600px;
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .portfolio-folder:hover:not(.is-open) { --lift: -12px; }
 .portfolio-folder:focus-visible { outline: 2px solid var(--text); outline-offset: 14px; border-radius: 14px; }
