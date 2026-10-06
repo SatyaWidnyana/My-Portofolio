@@ -1234,6 +1234,19 @@ body:has(.main-wrapper[inert]) {
 
 /* Ground shadow */
 
+.folder-back,
+.folder-back-right,
+.folder-back-left,
+.folder-back-right::before,
+.folder-back-right::after,
+.folder-back-left::before,
+.folder-back-left::after,
+.folder-tab,
+.folder-tab::after,
+.folder-front::before,
+.folder-front::after {
+  transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+}
 
 /* Back panel + tab */
 .folder-back {
@@ -1409,7 +1422,7 @@ body:has(.main-wrapper[inert]) {
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 -1px 2px rgba(0, 0, 0, 0.3),
     0 15px 30px -5px var(--folder-ground-shadow);
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), left 0.7s ease, right 0.7s ease, box-shadow 0.7s ease;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), left 0.7s ease, right 0.7s ease, box-shadow 0.7s ease, background-color 0.1s ease-out;
   overflow: hidden;
   padding: calc(var(--w) * 0.015);
   padding-bottom: calc(var(--w) * 0.06); /* Polaroid bottom thick border */
@@ -1525,7 +1538,7 @@ body:has(.main-wrapper[inert]) {
   box-shadow: var(--shadow-3d-base);
   transform-origin: 50% 100%;
   transform: translateZ(24px) rotateX(-5deg);
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease, background-color 0.1s ease-out;
   padding: calc(var(--w) * 0.06) calc(var(--w) * 0.07);
   box-sizing: border-box;
   transform-style: preserve-3d;
