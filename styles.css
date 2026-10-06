@@ -1295,7 +1295,8 @@ body:has(.main-wrapper[inert]) {
 
 @keyframes cardboard-right {
   0%, 35% { transform: translateZ(-2px) rotateY(0deg); box-shadow: var(--shadow-3d-base); }
-  65%, 100% { transform: translateZ(0px) rotateY(180deg); box-shadow: var(--shadow-3d-invX); }
+  /* Fold away from the viewer, matching the lower flap without perspective enlargement. */
+  65%, 100% { transform: translateZ(0px) rotateY(-180deg); box-shadow: var(--shadow-3d-invX); }
 }
 @keyframes cardboard-down-right {
   0%, 5% { 
