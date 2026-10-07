@@ -170,9 +170,10 @@
                 <div class="red-accent-tab"></div>
                 <div class="folder-tab-text">WORK ARCHIVE</div>
               </div>
-              <div class="folder-paper folder-paper-1">
+              <div class="folder-paper folder-paper-1" data-project-id="wga-ocean" role="button" tabindex="0" title="Click to view case study">
                 <div class="paper-img-wrapper">
                   <img src="image portofolio/WGA OCEAN/cover.jpeg" alt="WGA Ocean">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
                 </div>
                 <div class="paper-info">
                   <div class="paper-text">
@@ -182,9 +183,10 @@
                   <span class="paper-tag">2024</span>
                 </div>
               </div>
-              <div class="folder-paper folder-paper-2">
+              <div class="folder-paper folder-paper-2" data-project-id="wga-dekorasi" role="button" tabindex="0" title="Click to view case study">
                 <div class="paper-img-wrapper">
                   <img src="image portofolio/WGA DEKORASI/cover.jpeg" alt="WGA Dekorasi">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
                 </div>
                 <div class="paper-info">
                   <div class="paper-text">
@@ -194,9 +196,10 @@
                   <span class="paper-tag">2024</span>
                 </div>
               </div>
-              <div class="folder-paper folder-paper-3">
+              <div class="folder-paper folder-paper-3" data-project-id="satya-portfolio" role="button" tabindex="0" title="Click to view case study">
                 <div class="paper-img-wrapper">
                   <img src="image portofolio/MY PORTOFOLIO/cover.jpeg" alt="Satya Portfolio">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
                 </div>
                 <div class="paper-info">
                   <div class="paper-text">
@@ -206,9 +209,10 @@
                   <span class="paper-tag">2024</span>
                 </div>
               </div>
-              <div class="folder-paper folder-paper-4">
+              <div class="folder-paper folder-paper-4" data-project-id="ketut-gajah-bali" role="button" tabindex="0" title="Click to view case study">
                 <div class="paper-img-wrapper">
                   <img src="image portofolio/BALI ADVENTURE/cover.jpeg" alt="Ketut Gajah Bali">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
                 </div>
                 <div class="paper-info">
                   <div class="paper-text">
@@ -352,5 +356,102 @@
       </footer>
     </main>
     </div>
+  
+  <!-- Project Dossier Case Study Modal -->
+  <div class="dossier-modal-overlay" id="dossierModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="dossier-modal-container" id="dossierModalContainer">
+      <!-- Folder Binder Top Header -->
+      <div class="dossier-header-bar">
+        <div class="dossier-tab-badge">
+          <span class="dossier-stamp">CONFIDENTIAL DOSSIER</span>
+          <span class="dossier-doc-id" id="dossierDocId">CASE STUDY // #01</span>
+        </div>
+        <button class="dossier-close-btn" id="dossierCloseBtn" aria-label="Close Case Study">
+          <span>ESC</span> ✕
+        </button>
+      </div>
+
+      <!-- Main Dossier Content Paper -->
+      <div class="dossier-paper-body">
+        <div class="dossier-grid">
+          <!-- Left Column: Interactive Browser Window Preview -->
+          <div class="dossier-preview-col">
+            <div class="dossier-browser-frame">
+              <div class="browser-header">
+                <div class="browser-dots">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                </div>
+                <div class="browser-address-bar" id="dossierBrowserUrl">https://satyawidnyana.com/projects/...</div>
+              </div>
+              <div class="browser-screen">
+                <img id="dossierCoverImg" src="" alt="Project Preview">
+                <div class="browser-screen-overlay">
+                  <a id="dossierLiveBtnImg" href="#" target="_blank" rel="noopener noreferrer" class="btn-live-preview">
+                    <span>Explore Live Site ↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="dossier-quick-stats">
+              <div class="stat-box">
+                <span class="stat-label">YEAR</span>
+                <span class="stat-value" id="dossierYear">2024</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">ROLE</span>
+                <span class="stat-value" id="dossierRole">UI/UX &amp; Web Dev</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">LOCATION</span>
+                <span class="stat-value" id="dossierClient">Bali, Indonesia</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Project Case Study Meta & Description -->
+          <div class="dossier-info-col">
+            <div class="dossier-meta-top">
+              <span class="dossier-category-pill" id="dossierCategory">PRIVATE TOUR &amp; TRANSPORT</span>
+              <span class="dossier-status-pill">● COMPLETED</span>
+            </div>
+
+            <h2 class="dossier-project-title" id="dossierTitle">Ketut Gajah Bali</h2>
+
+            <div class="dossier-section">
+              <h4 class="dossier-subheading">PROJECT OVERVIEW</h4>
+              <p class="dossier-description" id="dossierDescription">
+                A luxury private tour and personal driver booking platform in Bali, designed to awaken the traveler's soul with immersive visual storytelling and effortless booking experience.
+              </p>
+            </div>
+
+            <div class="dossier-section">
+              <h4 class="dossier-subheading">KEY HIGHLIGHTS</h4>
+              <ul class="dossier-features-list" id="dossierFeatures">
+                <!-- Populated dynamically -->
+              </ul>
+            </div>
+
+            <div class="dossier-section">
+              <h4 class="dossier-subheading">TECH STACK &amp; TOOLS</h4>
+              <div class="dossier-tech-tags" id="dossierTech">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <div class="dossier-actions">
+              <a id="dossierLiveBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary btn-dossier-primary">
+                <span>Visit Live Project ↗</span>
+              </a>
+              <button id="dossierCloseSecondary" class="btn-secondary btn-dossier-secondary">
+                Close Dossier
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
