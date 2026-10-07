@@ -1,0 +1,53 @@
+{
+  "baseline": "683dd5d",
+  "css": [
+    "assets/css/01-base.css",
+    "assets/css/02-intro.css",
+    "assets/css/03-typography-layout.css",
+    "assets/css/04-navigation.css",
+    "assets/css/05-hero.css",
+    "assets/css/06-terminal-lanyard.css",
+    "assets/css/07-marquee.css",
+    "assets/css/08-portfolio.css",
+    "assets/css/09-sections.css",
+    "assets/css/10-responsive.css",
+    "assets/css/11-project-details.css",
+    "assets/css/12-lightbox-cream.css",
+    "assets/css/13-lightbox-editorial.css",
+    "assets/css/14-lightbox-base.css"
+  ],
+  "js": [
+    {
+      "name": "intro",
+      "file": "assets/js/features/intro.js"
+    },
+    {
+      "name": "navigation",
+      "file": "assets/js/features/navigation.js"
+    },
+    {
+      "name": "lanyard",
+      "file": "assets/js/features/lanyard.js"
+    },
+    {
+      "name": "terminal",
+      "file": "assets/js/features/terminal.js"
+    },
+    {
+      "name": "greetings",
+      "file": "assets/js/features/greetings.js"
+    },
+    {
+      "name": "terminal-layout",
+      "file": "assets/js/features/terminal-layout.js"
+    },
+    {
+      "name": "portfolio",
+      "file": "assets/js/features/portfolio.js"
+    },
+    {
+      "name": "lightbox",
+      "file": "assets/js/features/lightbox.js"
+    }
+  ]
+}

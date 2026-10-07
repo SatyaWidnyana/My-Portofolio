@@ -1,35 +1,45 @@
 # Portofolio Satya Widnyana
 
-Paket ini berisi ekspor prototipe desain untuk dilanjutkan di Antigravity. Ini belum merupakan situs produksi dan belum dipublikasikan.
+Website berbasis HTML, CSS, dan JavaScript vanilla. Tidak membutuhkan framework, npm install, atau build.
 
-## Cara membuka
+## Menjalankan
 
-1. Ekstrak seluruh isi ZIP ke satu folder.
-2. Buka folder tersebut di Antigravity atau editor pilihanmu.
-3. Buka `index.html` di browser untuk mencoba desain.
-4. Gunakan kontrol **Mobile**, **Desktop**, dan **Putar intro** untuk melihat tampilan dan animasinya.
+```sh
+node server.mjs
+```
 
-Tidak memerlukan npm, instalasi paket, atau proses build. Google Fonts membutuhkan koneksi internet; jika tidak tersedia, browser memakai font pengganti.
+Jalankan dari folder project, lalu buka http://127.0.0.1:8000. Google Fonts membutuhkan internet; tanpa koneksi, browser memakai font fallback.
 
-## Isi paket
+## Struktur
 
-- `index.html` — halaman prototipe beserta kontrol pratinjau.
-- `styles.css` — warna, tipografi, tata letak responsif, dan animasi.
-- `script.js` — interaksi pratinjau dan urutan intro.
-- `design-reference.html` — salinan rancangan yang ditampilkan dalam percakapan sebagai acuan visual.
-- `ANTIGRAVITY_PROMPT.md` — konteks dan arahan yang bisa disalin ke percakapan Antigravity.
+```text
+index.html                 Halaman utama dan markup modal
+assets/
+  css/                     Stylesheet per bagian sesuai urutan cascade
+  js/
+    app.js                 Registry fitur
+    main.js                Bootstrap sesuai urutan eksekusi awal
+    features/              Intro, navigasi, lanyard, terminal, portfolio, lightbox
+image/                     Foto, logo, dan aset lanyard
+image portofolio/          Cover masing-masing project
+docs/                      Panduan struktur dan konteks project
+tools/                     Verifikasi struktur dan dimensi gambar
+archive/                   Backup, eksperimen, dan referensi lama
+server.mjs                 Server lokal port 8000
+DEV_RULES.md               Aturan pengembangan dan save point
+```
 
-## Arah desain
+Lihat [panduan struktur](docs/ARCHITECTURE.md) untuk menentukan file yang perlu diedit. File dalam `archive/` tidak dimuat situs aktif.
 
-Tampilan editorial yang bersih: monokrom, aksen merah anggur, tipografi besar, dan ruang lega, terutama pada layar ponsel. Intro sekitar 5,6 detik menampilkan:
+## Verifikasi refactor
 
-**Hello → Bonjour → 你好 → こんにちは → Halo → “welcome to my portofolio” → cover.**
+```sh
+node tools/verify-structure.cjs
+node tools/check-dim.cjs
+```
 
-Pertahankan tombol lewati intro serta dukungan pengaturan perangkat untuk mengurangi gerakan (*reduced motion*).
+Verifikasi membandingkan source CSS, fitur JavaScript, dan markup dengan snapshot sebelum refactor, serta mengecek sintaks dan path aset. Ini bukan pengganti pengujian visual di browser. Perubahan desain atau logika berikutnya dapat membuat pemeriksaan kesamaan gagal secara sengaja.
 
-## Konten yang masih perlu diisi
+## Save point sebelum refactor
 
-Foto Satya, dua proyek, dan kontak masih berupa placeholder. Paket ini tidak berisi foto asli pengguna, karya nyata, atau informasi kontak asli. Ganti dengan data yang diberikan Satya sebelum menjadikannya situs final. Jangan menganggap contoh proyek sebagai pengalaman atau karya yang sudah dikerjakan.
-
-Satya membuat web dengan bantuan AI. Sebutan **AI-assisted Web Creator** digunakan sebagai arah profil awal; klaim kemampuan, pengalaman, dan layanan perlu sesuai dengan kemampuan serta informasi yang ia konfirmasi.
-
+Commit `683dd5d`, tag `save-3-before-structure-refactor`. Gunakan `git status` untuk melihat perubahan setelah save point.

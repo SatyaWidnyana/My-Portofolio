@@ -1,0 +1,220 @@
+/* Terminal Box Concept V3 (3D Embossed) */
+.terminal-box {
+  margin-top: 10px; font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; 
+  width: 100%;
+  background: linear-gradient(145deg, #1c1c1c, #0d0d0d); 
+  border-radius: 8px;
+  
+  /* Efek timbul 3D yang lebih rapat */
+  box-shadow: 
+    inset 0px 2px 2px rgba(255, 255, 255, 0.15),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.6),
+    0 10px 20px rgba(0, 0, 0, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.8);
+  
+  color: #e0e0e0;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.terminal-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    inset 0px 2px 2px rgba(255, 255, 255, 0.25),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.6),
+    0 15px 30px rgba(0, 0, 0, 0.5),
+    0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .terminal-box { 
+  background: linear-gradient(145deg, rgba(35, 35, 35, 0.95), rgba(15, 15, 15, 0.95)); 
+  box-shadow: 
+    inset 0px 2px 2px rgba(255, 255, 255, 0.15),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.6),
+    0 12px 25px rgba(0, 0, 0, 0.6),
+    0 5px 10px rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.9);
+}
+[data-theme="dark"] .terminal-box:hover {
+  box-shadow: 
+    inset 0px 2px 2px rgba(255, 255, 255, 0.25),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.6),
+    0 18px 35px rgba(0, 0, 0, 0.7),
+    0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.term-header { 
+  background: rgba(0,0,0,0.5); 
+  padding: 10px 12px; 
+  display: flex; 
+  align-items: center; 
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.term-dots { display: flex; gap: 6px; }
+.term-dots .dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+.term-title { margin-left: 15px; font-size: 0.8rem; color: #888; }
+.term-body { 
+  padding: 15px; 
+  max-height: 250px; 
+  overflow-y: auto; 
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #1a1a1a;
+}
+
+.term-body::-webkit-scrollbar { width: 6px; }
+.term-body::-webkit-scrollbar-track { background: #1a1a1a; }
+.term-body::-webkit-scrollbar-thumb { background-color: #333; border-radius: 10px; }
+
+.term-input-line { display: flex; align-items: center; gap: 8px; position: relative; }
+.term-prompt { color: #27c93f; font-weight: bold; }
+.term-cmd { color: #e0e0e0; font-weight: bold; }
+.term-cursor { display: inline-block; width: 8px; height: 1.1em; background: #e0e0e0; vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.term-btn-group {
+  position: absolute; right: 6px; top: 50%; margin-top: -10px;
+  display: flex; gap: 8px;
+}
+.term-run-btn, .term-del-btn { 
+  background: #ffffff; color: #000; border: 1px solid #ccc; padding: 4px 12px; border-radius: 6px;
+  font-size: 0.75rem; font-family: 'Outfit', sans-serif; font-weight: bold;
+  box-shadow: 0 4px 0 #bbb, 0 5px 5px rgba(0,0,0,0.5);
+  cursor: pointer; transition: all 0.1s ease; 
+}
+.term-run-btn { animation: pulseEnterBtn 1.5s infinite alternate; }
+
+.term-del-btn {
+  background: #ff4444; color: #fff; border: 1px solid #cc0000;
+  box-shadow: 0 4px 0 #990000, 0 5px 5px rgba(0,0,0,0.5);
+}
+
+.term-run-btn:hover, .term-del-btn:hover { 
+  filter: brightness(1.05); animation: none; margin-top: -1px;
+}
+.term-run-btn:active, .term-del-btn:active {
+  margin-top: 4px; 
+  box-shadow: 0 0px 0 #000, 0 1px 2px rgba(0,0,0,0.4);
+}
+.term-del-btn:active {
+  box-shadow: 0 0px 0 #990000, 0 1px 2px rgba(0,0,0,0.4);
+}
+@keyframes pulseEnterBtn { 
+  0% { box-shadow: 0 4px 0 #bbb, 0 5px 5px rgba(0,0,0,0.5); } 
+  100% { box-shadow: 0 4px 0 #bbb, 0 5px 15px rgba(255,255,255,0.4); } 
+}
+
+.term-logs { margin-top: 10px; font-size: 0.85rem; color: #888; display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.term-final-text { min-height: 10px; }
+.term-desc { margin: 0; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; line-height: 1.6; text-align: justify; }
+.term-desc strong { color: #fff; font-weight: bold; }
+.term-desc em { font-style: italic; color: #ffbd2e; } 
+.term-log-line { opacity: 0; animation: fadeUpLog 0.2s forwards; }
+@keyframes fadeUpLog { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero-image {
+  position: absolute;
+  top: -550px; /* Ditarik jauh lebih tinggi agar seluruh bagian lanyard terlihat saat masuk web */
+  right: 2%; /* Geser ke kanan viewport */
+  z-index: 10; /* Berada di belakang navbar (z-index 1000) */
+  display: flex;
+  justify-content: center;
+  pointer-events: auto; /* Agar bisa di-interaksi */
+  height: auto;
+  overflow: visible;
+  
+  /* Animasi Drop & Swing */
+  transform: translateY(-150vh);
+  transform-origin: top center;
+  touch-action: pan-y; /* Supaya scroll mobile tidak terlalu terganggu kecuali swipe horizontal */
+  will-change: transform; /* Optimasi FPS untuk JS Animation */
+  transform-style: preserve-3d;
+}
+
+
+
+.lanyard-card {
+  width: 100%;
+  max-width: 500px; /* Diperbesar ukurannya */
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  /* Optimasi Performa GPU Level Maksimal */
+  will-change: transform, filter;
+  transform: translateZ(0) scale(1); 
+  /* Bayangan dibuat lebih padat (blur lebih kecil, opacity lebih besar) */
+  filter: drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.6));
+  cursor: grab;
+}
+
+.lanyard-strap, .lanyard-body {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; /* Let the main container handle drag events */
+  will-change: transform;
+}
+
+/* Potong hanya 15% bagian atas (tali) - agar tidak mengenai ujung atas kartu yang bocor saat ditarik */
+.lanyard-strap {
+  clip-path: inset(0 0 85% 0);
+  transform-origin: top center;
+}
+
+/* Potong 15% atas, biarkan 85% bawah (sisa tali + kartu) */
+.lanyard-body {
+  clip-path: inset(14.5% 0 0 0); /* 14.5% agar ada sedikit overlap 0.5% menutupi garis potong */
+  transform-origin: top center;
+}
+
+.hero-image:active .lanyard-card {
+  cursor: grabbing;
+  /* Saat ditarik, bayangan tidak terlalu jauh/besar */
+  filter: drop-shadow(0px 18px 18px rgba(0, 0, 0, 0.65));
+  transform: translateZ(0) scale(1.015); /* Efek angkat (lift) */
+}
+
+/* Transisi mulus dikembalikan */
+.lanyard-light, .lanyard-dark {
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease, transform 0.3s ease;
+}
+
+.lanyard-dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  object-fit: fill; 
+  opacity: 0;
+  pointer-events: none; 
+  /* Tidak ada shadow putih, menggunakan shadow bawaan (hitam) atau tanpa shadow */
+  filter: none;
+}
+
+.hero-image:active .lanyard-dark {
+  filter: none;
+}
+
+/* Kondisi Saat Mode Gelap (Dark Mode) Aktif */
+[data-theme="dark"] .lanyard-light {
+  opacity: 0;
+}
+
+[data-theme="dark"] .lanyard-dark {
+  opacity: 1;
+}
+
+
+
+.hero-stats {
+  display: flex; flex-direction: column; gap: 50px; align-items: flex-start; text-align: left;
+}
+.stat-item h3 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 400; line-height: 1; color: var(--text); }
+.stat-item p { font-size: 0.8rem; letter-spacing: 2px; color: var(--text-muted); margin-top: 10px; font-weight: 500;}
+

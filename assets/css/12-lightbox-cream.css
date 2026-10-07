@@ -1,0 +1,207 @@
+/* Cream editorial theme for the Studio Lightbox */
+.dossier-modal-overlay {
+  background: rgba(64, 52, 42, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dossier-modal-container.mode-lightbox {
+  --lb-ink: #272421;
+  --lb-muted: #716a62;
+  --lb-soft: #f4eee5;
+  --lb-paper: #fcfaf6;
+  --lb-line: #e5ddd2;
+  --lb-accent: #c94f42;
+  color: var(--lb-ink);
+  background: var(--lb-paper);
+  border: 1px solid #d8cfc3;
+  box-shadow: 0 28px 90px rgba(67, 52, 38, 0.22), 0 4px 18px rgba(67, 52, 38, 0.08);
+}
+
+.dossier-modal-container.mode-lightbox .dossier-header-bar {
+  background: #f5f0e8;
+  border-bottom-color: var(--lb-line);
+}
+
+.dossier-modal-container.mode-lightbox .dossier-doc-id {
+  color: #8d8378;
+}
+
+.dossier-modal-container.mode-lightbox .dossier-close-btn {
+  color: var(--lb-ink);
+  background: rgba(255, 255, 255, 0.58);
+  border-color: #d8cfc3;
+}
+
+.dossier-modal-container.mode-lightbox .dossier-close-btn:hover {
+  background: #fff;
+  border-color: #b9aea1;
+}
+
+.dossier-modal-container.mode-lightbox .lightbox-tabs-bar {
+  background: #fbf8f2;
+  border-bottom-color: var(--lb-line);
+}
+
+.dossier-modal-container.mode-lightbox .lb-tab-btn {
+  color: #857b70;
+}
+
+.dossier-modal-container.mode-lightbox .lb-tab-btn:hover {
+  color: var(--lb-ink);
+  background: #f1ebe2;
+}
+
+.dossier-modal-container.mode-lightbox .lb-tab-btn.active {
+  color: #fff;
+  background: var(--lb-accent);
+  border-color: var(--lb-accent);
+  box-shadow: 0 7px 18px rgba(201, 79, 66, 0.2);
+}
+
+.dossier-modal-container.mode-lightbox .lightbox-content-area {
+  background: var(--lb-paper);
+}
+
+.dossier-modal-container.mode-lightbox .lb-hero-banner {
+  box-shadow: 0 20px 44px rgba(67, 52, 38, 0.2);
+}
+
+.dossier-modal-container.mode-lightbox .lb-hero-banner::after {
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+.dossier-modal-container.mode-lightbox .lb-hero-kicker {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.dossier-modal-container.mode-lightbox .lb-category-tag {
+  background: rgba(255, 247, 237, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff6ed;
+}
+
+.dossier-modal-container.mode-lightbox .lb-overline {
+  color: var(--lb-accent);
+}
+
+.dossier-modal-container.mode-lightbox .lb-section-title,
+.dossier-modal-container.mode-lightbox .lb-gallery-heading h2,
+.dossier-modal-container.mode-lightbox .lb-meta-val,
+.dossier-modal-container.mode-lightbox .lb-feature-card span,
+.dossier-modal-container.mode-lightbox .lb-spec-card h4 {
+  color: var(--lb-ink);
+}
+
+.dossier-modal-container.mode-lightbox .lb-desc-box p,
+.dossier-modal-container.mode-lightbox .lb-gallery-heading p,
+.dossier-modal-container.mode-lightbox .lb-spec-card p {
+  color: var(--lb-muted);
+}
+
+.dossier-modal-container.mode-lightbox .lb-overview-grid {
+  border-bottom-color: var(--lb-line);
+}
+
+.dossier-modal-container.mode-lightbox .lb-meta-sidebar {
+  border-top-color: var(--lb-line);
+}
+
+.dossier-modal-container.mode-lightbox .lb-meta-card {
+  border-bottom-color: var(--lb-line);
+}
+
+.dossier-modal-container.mode-lightbox .lb-meta-label,
+.dossier-modal-container.mode-lightbox .lb-device-label {
+  color: #9a9084;
+}
+
+.dossier-modal-container.mode-lightbox .lb-feature-card,
+.dossier-modal-container.mode-lightbox .lb-spec-card {
+  background: linear-gradient(145deg, #fffdf9, #f5efe7);
+  border-color: var(--lb-line);
+  box-shadow: 0 8px 20px rgba(67, 52, 38, 0.045);
+}
+
+.dossier-modal-container.mode-lightbox .lb-feature-card:hover {
+  background: #fff8f0;
+  border-color: #d6a59c;
+  box-shadow: 0 10px 24px rgba(201, 79, 66, 0.1);
+}
+
+.dossier-modal-container.mode-lightbox .lb-feature-card .feat-icon,
+.dossier-modal-container.mode-lightbox .lb-gallery-index,
+.dossier-modal-container.mode-lightbox .lb-gallery-footnote span {
+  color: var(--lb-accent);
+}
+
+.dossier-modal-container.mode-lightbox .lb-device-stage {
+  border-color: var(--lb-line);
+  background: radial-gradient(circle at 50% 0%, rgba(201, 79, 66, 0.1), transparent 48%), #f2ece3;
+}
+
+.dossier-modal-container.mode-lightbox .device-btn {
+  color: #83786d;
+  background: #fffdf9;
+  border-color: #d9cfc2;
+}
+
+.dossier-modal-container.mode-lightbox .device-btn:hover {
+  color: var(--lb-ink);
+  border-color: #c5b8a9;
+}
+
+.dossier-modal-container.mode-lightbox .device-btn.active {
+  color: #fff;
+  background: var(--lb-accent);
+  border-color: var(--lb-accent);
+}
+
+.dossier-modal-container.mode-lightbox .lb-mockup-wrapper {
+  background: #fffdf9;
+  border-color: #d4c9bc;
+  box-shadow: 0 18px 38px rgba(67, 52, 38, 0.16);
+}
+
+.dossier-modal-container.mode-lightbox .browser-frame-bar {
+  background: #ebe3d9;
+  border-bottom-color: #d9cfc2;
+}
+
+.dossier-modal-container.mode-lightbox .browser-title-text {
+  color: #8d8276;
+}
+
+.dossier-modal-container.mode-lightbox .lb-gallery-footnote {
+  color: #958a7e;
+}
+
+.dossier-modal-container.mode-lightbox .lb-tech-chips-box .lb-section-title {
+  color: var(--lb-ink);
+}
+
+.dossier-modal-container.mode-lightbox .dossier-tech-tags span {
+  color: #655b51;
+  background: #f3ece3;
+  border-color: #ded3c6;
+}
+
+@media (max-width: 768px) {
+  .dossier-modal-overlay {
+    padding: 10px;
+  }
+
+  .dossier-modal-container.mode-lightbox {
+    max-height: 94vh;
+    border-radius: 16px;
+  }
+
+  .dossier-modal-container.mode-lightbox .dossier-header-bar {
+    padding: 13px 16px;
+  }
+
+  .dossier-modal-container.mode-lightbox .dossier-doc-id {
+    display: none;
+  }
+}
+

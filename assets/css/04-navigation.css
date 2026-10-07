@@ -1,0 +1,191 @@
+/* Navbar */
+.navbar {
+  position: fixed; /* Berubah dari sticky ke fixed karena berada di luar main-wrapper */
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 8px 8px 30px; /* Right padding disamakan dengan top/bottom (8px) */
+  width: 92%;
+  max-width: 1200px;
+  opacity: 1;
+  
+  /* iOS 17 Liquid Glass Effect */
+  background: var(--nav-bg);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid var(--nav-border);
+  border-radius: 100px;
+  box-shadow: var(--nav-shadow);
+  transition: background 0.15s ease, border 0.15s ease, box-shadow 0.15s ease, transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease;
+}
+
+.navbar.hidden-on-load {
+  transform: translateX(-50%) translateY(-150%);
+  opacity: 0;
+  pointer-events: none;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.brand-logo {
+  height: 44px;
+  max-width: 160px;
+  object-fit: contain;
+  display: block;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+  animation: logo-pulse 4s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+  0%, 100% { filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)) brightness(1); }
+  50% { filter: drop-shadow(0 8px 12px rgba(0,0,0,0.2)) brightness(1.1); }
+}
+
+[data-theme="dark"] .brand-logo {
+  animation: logo-pulse-dark 4s ease-in-out infinite;
+}
+
+@keyframes logo-pulse-dark {
+  0%, 100% { filter: invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.5)) brightness(1); }
+  50% { filter: invert(1) drop-shadow(0 8px 12px rgba(0,0,0,0.7)) brightness(1.1); }
+}
+.nav-links { 
+  display: flex; 
+  gap: 5px; 
+  font-size: 0.95rem; 
+  font-weight: 500; 
+  position: relative; 
+  z-index: 2;
+}
+.nav-links a { 
+  position: relative; 
+  padding: 8px 16px; 
+  color: var(--text-muted);
+  z-index: 2; 
+  transition: color 0.3s ease;
+}
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.glass-pill-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 100px;
+  background: var(--glass-pill);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-glow);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.glass-pill-bg.active {
+  opacity: 1;
+  transform: scale(1);
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 40px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background: var(--text-muted);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+
+.nav-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-menu-btn {
+  display: none;
+}
+
+.nav-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--text-muted);
+  opacity: 0.3;
+}
+
+.theme-toggle {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.theme-toggle svg {
+  position: absolute;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+/* Default (Light Mode): Moon visible */
+.theme-toggle .sun-icon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+.theme-toggle .moon-icon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+/* Dark Mode: Sun visible */
+[data-theme="dark"] .theme-toggle .sun-icon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+[data-theme="dark"] .theme-toggle .moon-icon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+.theme-toggle:hover {
+  background: var(--glass-pill);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: var(--glass-border);
+  box-shadow: var(--glass-glow);
+  transform: scale(1.05); /* Reduced from 1.15 so the hover circle isn't too big */
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+

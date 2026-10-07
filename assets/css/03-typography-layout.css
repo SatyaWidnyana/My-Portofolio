@@ -1,0 +1,89 @@
+/* Typography utilities */
+.script-font {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  font-family: 'Courier New', Courier, monospace;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--text);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.greeting-cursor {
+  display: inline-block;
+  font-weight: 400;
+  color: var(--text);
+  animation: blink 1s step-end infinite;
+  margin-left: 4px;
+}
+
+
+.section-title {
+  font-size: 1rem;
+  letter-spacing: 3px;
+  font-weight: 500;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+  color: var(--text);
+}
+.sub-heading {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Transition Overlay */
+.transition-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+}
+.transition-col {
+  position: absolute;
+  top: 0;
+  height: 300vh;
+  background: var(--text); /* Dark color for dramatic wipe */
+  transform: translateY(100vh); /* Start below the screen */
+  transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+/* Explicitly position and overlap columns to avoid any sub-pixel gaps */
+.transition-col:nth-child(1) { left: 0%; width: 26%; }
+.transition-col:nth-child(2) { left: 25%; width: 26%; }
+.transition-col:nth-child(3) { left: 50%; width: 26%; }
+.transition-col:nth-child(4) { left: 75%; width: 25%; }
+
+.transition-col.sweep {
+  transform: translateY(-300vh);
+}
+
+body:has(.main-wrapper[inert]) {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Layout */
+.main-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 100px 5vw 0; /* Tambahan padding atas 100px untuk kompensasi navbar yang dicabut */
+  opacity: 0;
+  transform: translateY(15vh);
+  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.main-wrapper:not([inert]) {
+  opacity: 1;
+  transform: translateY(0);
+}
+

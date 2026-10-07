@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('node:path');
 
 function readPNGDimensions(filePath) {
     const buffer = Buffer.alloc(24);
@@ -16,5 +17,5 @@ function readPNGDimensions(filePath) {
     return { width, height };
 }
 
-console.log('Light:', readPNGDimensions('d:/satya-portfolio/image/Foto_card_dekstop.png'));
-console.log('Dark:', readPNGDimensions('d:/satya-portfolio/image/Foto_card_desktop_darkmode.png'));
+console.log('Light:', readPNGDimensions(path.join(__dirname, '../image/Foto_card_dekstop.png')));
+console.log('Dark:', readPNGDimensions(path.join(__dirname, '../image/Foto_card_desktop_darkmode.png')));

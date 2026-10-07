@@ -1,5 +1,13 @@
 # Aturan Pengembangan Website Satya
 
+## Struktur aktif setelah refactor
+
+- Halaman utama: `index.html`; CSS: `assets/css/`; fitur JavaScript: `assets/js/features/`.
+- Bootstrap: `assets/js/app.js` dan `assets/js/main.js`. Pertahankan urutan stylesheet dan inisialisasi fitur.
+- Nama `styles.css` dan `script.js` di contoh aturan lama merujuk pada struktur sebelum refactor. Sekarang naikkan versi query URL file CSS/JS terkait di `index.html`.
+- Lihat `docs/ARCHITECTURE.md` untuk peta fitur. `archive/` hanya menyimpan source historis dan tidak dipakai halaman aktif.
+- Pemeriksaan migrasi: `node tools/verify-structure.cjs`.
+
 File ini berisi pengingat (rules) agar agent AI tidak mengulangi kesalahan yang sama selama proses development. 
 
 ## Aturan Penting:

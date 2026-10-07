@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portofolio Satya Widnyana, UI/UX Designer & Web Creator.">
+  <title>Satya Widnyana — Creative Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Outfit:wght@300;400;500;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=182">
+  <script src="script.js?v=77" defer></script>
+</head>
+<body>
+  <!-- Intro Animation Overlay -->
+  <div class="intro-overlay" id="intro-overlay">
+    <div class="intro-content">
+      <div class="intro-greeting" id="intro-greeting">Hello</div>
+      <div class="intro-loading-wrapper" id="intro-loading-wrapper">
+        <div class="intro-percent" id="intro-percent">0%</div>
+        <div class="intro-loading-bar">
+          <div class="intro-progress" id="intro-progress"></div>
+        </div>
+      </div>
+      <div class="intro-welcome" id="intro-welcome" hidden>
+        <img src="image/Logo.png" alt="Satya Logo" class="intro-logo" id="intro-logo">
+        <span>welcome to my</span>
+        <span class="serif-italic">portfolio.</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="transition-grid" id="transition-grid">
+    <div class="transition-col"></div>
+    <div class="transition-col"></div>
+    <div class="transition-col"></div>
+    <div class="transition-col"></div>
+  </div>
+
+  <!-- Navigation moved outside main-wrapper to fix backdrop-filter bug during transform -->
+  <header class="navbar hidden-on-load" id="navbar">
+    <a href="#" class="brand">
+      <img src="image/Logo.png" alt="Satya Logo" class="brand-logo">
+    </a>
+    <nav class="nav-links" id="nav-links">
+      <div class="glass-pill-bg" id="glass-pill-bg"></div>
+      <a href="#projects">Selected Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-action">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+      <div class="nav-divider"></div>
+      <a href="#contact" class="btn-primary">Let's Talk</a>
+    </div>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open Menu">
+      <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </header>
+
+  <div class="main-wrapper" id="main-wrapper" inert>
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        
+        <div class="hero-content">
+          <div class="hero-text">
+            <h2 class="hero-subtitle" style="position: relative;">
+              <!-- Placeholder tersembunyi untuk mem-booking ukuran tinggi dan lebar yang akurat 100% -->
+              <div style="visibility: hidden; pointer-events: none;" aria-hidden="true">
+                <span class="script-font-dummy">HELLO, MY NAME IS...</span>
+                <span class="name-solid">SATYA</span><br>
+                <span class="name-solid" id="widnyana-dummy">WIDNYANA</span>
+              </div>
+              
+              <!-- Teks asli yang di-animasikan -->
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <span class="script-font"></span>
+                <span class="name-solid">SATYA</span><br>
+                <span class="name-solid">WIDNYANA</span>
+              </div>
+            </h2>
+            <div class="terminal-box" id="termV2">
+              <div class="term-header">
+                 <div class="term-dots">
+                   <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                 </div>
+                 <span class="term-title">guest@satya:~</span>
+              </div>
+              <div class="term-body">
+                <div class="term-input-line" id="termInputLine">
+                  <span class="term-prompt">guest@satya:~$</span>
+                  <span class="term-cmd">./load_profile</span><span class="term-cursor" id="mainCursor"></span>
+                  <div class="term-btn-group">
+                    <button class="term-run-btn" id="termRunBtn">ENTER ↵</button>
+                    <button class="term-del-btn" id="termDelBtn" style="display: none;">DELETE ⌫</button>
+                  </div>
+                </div>
+                <div class="term-logs" id="termLogs"></div>
+                <div class="term-final-text" id="termFinalText"></div>
+                <div id="termSourceHtml" style="display: none;">
+                  <p class="term-desc" style="margin-top: 15px;">
+                    As a <strong>Web Designer & Digital Creator</strong>, I design digital experiences that <em>inspire</em> and <em>connect</em>. I focus on crafting elegant, functional, and user-centered interfaces.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="hero-image" id="lanyard">
+            <!-- Ghost image to maintain container dimensions -->
+            <img src="image/lanyard new lightmode.png" class="lanyard-card" style="visibility: hidden;" draggable="false" />
+            
+            <!-- Strap Part (Top 30%) -->
+            <div class="lanyard-strap" id="lanyard-strap">
+              <img src="image/lanyard new lightmode.png" alt="" class="lanyard-card lanyard-light" draggable="false" />
+              <img src="image/lanyard new darkmode.png" alt="" class="lanyard-card lanyard-dark" draggable="false" />
+            </div>
+            
+            <!-- Card Body Part (Bottom 70%) -->
+            <div class="lanyard-body" id="lanyard-body">
+              <img src="image/lanyard new lightmode.png" alt="Satya Widnyana Name Tag Light" class="lanyard-card lanyard-light" draggable="false" />
+              <img src="image/lanyard new darkmode.png" alt="Satya Widnyana Name Tag Dark" class="lanyard-card lanyard-dark" draggable="false" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="marquee-container">
+          <div class="marquee-mask">
+            <div class="marquee-content">
+            <span class="m-solid">WEB DEVELOPMENT</span><span class="m-dot">✦</span>
+            <span class="m-outline">INTERACTIVE DESIGN</span><span class="m-dot">✦</span>
+            <span class="m-solid">UI/UX DESIGNER</span><span class="m-dot">✦</span>
+            <span class="m-outline">PROMPT ENGINEERING</span><span class="m-dot">✦</span>
+            <span class="m-solid">MUSIC (HOBBY)</span><span class="m-dot">✦</span>
+            <span class="m-outline">VIBE CODING</span><span class="m-dot">✦</span>
+            <span class="m-solid">WEB DEVELOPMENT</span><span class="m-dot">✦</span>
+            <span class="m-outline">INTERACTIVE DESIGN</span><span class="m-dot">✦</span>
+            <span class="m-solid">UI/UX DESIGNER</span><span class="m-dot">✦</span>
+            <span class="m-outline">PROMPT ENGINEERING</span><span class="m-dot">✦</span>
+            <span class="m-solid">MUSIC (HOBBY)</span><span class="m-dot">✦</span>
+            <span class="m-outline">VIBE CODING</span><span class="m-dot">✦</span>
+            <span class="m-solid">WEB DEVELOPMENT</span><span class="m-dot">✦</span>
+            <span class="m-outline">INTERACTIVE DESIGN</span><span class="m-dot">✦</span>
+            <span class="m-solid">UI/UX DESIGNER</span><span class="m-dot">✦</span>
+            <span class="m-outline">PROMPT ENGINEERING</span><span class="m-dot">✦</span>
+            <span class="m-solid">MUSIC (HOBBY)</span><span class="m-dot">✦</span>
+            <span class="m-outline">VIBE CODING</span><span class="m-dot">✦</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio Section: folder popup -->
+      <section class="projects" id="projects">
+        <div class="folder-stage" id="folder-stage">
+          <div class="portfolio-folder" id="portfolio-folder" role="button" tabindex="0" aria-label="Click to open portfolio">
+            <div class="folder-3d">
+
+              <div class="folder-back" aria-hidden="true"></div>
+              <div class="folder-back-right" aria-hidden="true"></div>
+              <div class="folder-back-left" aria-hidden="true"></div>
+              <div class="folder-tab" aria-hidden="true">
+                <div class="red-accent-tab"></div>
+                <div class="folder-tab-text">WORK ARCHIVE</div>
+              </div>
+              <div class="folder-paper folder-paper-1" data-project-id="wga-ocean" role="button" tabindex="0" title="Click to view case study">
+                <div class="paper-img-wrapper">
+                  <img src="image portofolio/WGA OCEAN/cover.jpeg" alt="WGA Ocean">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
+                </div>
+                <div class="paper-info">
+                  <div class="paper-text">
+                    <h3 class="paper-title">WGA Ocean</h3>
+                    <span class="paper-category">Water Sports &amp; Transport</span>
+                  </div>
+                  <span class="paper-tag">2024</span>
+                </div>
+              </div>
+              <div class="folder-paper folder-paper-2" data-project-id="wga-dekorasi" role="button" tabindex="0" title="Click to view case study">
+                <div class="paper-img-wrapper">
+                  <img src="image portofolio/WGA DEKORASI/cover.jpeg" alt="WGA Dekorasi">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
+                </div>
+                <div class="paper-info">
+                  <div class="paper-text">
+                    <h3 class="paper-title">WGA Dekorasi</h3>
+                    <span class="paper-category">Event &amp; Equipment Rental</span>
+                  </div>
+                  <span class="paper-tag">2024</span>
+                </div>
+              </div>
+              <div class="folder-paper folder-paper-3" data-project-id="satya-portfolio" role="button" tabindex="0" title="Click to view case study">
+                <div class="paper-img-wrapper">
+                  <img src="image portofolio/MY PORTOFOLIO/cover.jpeg" alt="Satya Portfolio">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
+                </div>
+                <div class="paper-info">
+                  <div class="paper-text">
+                    <h3 class="paper-title">Satya Portfolio</h3>
+                    <span class="paper-category">Personal Creative Portfolio</span>
+                  </div>
+                  <span class="paper-tag">2024</span>
+                </div>
+              </div>
+              <div class="folder-paper folder-paper-4" data-project-id="ketut-gajah-bali" role="button" tabindex="0" title="Click to view case study">
+                <div class="paper-img-wrapper">
+                  <img src="image portofolio/BALI ADVENTURE/cover.jpeg" alt="Ketut Gajah Bali">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
+                </div>
+                <div class="paper-info">
+                  <div class="paper-text">
+                    <h3 class="paper-title">Ketut Gajah Bali</h3>
+                    <span class="paper-category">Private Tour &amp; Transport</span>
+                  </div>
+                  <span class="paper-tag">2024</span>
+                </div>
+              </div>
+              <div class="folder-clip" aria-hidden="true"></div>
+              <div class="folder-front">
+                <div class="folder-front-content">
+                  <div class="folder-top-meta">
+                    <div class="red-accent-line"></div>
+                    <div class="meta-text">SW / PORTFOLIO</div>
+                  </div>
+                  <div class="folder-title-area">
+                    <h2 class="folder-huge-title">Selected Works</h2>
+                    <p class="folder-sub-title">Web development &amp; digital design</p>
+                  </div>
+                  <div class="folder-bottom-meta">
+                    <div class="meta-num">01</div>
+                    <div class="folder-action swipe-container" id="swipe-container">
+                      <div class="swipe-thumb" id="swipe-thumb">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                      </div>
+                      <span class="swipe-text">SWIPE TO OPEN</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work Process & Skills Section -->
+      <section class="process-skills" id="about">
+        <div class="skills-col">
+          <h2 class="section-title">EDUCATION & SKILLS</h2>
+          <div class="education">
+             <h4 class="sub-heading">EDUCATION</h4>
+             <div class="edu-item">
+               <div>
+                 <h5>B.Sc. in Visual Communication Design</h5>
+                 <p>Binus University</p>
+               </div>
+               <span class="year">2018 - 2022</span>
+             </div>
+             <div class="edu-item">
+               <div>
+                 <h5>UI/UX Design Certification</h5>
+                 <p>Google Career Certificates</p>
+               </div>
+               <span class="year">2023</span>
+             </div>
+          </div>
+          <div class="skills">
+            <h4 class="sub-heading">SKILLS</h4>
+            <div class="skills-tags">
+              <span>WEB DESIGN</span>
+              <span>UI/UX DESIGN</span>
+              <span>FIGMA</span>
+              <span>FRAMER</span>
+              <span>JAVASCRIPT</span>
+              <span>HTML / CSS</span>
+              <span>GSAP ANIMATION</span>
+              <span>SEO BASICS</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="process-col">
+           <h2 class="section-title">WORK PROCESS</h2>
+           <div class="process-list">
+             <div class="process-item">
+               <span class="num">01</span>
+               <div class="icon">🔍</div>
+               <div class="process-text">
+                 <h4>DISCOVER</h4>
+                 <p>Understanding goals, audience, and project requirements.</p>
+               </div>
+             </div>
+             <div class="process-item">
+               <span class="num">02</span>
+               <div class="icon">💡</div>
+               <div class="process-text">
+                 <h4>IDEATE</h4>
+                 <p>Planning, wireframing, and creating the right concept.</p>
+               </div>
+             </div>
+             <div class="process-item">
+               <span class="num">03</span>
+               <div class="icon">✏️</div>
+               <div class="process-text">
+                 <h4>DESIGN</h4>
+                 <p>Crafting visual design with a focus on user experience.</p>
+               </div>
+             </div>
+             <div class="process-item">
+               <span class="num">04</span>
+               <div class="icon">&lt;/&gt;</div>
+               <div class="process-text">
+                 <h4>DEVELOP</h4>
+                 <p>Building fast, responsive, and high-performing websites.</p>
+               </div>
+             </div>
+           </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact" id="contact">
+        <div class="contact-wrap">
+          <div class="contact-left">
+             <h2 class="contact-title">LET'S WORK<br><em>TOGETHER</em><span class="sparkle">✦</span></h2>
+             <p>I'm currently open for new projects and collaborations. Let's create something amazing that drives results.</p>
+          </div>
+          <div class="contact-right">
+             <a href="mailto:hello@satyawidnyana.com" class="contact-link">
+               <span class="icon">✉</span> hello@satyawidnyana.com
+             </a>
+             <a href="#" class="contact-link">
+               <span class="icon">🌐</span> www.satyawidnyana.com
+             </a>
+             <a href="#" class="contact-link">
+               <span class="icon">📍</span> Jakarta, Indonesia
+             </a>
+          </div>
+        </div>
+      </section>
+      
+      <footer class="footer">
+        <div class="footer-brand">Satya<span>.</span></div>
+        <div class="footer-links">
+          <a href="#">LinkedIn</a>
+          <a href="#">Instagram</a>
+          <a href="#">Dribbble</a>
+        </div>
+        <div class="footer-copy">© 2024 Satya Widnyana. All rights reserved.</div>
+      </footer>
+    </main>
+    </div>
+  
+  <!-- Project Case Study Modal: Studio Lightbox -->
+  <div class="dossier-modal-overlay" id="dossierModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="dossier-modal-container mode-lightbox" id="dossierModalContainer">
+      
+      <!-- Top Header Bar -->
+      <div class="dossier-header-bar">
+        <div class="dossier-tab-badge">
+          <span class="dossier-stamp" id="dossierStampTag">STUDIO LIGHTBOX</span>
+          <span class="dossier-doc-id" id="dossierDocId">PROJECT SHOWCASE</span>
+        </div>
+
+        <!-- Concept Mode Switcher Toggle -->
+        <div class="concept-mode-switcher">
+          <button class="mode-btn active" id="btnModeDossier" title="Option 1: Folder Dossier File Mode">
+            <span>📁 Dossier File</span>
+          </button>
+          <button class="mode-btn" id="btnModeLightbox" title="Option 2: Studio Lightbox Mode">
+            <span>💎 Studio Lightbox</span>
+          </button>
+        </div>
+
+        <button class="dossier-close-btn" id="dossierCloseBtn" aria-label="Close Case Study">
+          <span>ESC</span> ✕
+        </button>
+      </div>
+
+      <!-- ==========================================
+           CONCEPT 1 VIEW: DOSSIER BINDER PAPER
+           ========================================== -->
+      <div class="dossier-paper-body concept-view-dossier" id="conceptViewDossier">
+        <div class="dossier-grid">
+          <!-- Left Column: Interactive Browser Window Preview -->
+          <div class="dossier-preview-col">
+            <div class="dossier-browser-frame">
+              <div class="browser-header">
+                <div class="browser-dots">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                </div>
+                <div class="browser-address-bar" id="dossierBrowserUrl">https://satyawidnyana.com/projects/...</div>
+              </div>
+              <div class="browser-screen">
+                <img id="dossierCoverImg" src="" alt="Project Preview">
+                <div class="browser-screen-overlay">
+                  <a id="dossierLiveBtnImg" href="#" target="_blank" rel="noopener noreferrer" class="btn-live-preview">
+                    <span>Explore Live Site ↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="dossier-quick-stats">
+              <div class="stat-box">
+                <span class="stat-label">YEAR</span>
+                <span class="stat-value" id="dossierYear">2024</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">ROLE</span>
+                <span class="stat-value" id="dossierRole">UI/UX &amp; Web Dev</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">LOCATION</span>
+                <span class="stat-value" id="dossierClient">Bali, Indonesia</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Project Case Study Meta & Description -->
+          <div class="dossier-info-col">
+            <div class="dossier-meta-top">
+              <span class="dossier-category-pill" id="dossierCategory">PRIVATE TOUR &amp; TRANSPORT</span>
+              <span class="dossier-status-pill">● COMPLETED</span>
+            </div>
+
+            <h2 class="dossier-project-title" id="dossierTitle">Ketut Gajah Bali</h2>
+
+            <div class="dossier-section">
+              <h4 class="dossier-subheading">PROJECT OVERVIEW</h4>
+              <p class="dossier-description" id="dossierDescription">
+                A luxury private tour and personal driver booking platform in Bali, designed to awaken the traveler's soul with immersive visual storytelling and effortless booking experience.
+              </p>
+            </div>
+
+            <div class="dossier-section">
+              <h4 class="dossier-subheading">KEY HIGHLIGHTS</h4>
+              <ul class="dossier-features-list" id="dossierFeatures">
+                <!-- Populated dynamically -->
+              </ul>
+            </div>
+
+            <div class="dossier-section">
+              <h4 class="dossier-subheading">TECH STACK &amp; TOOLS</h4>
+              <div class="dossier-tech-tags" id="dossierTech">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <div class="dossier-actions">
+              <a id="dossierLiveBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary btn-dossier-primary">
+                <span>Visit Live Project ↗</span>
+              </a>
+              <button class="btn-secondary btn-dossier-secondary dossier-close-trigger">
+                Close Dossier
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STUDIO LIGHTBOX SHOWCASE
+           ========================================== -->
+      <div class="lightbox-body concept-view-lightbox" id="conceptViewLightbox">
+        <!-- Lightbox Sub-Header with Navigation Tabs -->
+        <div class="lightbox-tabs-bar">
+          <button class="lb-tab-btn active" data-lb-tab="overview">
+            <span>✦ Overview</span>
+          </button>
+          <button class="lb-tab-btn" data-lb-tab="gallery">
+            <span>🖼 Gallery &amp; Mockup</span>
+          </button>
+          <button class="lb-tab-btn" data-lb-tab="specs">
+            <span>⚙ Tech Specs</span>
+          </button>
+        </div>
+
+        <div class="lightbox-content-area">
+          <!-- Lightbox Tab 1: Overview -->
+          <div class="lb-tab-pane active" id="lbTabOverview">
+            <div class="lb-hero-banner">
+              <img id="lbHeroImg" src="" alt="Project Hero">
+              <div class="lb-hero-overlay">
+                <div class="lb-hero-topline">
+                  <span class="lb-hero-kicker">SELECTED WORK / 2024</span>
+                  <span class="lb-hero-status"><span></span> Live project</span>
+                </div>
+                <span class="lb-category-tag" id="lbCategory">Private Tour &amp; Transport</span>
+                <h1 class="lb-main-title" id="lbTitle">Ketut Gajah Bali</h1>
+                <p class="lb-tagline" id="lbTagline">High-craft digital web experience designed for modern travelers.</p>
+                <div class="lb-hero-buttons">
+                  <a id="lbLiveBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <span>Explore Live Website ↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="lb-overview-grid">
+              <div class="lb-desc-box">
+                <span class="lb-overline">THE IDEA</span>
+                <h3 class="lb-section-title">Project Narrative</h3>
+                <p id="lbDescription">Full project case study description goes here...</p>
+              </div>
+
+              <div class="lb-meta-sidebar">
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Client / Context</span>
+                  <strong class="lb-meta-val" id="lbClient">Bali, Indonesia</strong>
+                </div>
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Role</span>
+                  <strong class="lb-meta-val" id="lbRole">UI/UX &amp; Web Dev</strong>
+                </div>
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Year</span>
+                  <strong class="lb-meta-val" id="lbYear">2024</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="lb-features-section">
+              <span class="lb-overline">WHAT MAKES IT WORK</span>
+              <h3 class="lb-section-title">Key Core Capabilities</h3>
+              <div class="lb-features-grid" id="lbFeaturesGrid">
+                <!-- Dynamic feature cards -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Lightbox Tab 2: Gallery & Mockup -->
+          <div class="lb-tab-pane" id="lbTabGallery" style="display: none;">
+            <div class="lb-gallery-view">
+              <div class="lb-gallery-heading">
+                <div>
+                  <span class="lb-overline">INTERACTION PREVIEW</span>
+                  <h2>See it in its natural habitat.</h2>
+                  <p>Switch viewport to inspect how the experience adapts across screens.</p>
+                </div>
+                <span class="lb-gallery-index">01 — 02</span>
+              </div>
+              <div class="lb-device-selector">
+                <span class="lb-device-label">DEVICE VIEW:</span>
+                <button class="device-btn active" id="btnDeviceDesktop">🖥 Desktop Browser</button>
+                <button class="device-btn" id="btnDeviceMobile">📱 Mobile View</button>
+              </div>
+              <div class="lb-device-stage">
+              <div class="lb-mockup-wrapper desktop-mode" id="lbMockupWrapper">
+                <div class="browser-frame-bar">
+                  <div class="browser-dots">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                  </div>
+                  <span class="browser-title-text" id="lbMockupUrl">https://satyawidnyana.com</span>
+                </div>
+                <div class="mockup-img-container">
+                  <img id="lbMockupImg" src="" alt="Full Mockup Preview" decoding="async">
+                </div>
+              </div>
+              </div>
+              <p class="lb-gallery-footnote"><span>✦</span> Drag the scroll inside the preview to explore the full page.</p>
+            </div>
+          </div>
+
+          <!-- Lightbox Tab 3: Tech Specs -->
+          <div class="lb-tab-pane" id="lbTabSpecs" style="display: none;">
+            <div class="lb-specs-grid">
+              <div class="lb-spec-card">
+                <div class="spec-icon">⚡</div>
+                <h4>Frontend &amp; Logic</h4>
+                <p id="lbSpecFrontend">JavaScript ES6+, Vanilla Modular Components, Dynamic State Management.</p>
+              </div>
+              <div class="lb-spec-card">
+                <div class="spec-icon">🎨</div>
+                <h4>Styling &amp; Architecture</h4>
+                <p id="lbSpecStyling">Vanilla CSS3 Design Tokens, Custom Glassmorphism, 3D CSS Transforms, HSL Color Palette.</p>
+              </div>
+              <div class="lb-spec-card">
+                <div class="spec-icon">🚀</div>
+                <h4>Performance &amp; SEO</h4>
+                <p>Semantic HTML5 structure, optimized asset compression, 100/100 Google Lighthouse ready.</p>
+              </div>
+              <div class="lb-spec-card">
+                <div class="spec-icon">✨</div>
+                <h4>Animation Engine</h4>
+                <p>GSAP &amp; Web Animations API, 60fps smooth spring physics, FLIP layout expansion.</p>
+              </div>
+            </div>
+            
+            <div class="lb-tech-chips-box">
+              <h4 class="lb-section-title">Complete Technology Stack</h4>
+              <div class="dossier-tech-tags" id="lbTechChips">
+                <!-- Tech chips -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

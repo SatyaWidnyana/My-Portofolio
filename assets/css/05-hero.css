@@ -1,0 +1,300 @@
+/* Hero Section */
+.hero { 
+  padding: 20px 0 100px 0; 
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 70px; /* Space for the banner below */
+}
+.kicker { display: inline-block; font-size: 0.9rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 8px 0; margin-bottom: 10px; }
+.pulse-dot { display: inline-block; width: 8px; height: 8px; background: #28a745; border-radius: 50%; margin-right: 8px; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(40,167,69,0.4); } 70% { box-shadow: 0 0 0 10px rgba(40,167,69,0); } 100% { box-shadow: 0 0 0 0 rgba(40,167,69,0); } }
+
+.hero-title-container { text-align: left; margin: 0; overflow: hidden; padding: 4vw 0; padding-left: 5%; }
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 10vw; /* Diperkecil agar ada space di kanan */
+  font-weight: 500;
+  line-height: 1; /* Fix clipping at top/bottom */
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.hero-title span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  
+  /* Background clip must be on the transformed element */
+  background: 
+    radial-gradient(
+      circle 20vw at center, /* Spotlight bulat yang lebih fokus */
+      rgba(255, 255, 255, 1) 0%,
+      transparent 70%
+    ),
+    linear-gradient(
+      110deg,
+      transparent 0%,
+      transparent 45%,
+      rgba(255, 255, 255, 0.9) 50%, /* Kilapan garis tajam */
+      transparent 55%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--text) 30%,
+      var(--text-fade) 100%
+    );
+  background-size: 150vw auto, 150vw auto, 100% 100%;
+  background-position: -100vw center, -100vw center, center top;
+  background-repeat: no-repeat;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: 
+    titleReveal 1.5s cubic-bezier(0.25, 1, 0.3, 1) forwards,
+    titleShine 6s ease-in-out infinite;
+}
+
+.hero-title span:nth-child(1) { animation-delay: 0.1s, 1.5s; }
+.hero-title span:nth-child(2) { animation-delay: 0.2s, 1.6s; }
+.hero-title span:nth-child(3) { animation-delay: 0.3s, 1.7s; }
+.hero-title span:nth-child(4) { animation-delay: 0.4s, 1.8s; }
+.hero-title span:nth-child(5) { animation-delay: 0.5s, 1.9s; }
+.hero-title span:nth-child(6) { animation-delay: 0.6s, 2.0s; }
+.hero-title span:nth-child(7) { animation-delay: 0.7s, 2.1s; }
+.hero-title span:nth-child(8) { animation-delay: 0.8s, 2.2s; }
+.hero-title span:nth-child(9) { animation-delay: 0.9s, 2.3s; }
+
+@keyframes titleReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes titleShine {
+  0% { background-position: -100vw center, -100vw center, center top; }
+  75% { background-position: 150vw center, 150vw center, center top; } /* Jarak tempuh dipendekkan agar pergerakan jauh lebih lambat dan smooth */
+  100% { background-position: 150vw center, 150vw center, center top; } /* Jeda 1.5 detik */
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: max-content 0.8fr 1.5fr;
+  gap: 50px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.hero-text {
+  width: max-content;
+}
+.hero-subtitle {
+  margin-bottom: 5px; /* Diperkecil agar terminal lebih merapat ke atas */
+}
+
+/* Efek Highlight Stabilo pada "Hello, I'm" */
+.script-font, .script-font-dummy {
+  display: block; 
+  width: fit-content;
+  position: relative;
+  z-index: 1;
+  padding: 2px 8px; 
+  margin-bottom: 5px;
+  
+  /* Styling teks aslinya diubah ke monospace agar seperti terminal */
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  color: var(--text);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 5px;
+  white-space: nowrap;
+  
+  transition: color 0.15s ease;
+}
+
+.script-font-dummy {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.script-font::after {
+  content: '';
+  position: absolute;
+  bottom: 0%; 
+  left: 0;
+  width: 100%;
+  height: 100%; /* Penuhi seluruh teks untuk mode hitam putih */
+  background-color: var(--text); /* Warna hitam di light mode, putih di dark mode */
+  z-index: -1;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.script-font.highlight-active {
+  color: var(--bg); /* Teks menjadi putih di light mode agar terbaca di atas highlight hitam */
+  transition: color 0.1s 0.3s ease; /* Delay warnanya hanya saat animasi highlight muncul pertama kali */
+}
+
+.script-font.highlight-active::after {
+  animation: stabilo-highlight 0.8s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+  animation-delay: 0.2s; /* Memberikan jeda tipis setelah layar terbuka */
+}
+
+@keyframes stabilo-highlight {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+
+.name-solid, .name-outline {
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
+  font-size: 10.5rem; /* Ukuran diperkecil sedikit */
+  line-height: 0.9;
+  letter-spacing: 1px;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  position: relative;
+  z-index: 10; /* Membuat SATYA selalu berada di atas layer 'Hello, I'm' */
+}
+
+.name-solid, .name-outline {
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), -webkit-text-stroke 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.name-solid {
+  color: var(--text);
+}
+
+.name-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--text);
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.92em;
+  background-color: currentColor;
+  margin-left: 6px;
+  vertical-align: baseline;
+  transform: translateY(0.02em);
+}
+.name-outline .typing-cursor {
+  background-color: var(--text);
+  -webkit-text-stroke: 0;
+}
+
+.glitch-char {
+  position: relative;
+  display: inline-block;
+  transition: color 0.2s, transform 0.2s, -webkit-text-stroke 0.2s;
+}
+
+.glitch-char.is-math-hover {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text);
+  transform: scale(0.96);
+  z-index: 20;
+}
+
+.glitch-char::before,
+.glitch-char::after {
+  position: absolute;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.08em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  -webkit-text-stroke: 0;
+  pointer-events: none;
+  font-weight: 600;
+  line-height: 1;
+  z-index: 10;
+  left: -5px;
+  right: -5px;
+  width: auto;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Garis ukur atas */
+.glitch-char::before {
+  content: attr(data-measure-top);
+  top: 0;
+  border-top: 1.5px dashed var(--text-muted);
+  border-left: 1.5px solid var(--text-muted);
+  border-right: 1.5px solid var(--text-muted);
+  padding-top: 4px;
+  transform: translateY(-90%);
+}
+.glitch-char.is-math-hover::before {
+  opacity: 1;
+  transform: translateY(-110%);
+}
+
+/* Garis ukur bawah */
+.glitch-char::after {
+  content: attr(data-measure-bottom);
+  bottom: 0;
+  border-bottom: 1.5px dashed var(--text-muted);
+  border-left: 1.5px solid var(--text-muted);
+  border-right: 1.5px solid var(--text-muted);
+  padding-bottom: 4px;
+  transform: translateY(90%);
+}
+.glitch-char.is-math-hover::after {
+  opacity: 1;
+  transform: translateY(110%);
+}
+
+/* SVG True Path Tracing Effect */
+.hero-subtitle.glitch-ready .name-outline {
+  position: relative;
+  /* Kosongkan warna dari text html, kita murni pakai SVG */
+  color: transparent;
+  -webkit-text-stroke: 0;
+}
+
+.base-svg-text {
+  fill: transparent;
+  stroke: var(--text); /* Hitam/Putih kaya biasa */
+  stroke-width: 2px;
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 1px;
+  transition: stroke 0.15s ease;
+}
+
+.trace-tspan {
+  fill: transparent;
+  stroke: var(--loading-color);
+  stroke-width: 4px;
+  stroke-linecap: round;
+  /* Garis sepanjang 80px, celah sejauh 4000px */
+  stroke-dasharray: 80 4000;
+  /* Posisi 80 akan menyembunyikan garis sepenuhnya di area celah (gap) */
+  stroke-dashoffset: 80;
+  /* Animasi dikontrol oleh JS (class is-tracing) agar tidak bertabrakan */
+  filter: drop-shadow(0 0 10px var(--loading-color)) drop-shadow(0 0 20px var(--loading-color));
+}
+
+.trace-tspan.is-tracing {
+  animation: true-svg-trace var(--anim-dur) linear forwards;
+}
+
+@keyframes true-svg-trace {
+  0% { stroke-dashoffset: 80; }
+  100% { stroke-dashoffset: var(--path-len); } 
+}
+.hero-desc { color: var(--text-muted); font-size: 1.05rem; max-width: 280px; line-height: 1.7; }
+.hero-desc strong { font-weight: 600; color: var(--text); }
+.hero-desc em { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text); }
+
