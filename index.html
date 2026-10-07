@@ -357,15 +357,15 @@
     </main>
     </div>
   
-  <!-- Project Case Study Modal (Supports Concept 1: Dossier File & Concept 2: Studio Lightbox) -->
+  <!-- Project Case Study Modal: Studio Lightbox -->
   <div class="dossier-modal-overlay" id="dossierModal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="dossier-modal-container mode-dossier" id="dossierModalContainer">
+    <div class="dossier-modal-container mode-lightbox" id="dossierModalContainer">
       
-      <!-- Top Header Bar with Mode Switcher -->
+      <!-- Top Header Bar -->
       <div class="dossier-header-bar">
         <div class="dossier-tab-badge">
-          <span class="dossier-stamp" id="dossierStampTag">CONFIDENTIAL DOSSIER</span>
-          <span class="dossier-doc-id" id="dossierDocId">CASE STUDY // #01</span>
+          <span class="dossier-stamp" id="dossierStampTag">STUDIO LIGHTBOX</span>
+          <span class="dossier-doc-id" id="dossierDocId">PROJECT SHOWCASE</span>
         </div>
 
         <!-- Concept Mode Switcher Toggle -->
@@ -467,9 +467,9 @@
       </div>
 
       <!-- ==========================================
-           CONCEPT 2 VIEW: STUDIO LIGHTBOX SHOWCASE
+           STUDIO LIGHTBOX SHOWCASE
            ========================================== -->
-      <div class="lightbox-body concept-view-lightbox" id="conceptViewLightbox" style="display: none;">
+      <div class="lightbox-body concept-view-lightbox" id="conceptViewLightbox">
         <!-- Lightbox Sub-Header with Navigation Tabs -->
         <div class="lightbox-tabs-bar">
           <button class="lb-tab-btn active" data-lb-tab="overview">
@@ -489,6 +489,10 @@
             <div class="lb-hero-banner">
               <img id="lbHeroImg" src="" alt="Project Hero">
               <div class="lb-hero-overlay">
+                <div class="lb-hero-topline">
+                  <span class="lb-hero-kicker">SELECTED WORK / 2024</span>
+                  <span class="lb-hero-status"><span></span> Live project</span>
+                </div>
                 <span class="lb-category-tag" id="lbCategory">Private Tour &amp; Transport</span>
                 <h1 class="lb-main-title" id="lbTitle">Ketut Gajah Bali</h1>
                 <p class="lb-tagline" id="lbTagline">High-craft digital web experience designed for modern travelers.</p>
@@ -502,6 +506,7 @@
 
             <div class="lb-overview-grid">
               <div class="lb-desc-box">
+                <span class="lb-overline">THE IDEA</span>
                 <h3 class="lb-section-title">Project Narrative</h3>
                 <p id="lbDescription">Full project case study description goes here...</p>
               </div>
@@ -523,6 +528,7 @@
             </div>
 
             <div class="lb-features-section">
+              <span class="lb-overline">WHAT MAKES IT WORK</span>
               <h3 class="lb-section-title">Key Core Capabilities</h3>
               <div class="lb-features-grid" id="lbFeaturesGrid">
                 <!-- Dynamic feature cards -->
@@ -533,11 +539,20 @@
           <!-- Lightbox Tab 2: Gallery & Mockup -->
           <div class="lb-tab-pane" id="lbTabGallery" style="display: none;">
             <div class="lb-gallery-view">
+              <div class="lb-gallery-heading">
+                <div>
+                  <span class="lb-overline">INTERACTION PREVIEW</span>
+                  <h2>See it in its natural habitat.</h2>
+                  <p>Switch viewport to inspect how the experience adapts across screens.</p>
+                </div>
+                <span class="lb-gallery-index">01 — 02</span>
+              </div>
               <div class="lb-device-selector">
                 <span class="lb-device-label">DEVICE VIEW:</span>
                 <button class="device-btn active" id="btnDeviceDesktop">🖥 Desktop Browser</button>
                 <button class="device-btn" id="btnDeviceMobile">📱 Mobile View</button>
               </div>
+              <div class="lb-device-stage">
               <div class="lb-mockup-wrapper desktop-mode" id="lbMockupWrapper">
                 <div class="browser-frame-bar">
                   <div class="browser-dots">
@@ -546,9 +561,11 @@
                   <span class="browser-title-text" id="lbMockupUrl">https://satyawidnyana.com</span>
                 </div>
                 <div class="mockup-img-container">
-                  <img id="lbMockupImg" src="" alt="Full Mockup Preview">
+                  <img id="lbMockupImg" src="" alt="Full Mockup Preview" decoding="async">
                 </div>
               </div>
+              </div>
+              <p class="lb-gallery-footnote"><span>✦</span> Drag the scroll inside the preview to explore the full page.</p>
             </div>
           </div>
 

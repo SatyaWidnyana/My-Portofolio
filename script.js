@@ -1040,32 +1040,6 @@
     document.body.style.overflow = '';
   }
 
-  // Concept Mode Switcher (Option 1 vs Option 2)
-  const btnModeDossier = document.getElementById('btnModeDossier');
-  const btnModeLightbox = document.getElementById('btnModeLightbox');
-  const conceptViewDossier = document.getElementById('conceptViewDossier');
-  const conceptViewLightbox = document.getElementById('conceptViewLightbox');
-  const dossierStampTag = document.getElementById('dossierStampTag');
-
-  function setModalMode(mode) {
-    if (mode === 'lightbox') {
-      if (btnModeLightbox) btnModeLightbox.classList.add('active');
-      if (btnModeDossier) btnModeDossier.classList.remove('active');
-      if (conceptViewLightbox) conceptViewLightbox.style.display = 'flex';
-      if (conceptViewDossier) conceptViewDossier.style.display = 'none';
-      if (dossierStampTag) dossierStampTag.textContent = 'STUDIO LIGHTBOX';
-    } else {
-      if (btnModeDossier) btnModeDossier.classList.add('active');
-      if (btnModeLightbox) btnModeLightbox.classList.remove('active');
-      if (conceptViewDossier) conceptViewDossier.style.display = 'block';
-      if (conceptViewLightbox) conceptViewLightbox.style.display = 'none';
-      if (dossierStampTag) dossierStampTag.textContent = 'CONFIDENTIAL DOSSIER';
-    }
-  }
-
-  if (btnModeDossier) btnModeDossier.addEventListener('click', () => setModalMode('dossier'));
-  if (btnModeLightbox) btnModeLightbox.addEventListener('click', () => setModalMode('lightbox'));
-
   // Lightbox Tabs Navigation
   document.querySelectorAll('.lb-tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1088,22 +1062,36 @@
   const btnDeviceMobile = document.getElementById('btnDeviceMobile');
   const lbMockupWrapper = document.getElementById('lbMockupWrapper');
 
-  if (btnDeviceDesktop && lbMockupWrapper) {
-    btnDeviceDesktop.addEventListener('click', () => {
-      btnDeviceDesktop.classList.add('active');
-      if (btnDeviceMobile) btnDeviceMobile.classList.remove('active');
-      lbMockupWrapper.classList.remove('mobile-mode');
-      lbMockupWrapper.classList.add('desktop-mode');
+  function setDeviceMode(mode) {
+    if (!lbMockupWrapper) return;
+    const isMobile = mode === 'mobile';
+    const activeButton = isMobile ? btnDeviceMobile : btnDeviceDesktop;
+    const inactiveButton = isMobile ? btnDeviceDesktop : btnDeviceMobile;
+
+    // Batch the class changes into the next paint so the image is not forced
+    // through two layout passes during the viewport switch.
+    requestAnimationFrame(() => {
+      lbMockupWrapper.classList.toggle('mobile-mode', isMobile);
+      lbMockupWrapper.classList.toggle('desktop-mode', !isMobile);
+      if (activeButton) {
+        activeButton.classList.add('active');
+        activeButton.setAttribute('aria-pressed', 'true');
+      }
+      if (inactiveButton) {
+        inactiveButton.classList.remove('active');
+        inactiveButton.setAttribute('aria-pressed', 'false');
+      }
     });
   }
 
+  if (btnDeviceDesktop && lbMockupWrapper) {
+    btnDeviceDesktop.setAttribute('aria-pressed', 'true');
+    btnDeviceMobile?.setAttribute('aria-pressed', 'false');
+    btnDeviceDesktop.addEventListener('click', () => setDeviceMode('desktop'));
+  }
+
   if (btnDeviceMobile && lbMockupWrapper) {
-    btnDeviceMobile.addEventListener('click', () => {
-      btnDeviceMobile.classList.add('active');
-      if (btnDeviceDesktop) btnDeviceDesktop.classList.remove('active');
-      lbMockupWrapper.classList.remove('desktop-mode');
-      lbMockupWrapper.classList.add('mobile-mode');
-    });
+    btnDeviceMobile.addEventListener('click', () => setDeviceMode('mobile'));
   }
 
   // Attach click events to folder papers
