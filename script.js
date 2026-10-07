@@ -987,6 +987,46 @@
       techBox.innerHTML = data.tech.map(t => `<span>${t}</span>`).join('');
     }
 
+    // Populate Option 2 (Studio Lightbox) fields
+    const lbCategory = document.getElementById('lbCategory');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbTagline = document.getElementById('lbTagline');
+    const lbDescription = document.getElementById('lbDescription');
+    const lbClient = document.getElementById('lbClient');
+    const lbRole = document.getElementById('lbRole');
+    const lbYear = document.getElementById('lbYear');
+    const lbHeroImg = document.getElementById('lbHeroImg');
+    const lbMockupImg = document.getElementById('lbMockupImg');
+    const lbLiveBtn = document.getElementById('lbLiveBtn');
+    const lbMockupUrl = document.getElementById('lbMockupUrl');
+
+    if (lbCategory) lbCategory.textContent = data.category;
+    if (lbTitle) lbTitle.textContent = data.title;
+    if (lbTagline) lbTagline.textContent = `${data.category} • ${data.year}`;
+    if (lbDescription) lbDescription.textContent = data.description;
+    if (lbClient) lbClient.textContent = data.client;
+    if (lbRole) lbRole.textContent = data.role;
+    if (lbYear) lbYear.textContent = data.year;
+    if (lbHeroImg) lbHeroImg.src = data.cover;
+    if (lbMockupImg) lbMockupImg.src = data.cover;
+    if (lbLiveBtn) lbLiveBtn.href = data.liveUrl || '#';
+    if (lbMockupUrl) lbMockupUrl.textContent = data.url;
+
+    const lbFeaturesGrid = document.getElementById('lbFeaturesGrid');
+    if (lbFeaturesGrid) {
+      lbFeaturesGrid.innerHTML = data.features.map(f => `
+        <div class="lb-feature-card">
+          <span class="feat-icon">✦</span>
+          <span>${f}</span>
+        </div>
+      `).join('');
+    }
+
+    const lbTechChips = document.getElementById('lbTechChips');
+    if (lbTechChips) {
+      lbTechChips.innerHTML = data.tech.map(t => `<span>${t}</span>`).join('');
+    }
+
     // Show modal
     dossierModal.classList.add('active');
     dossierModal.setAttribute('aria-hidden', 'false');
@@ -998,6 +1038,72 @@
     dossierModal.classList.remove('active');
     dossierModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+  }
+
+  // Concept Mode Switcher (Option 1 vs Option 2)
+  const btnModeDossier = document.getElementById('btnModeDossier');
+  const btnModeLightbox = document.getElementById('btnModeLightbox');
+  const conceptViewDossier = document.getElementById('conceptViewDossier');
+  const conceptViewLightbox = document.getElementById('conceptViewLightbox');
+  const dossierStampTag = document.getElementById('dossierStampTag');
+
+  function setModalMode(mode) {
+    if (mode === 'lightbox') {
+      if (btnModeLightbox) btnModeLightbox.classList.add('active');
+      if (btnModeDossier) btnModeDossier.classList.remove('active');
+      if (conceptViewLightbox) conceptViewLightbox.style.display = 'flex';
+      if (conceptViewDossier) conceptViewDossier.style.display = 'none';
+      if (dossierStampTag) dossierStampTag.textContent = 'STUDIO LIGHTBOX';
+    } else {
+      if (btnModeDossier) btnModeDossier.classList.add('active');
+      if (btnModeLightbox) btnModeLightbox.classList.remove('active');
+      if (conceptViewDossier) conceptViewDossier.style.display = 'block';
+      if (conceptViewLightbox) conceptViewLightbox.style.display = 'none';
+      if (dossierStampTag) dossierStampTag.textContent = 'CONFIDENTIAL DOSSIER';
+    }
+  }
+
+  if (btnModeDossier) btnModeDossier.addEventListener('click', () => setModalMode('dossier'));
+  if (btnModeLightbox) btnModeLightbox.addEventListener('click', () => setModalMode('lightbox'));
+
+  // Lightbox Tabs Navigation
+  document.querySelectorAll('.lb-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.lb-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.getAttribute('data-lb-tab');
+
+      document.querySelectorAll('.lb-tab-pane').forEach(pane => {
+        pane.style.display = 'none';
+      });
+
+      if (target === 'overview') document.getElementById('lbTabOverview').style.display = 'block';
+      if (target === 'gallery') document.getElementById('lbTabGallery').style.display = 'block';
+      if (target === 'specs') document.getElementById('lbTabSpecs').style.display = 'block';
+    });
+  });
+
+  // Device View Selector (Desktop vs Mobile View)
+  const btnDeviceDesktop = document.getElementById('btnDeviceDesktop');
+  const btnDeviceMobile = document.getElementById('btnDeviceMobile');
+  const lbMockupWrapper = document.getElementById('lbMockupWrapper');
+
+  if (btnDeviceDesktop && lbMockupWrapper) {
+    btnDeviceDesktop.addEventListener('click', () => {
+      btnDeviceDesktop.classList.add('active');
+      if (btnDeviceMobile) btnDeviceMobile.classList.remove('active');
+      lbMockupWrapper.classList.remove('mobile-mode');
+      lbMockupWrapper.classList.add('desktop-mode');
+    });
+  }
+
+  if (btnDeviceMobile && lbMockupWrapper) {
+    btnDeviceMobile.addEventListener('click', () => {
+      btnDeviceMobile.classList.add('active');
+      if (btnDeviceDesktop) btnDeviceDesktop.classList.remove('active');
+      lbMockupWrapper.classList.remove('desktop-mode');
+      lbMockupWrapper.classList.add('mobile-mode');
+    });
   }
 
   // Attach click events to folder papers
@@ -1017,7 +1123,9 @@
   });
 
   if (dossierCloseBtn) dossierCloseBtn.addEventListener('click', closeDossier);
-  if (dossierCloseSecondary) dossierCloseSecondary.addEventListener('click', closeDossier);
+  document.querySelectorAll('.dossier-close-trigger').forEach(btn => {
+    btn.addEventListener('click', closeDossier);
+  });
 
   if (dossierModal) {
     dossierModal.addEventListener('click', (e) => {

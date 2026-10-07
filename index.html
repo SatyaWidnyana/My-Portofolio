@@ -357,22 +357,36 @@
     </main>
     </div>
   
-  <!-- Project Dossier Case Study Modal -->
+  <!-- Project Case Study Modal (Supports Concept 1: Dossier File & Concept 2: Studio Lightbox) -->
   <div class="dossier-modal-overlay" id="dossierModal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="dossier-modal-container" id="dossierModalContainer">
-      <!-- Folder Binder Top Header -->
+    <div class="dossier-modal-container mode-dossier" id="dossierModalContainer">
+      
+      <!-- Top Header Bar with Mode Switcher -->
       <div class="dossier-header-bar">
         <div class="dossier-tab-badge">
-          <span class="dossier-stamp">CONFIDENTIAL DOSSIER</span>
+          <span class="dossier-stamp" id="dossierStampTag">CONFIDENTIAL DOSSIER</span>
           <span class="dossier-doc-id" id="dossierDocId">CASE STUDY // #01</span>
         </div>
+
+        <!-- Concept Mode Switcher Toggle -->
+        <div class="concept-mode-switcher">
+          <button class="mode-btn active" id="btnModeDossier" title="Option 1: Folder Dossier File Mode">
+            <span>📁 Dossier File</span>
+          </button>
+          <button class="mode-btn" id="btnModeLightbox" title="Option 2: Studio Lightbox Mode">
+            <span>💎 Studio Lightbox</span>
+          </button>
+        </div>
+
         <button class="dossier-close-btn" id="dossierCloseBtn" aria-label="Close Case Study">
           <span>ESC</span> ✕
         </button>
       </div>
 
-      <!-- Main Dossier Content Paper -->
-      <div class="dossier-paper-body">
+      <!-- ==========================================
+           CONCEPT 1 VIEW: DOSSIER BINDER PAPER
+           ========================================== -->
+      <div class="dossier-paper-body concept-view-dossier" id="conceptViewDossier">
         <div class="dossier-grid">
           <!-- Left Column: Interactive Browser Window Preview -->
           <div class="dossier-preview-col">
@@ -444,13 +458,135 @@
               <a id="dossierLiveBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary btn-dossier-primary">
                 <span>Visit Live Project ↗</span>
               </a>
-              <button id="dossierCloseSecondary" class="btn-secondary btn-dossier-secondary">
+              <button class="btn-secondary btn-dossier-secondary dossier-close-trigger">
                 Close Dossier
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- ==========================================
+           CONCEPT 2 VIEW: STUDIO LIGHTBOX SHOWCASE
+           ========================================== -->
+      <div class="lightbox-body concept-view-lightbox" id="conceptViewLightbox" style="display: none;">
+        <!-- Lightbox Sub-Header with Navigation Tabs -->
+        <div class="lightbox-tabs-bar">
+          <button class="lb-tab-btn active" data-lb-tab="overview">
+            <span>✦ Overview</span>
+          </button>
+          <button class="lb-tab-btn" data-lb-tab="gallery">
+            <span>🖼 Gallery &amp; Mockup</span>
+          </button>
+          <button class="lb-tab-btn" data-lb-tab="specs">
+            <span>⚙ Tech Specs</span>
+          </button>
+        </div>
+
+        <div class="lightbox-content-area">
+          <!-- Lightbox Tab 1: Overview -->
+          <div class="lb-tab-pane active" id="lbTabOverview">
+            <div class="lb-hero-banner">
+              <img id="lbHeroImg" src="" alt="Project Hero">
+              <div class="lb-hero-overlay">
+                <span class="lb-category-tag" id="lbCategory">Private Tour &amp; Transport</span>
+                <h1 class="lb-main-title" id="lbTitle">Ketut Gajah Bali</h1>
+                <p class="lb-tagline" id="lbTagline">High-craft digital web experience designed for modern travelers.</p>
+                <div class="lb-hero-buttons">
+                  <a id="lbLiveBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <span>Explore Live Website ↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="lb-overview-grid">
+              <div class="lb-desc-box">
+                <h3 class="lb-section-title">Project Narrative</h3>
+                <p id="lbDescription">Full project case study description goes here...</p>
+              </div>
+
+              <div class="lb-meta-sidebar">
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Client / Context</span>
+                  <strong class="lb-meta-val" id="lbClient">Bali, Indonesia</strong>
+                </div>
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Role</span>
+                  <strong class="lb-meta-val" id="lbRole">UI/UX &amp; Web Dev</strong>
+                </div>
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Year</span>
+                  <strong class="lb-meta-val" id="lbYear">2024</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="lb-features-section">
+              <h3 class="lb-section-title">Key Core Capabilities</h3>
+              <div class="lb-features-grid" id="lbFeaturesGrid">
+                <!-- Dynamic feature cards -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Lightbox Tab 2: Gallery & Mockup -->
+          <div class="lb-tab-pane" id="lbTabGallery" style="display: none;">
+            <div class="lb-gallery-view">
+              <div class="lb-device-selector">
+                <span class="lb-device-label">DEVICE VIEW:</span>
+                <button class="device-btn active" id="btnDeviceDesktop">🖥 Desktop Browser</button>
+                <button class="device-btn" id="btnDeviceMobile">📱 Mobile View</button>
+              </div>
+              <div class="lb-mockup-wrapper desktop-mode" id="lbMockupWrapper">
+                <div class="browser-frame-bar">
+                  <div class="browser-dots">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                  </div>
+                  <span class="browser-title-text" id="lbMockupUrl">https://satyawidnyana.com</span>
+                </div>
+                <div class="mockup-img-container">
+                  <img id="lbMockupImg" src="" alt="Full Mockup Preview">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lightbox Tab 3: Tech Specs -->
+          <div class="lb-tab-pane" id="lbTabSpecs" style="display: none;">
+            <div class="lb-specs-grid">
+              <div class="lb-spec-card">
+                <div class="spec-icon">⚡</div>
+                <h4>Frontend &amp; Logic</h4>
+                <p id="lbSpecFrontend">JavaScript ES6+, Vanilla Modular Components, Dynamic State Management.</p>
+              </div>
+              <div class="lb-spec-card">
+                <div class="spec-icon">🎨</div>
+                <h4>Styling &amp; Architecture</h4>
+                <p id="lbSpecStyling">Vanilla CSS3 Design Tokens, Custom Glassmorphism, 3D CSS Transforms, HSL Color Palette.</p>
+              </div>
+              <div class="lb-spec-card">
+                <div class="spec-icon">🚀</div>
+                <h4>Performance &amp; SEO</h4>
+                <p>Semantic HTML5 structure, optimized asset compression, 100/100 Google Lighthouse ready.</p>
+              </div>
+              <div class="lb-spec-card">
+                <div class="spec-icon">✨</div>
+                <h4>Animation Engine</h4>
+                <p>GSAP &amp; Web Animations API, 60fps smooth spring physics, FLIP layout expansion.</p>
+              </div>
+            </div>
+            
+            <div class="lb-tech-chips-box">
+              <h4 class="lb-section-title">Complete Technology Stack</h4>
+              <div class="dossier-tech-tags" id="lbTechChips">
+                <!-- Tech chips -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </body>
