@@ -19,6 +19,18 @@ window.SatyaPortfolio.features['portfolio'] = function () {
 
   // Portfolio folder: tilt 3D halus mengikuti mouse (hanya desktop)
   const folderBtn = document.getElementById('portfolio-folder');
+  const folderPapers = document.querySelectorAll('.folder-paper[data-project-id]');
+
+  function syncPaperAccess() {
+    const unlocked = Boolean(folderBtn && folderBtn.classList.contains('is-open'));
+    folderPapers.forEach(paper => {
+      paper.inert = !unlocked;
+      paper.tabIndex = unlocked ? 0 : -1;
+      paper.setAttribute('aria-disabled', String(!unlocked));
+    });
+  }
+
+  syncPaperAccess();
   if (folderBtn && window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     folderBtn.addEventListener('pointermove', (e) => {
@@ -70,6 +82,7 @@ window.SatyaPortfolio.features['portfolio'] = function () {
         console.log('Portfolio Opened!');
         const folderBtn = document.getElementById('portfolio-folder');
         if(folderBtn) folderBtn.classList.add('is-open');
+        syncPaperAccess();
         const projectsSec = document.getElementById('projects');
         if(projectsSec) projectsSec.classList.add('is-open');
         

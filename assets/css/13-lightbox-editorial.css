@@ -1,4 +1,18 @@
 /* Studio Lightbox redesign */
+.dossier-modal-container.mode-lightbox .lb-hero-banner {
+  overflow: hidden;
+  box-shadow:
+    0 2px 0 rgba(185, 173, 157, 0.45),
+    0 5px 10px -4px rgba(58, 45, 32, 0.12),
+    0 16px 28px -12px rgba(58, 45, 32, 0.16);
+}
+
+.dossier-modal-container.mode-lightbox .lb-hero-banner::after {
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
 .dossier-modal-container.mode-lightbox {
   background:
     radial-gradient(circle at 88% 4%, rgba(205, 68, 56, 0.13), transparent 28%),
@@ -38,8 +52,51 @@
   min-height: 340px;
   border-radius: 24px;
   margin-bottom: 34px;
+  overflow: visible;
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.38);
   isolation: isolate;
+}
+
+/* Keep the project artwork clean; show its text as a caption underneath. */
+.lb-hero-banner img {
+  filter: none;
+}
+
+.lb-hero-overlay {
+  position: absolute;
+  inset: auto 28px 28px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0;
+  padding: 0 4px;
+  background: none;
+  color: var(--lb-ink, var(--text, #fff));
+}
+
+.lb-hero-topline {
+  display: none;
+}
+
+.lb-hero-overlay .lb-category-tag {
+  display: inline-flex;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-color: currentColor;
+  background: transparent;
+  color: var(--lb-accent, var(--folder-red, #cd4438));
+}
+
+.lb-hero-overlay .lb-main-title {
+  display: none;
+}
+
+.lb-hero-overlay .lb-tagline {
+  display: none;
+}
+
+.lb-hero-overlay .lb-hero-buttons {
+  flex: 0 0 auto;
 }
 
 .lb-hero-banner::after {
@@ -53,8 +110,8 @@
 }
 
 .lb-hero-overlay {
-  padding: clamp(24px, 4vw, 44px);
-  background: linear-gradient(180deg, rgba(7, 7, 9, 0.08) 16%, rgba(7, 7, 9, 0.92) 100%);
+  padding: 0;
+  background: none;
 }
 
 .lb-hero-topline {
@@ -275,8 +332,7 @@
 
 .lb-mockup-wrapper {
   margin: 0 auto;
-  transition: width 220ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: width;
+  transition: none;
   contain: layout paint;
 }
 
@@ -292,8 +348,7 @@
 }
 
 .mockup-img-container img {
-  backface-visibility: hidden;
-  transform: translateZ(0);
+  transform: none;
 }
 
 .lb-gallery-footnote {
@@ -332,10 +387,22 @@
     min-height: 390px;
     height: 56vh;
     border-radius: 18px;
+    margin-bottom: 28px;
   }
 
   .lb-hero-overlay {
-    padding: 22px;
+    inset: auto 18px 18px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+  }
+
+  .lb-hero-overlay .lb-hero-buttons {
+    margin-top: 0;
+  }
+
+  .lb-hero-overlay {
+    padding: 0;
   }
 
   .lb-hero-kicker {

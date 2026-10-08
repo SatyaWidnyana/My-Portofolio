@@ -311,6 +311,10 @@
 }
 
 /* Papers */
+.portfolio-folder:not(.is-open) .folder-paper {
+  pointer-events: none;
+}
+
 .folder-paper {
   position: absolute;
   left: 4%;
@@ -419,6 +423,11 @@
 .portfolio-folder:hover:not(.is-open) .folder-paper-3 { transform: translateZ(12px) translateY(-8%) rotate(-2deg); }
 
 /* Sequential Grid Origami Animations */
+.portfolio-folder.is-open .folder-paper {
+  /* Balance the top and bottom margins within each unfolded panel. */
+  translate: 0 calc(var(--w) * -0.01);
+}
+
 .projects.is-open {
   padding-top: calc( (var(--w) * 0.6265 + 30px) / 2 + 100px );
   padding-bottom: calc( (var(--w) * 0.6265 + 30px) / 2 + 100px );
