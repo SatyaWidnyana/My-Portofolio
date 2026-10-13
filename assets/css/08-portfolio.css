@@ -180,17 +180,24 @@
 .folder-back-left { /* Bottom-Right Flap */
   display: block !important;
   position: absolute;
-  left: 0; right: 0; top: 10.5%; bottom: 0;
+  left: 0; right: 0; bottom: 0;
+  height: 72%;
   background-color: var(--folder-back-top);
   background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.1) 100%);
   border-radius: calc(var(--w) * 0.02);
   box-shadow: var(--shadow-3d-base);
-  transform-origin: calc(100% + 15px) calc(100% + 15px);
-  transform: translateZ(-3px) rotateX(0deg) rotateY(0deg);
+  /* Travel with the front cover until this panel unfolds to the right. */
+  transform-origin: calc(100% + 15px) 100%;
+  transform: translateZ(24px) rotateX(-5deg) translateY(0px) rotateY(0deg);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease, background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+.portfolio-folder:hover:not(.is-open) .folder-back-left {
+  transform: translateZ(24px) rotateX(-10deg) translateY(0px) rotateY(0deg);
 }
 .portfolio-folder.is-open .folder-back-left,
 .folder-3d.is-open .folder-back-left {
   animation: cardboard-down-right 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  height: 89.5%;
 }
 
 @keyframes cardboard-right {
@@ -199,16 +206,17 @@
   65%, 100% { transform: translateZ(0px) rotateY(-180deg); box-shadow: var(--shadow-3d-invX); }
 }
 @keyframes cardboard-down-right {
+  /* Match cardboard-down's height, hinge and downward path to avoid a second rim. */
   0%, 5% { 
-    transform: translateZ(-3px) rotateX(0deg) rotateY(0deg); 
+    transform: translateZ(24px) rotateX(-5deg) translateY(0px) rotateY(0deg);
     box-shadow: var(--shadow-3d-base);
   }
   35%, 65% { 
-    transform: translateZ(-1px) rotateX(-180deg) rotateY(0deg); 
+    transform: translateZ(0px) rotateX(-180deg) translateY(-30px) rotateY(0deg);
     box-shadow: var(--shadow-3d-invY);
   }
   95%, 100% { 
-    transform: translateZ(0px) rotateX(-180deg) rotateY(180deg); 
+    transform: translateZ(0px) rotateX(-180deg) translateY(-30px) rotateY(180deg);
     box-shadow: var(--shadow-3d-invXY);
   }
 }
@@ -679,5 +687,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .folder-stage { transition: opacity 0.3s ease; transform: none; }
-  .folder-3d, .folder-paper, .folder-front { transition: none; }
+  .folder-3d, .folder-paper, .folder-front, .folder-back-left { transition: none; }
 }

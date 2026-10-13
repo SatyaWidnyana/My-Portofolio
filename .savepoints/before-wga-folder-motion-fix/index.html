@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portofolio Satya Widnyana, UI/UX Designer & Web Creator.">
+  <title>Satya Widnyana — Creative Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Outfit:wght@300;400;500;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/01-base.css?v=183">
+  <link rel="stylesheet" href="assets/css/02-intro.css?v=183">
+  <link rel="stylesheet" href="assets/css/03-typography-layout.css?v=183">
+  <link rel="stylesheet" href="assets/css/04-navigation.css?v=183">
+  <link rel="stylesheet" href="assets/css/05-hero.css?v=183">
+  <link rel="stylesheet" href="assets/css/06-terminal-lanyard.css?v=183">
+  <link rel="stylesheet" href="assets/css/07-marquee.css?v=183">
+  <link rel="stylesheet" href="assets/css/08-portfolio.css?v=187">
+  <link rel="stylesheet" href="assets/css/09-sections.css?v=183">
+  <link rel="stylesheet" href="assets/css/10-responsive.css?v=183">
+  <link rel="stylesheet" href="assets/css/11-project-details.css?v=183">
+  <link rel="stylesheet" href="assets/css/12-lightbox-cream.css?v=183">
+  <link rel="stylesheet" href="assets/css/13-lightbox-editorial.css?v=187">
+  <link rel="stylesheet" href="assets/css/14-lightbox-base.css?v=190">
+  <link rel="stylesheet" href="assets/css/15-lightbox-workbench.css?v=51">
+  <script src="assets/js/app.js?v=78" defer></script>
+  <script src="assets/js/features/intro.js?v=78" defer></script>
+  <script src="assets/js/features/navigation.js?v=78" defer></script>
+  <script src="assets/js/features/lanyard.js?v=78" defer></script>
+  <script src="assets/js/features/terminal.js?v=78" defer></script>
+  <script src="assets/js/features/greetings.js?v=78" defer></script>
+  <script src="assets/js/features/terminal-layout.js?v=78" defer></script>
+  <script src="assets/js/features/portfolio.js?v=79" defer></script>
+  <script src="assets/js/features/lightbox.js?v=107" defer></script>
+  <script src="assets/js/main.js?v=78" defer></script>
+</head>
+<body>
+  <!-- Intro Animation Overlay -->
+  <div class="intro-overlay" id="intro-overlay">
+    <div class="intro-content">
+      <div class="intro-greeting" id="intro-greeting">Hello</div>
+      <div class="intro-loading-wrapper" id="intro-loading-wrapper">
+        <div class="intro-percent" id="intro-percent">0%</div>
+        <div class="intro-loading-bar">
+          <div class="intro-progress" id="intro-progress"></div>
+        </div>
+      </div>
+      <div class="intro-welcome" id="intro-welcome" hidden>
+        <img src="image/Logo.png" alt="Satya Logo" class="intro-logo" id="intro-logo">
+        <span>welcome to my</span>
+        <span class="serif-italic">portfolio.</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="transition-grid" id="transition-grid">
+    <div class="transition-col"></div>
+    <div class="transition-col"></div>
+    <div class="transition-col"></div>
+    <div class="transition-col"></div>
+  </div>
+
+  <!-- Navigation moved outside main-wrapper to fix backdrop-filter bug during transform -->
+  <header class="navbar hidden-on-load" id="navbar">
+    <a href="#" class="brand">
+      <img src="image/Logo.png" alt="Satya Logo" class="brand-logo">
+    </a>
+    <nav class="nav-links" id="nav-links">
+      <div class="glass-pill-bg" id="glass-pill-bg"></div>
+      <a href="#projects">Selected Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-action">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+      <div class="nav-divider"></div>
+      <a href="#contact" class="btn-primary">Let's Talk</a>
+    </div>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open Menu">
+      <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </header>
+
+  <div class="main-wrapper" id="main-wrapper" inert>
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        
+        <div class="hero-content">
+          <div class="hero-text">
+            <h2 class="hero-subtitle" style="position: relative;">
+              <!-- Placeholder tersembunyi untuk mem-booking ukuran tinggi dan lebar yang akurat 100% -->
+              <div style="visibility: hidden; pointer-events: none;" aria-hidden="true">
+                <span class="script-font-dummy">HELLO, MY NAME IS...</span>
+                <span class="name-solid">SATYA</span><br>
+                <span class="name-solid" id="widnyana-dummy">WIDNYANA</span>
+              </div>
+              
+              <!-- Teks asli yang di-animasikan -->
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <span class="script-font"></span>
+                <span class="name-solid">SATYA</span><br>
+                <span class="name-solid">WIDNYANA</span>
+              </div>
+            </h2>
+            <div class="terminal-box" id="termV2">
+              <div class="term-header">
+                 <div class="term-dots">
+                   <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                 </div>
+                 <span class="term-title">guest@satya:~</span>
+              </div>
+              <div class="term-body">
+                <div class="term-input-line" id="termInputLine">
+                  <span class="term-prompt">guest@satya:~$</span>
+                  <span class="term-cmd">./load_profile</span><span class="term-cursor" id="mainCursor"></span>
+                  <div class="term-btn-group">
+                    <button class="term-run-btn" id="termRunBtn">ENTER ↵</button>
+                    <button class="term-del-btn" id="termDelBtn" style="display: none;">DELETE ⌫</button>
+                  </div>
+                </div>
+                <div class="term-logs" id="termLogs"></div>
+                <div class="term-final-text" id="termFinalText"></div>
+                <div id="termSourceHtml" style="display: none;">
+                  <p class="term-desc" style="margin-top: 15px;">
+                    As a <strong>Web Designer & Digital Creator</strong>, I design digital experiences that <em>inspire</em> and <em>connect</em>. I focus on crafting elegant, functional, and user-centered interfaces.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="hero-image" id="lanyard">
+            <!-- Ghost image to maintain container dimensions -->
+            <img src="image/lanyard new lightmode.png" class="lanyard-card" style="visibility: hidden;" draggable="false" />
+            
+            <!-- Strap Part (Top 30%) -->
+            <div class="lanyard-strap" id="lanyard-strap">
+              <img src="image/lanyard new lightmode.png" alt="" class="lanyard-card lanyard-light" draggable="false" />
+              <img src="image/lanyard new darkmode.png" alt="" class="lanyard-card lanyard-dark" draggable="false" />
+            </div>
+            
+            <!-- Card Body Part (Bottom 70%) -->
+            <div class="lanyard-body" id="lanyard-body">
+              <img src="image/lanyard new lightmode.png" alt="Satya Widnyana Name Tag Light" class="lanyard-card lanyard-light" draggable="false" />
+              <img src="image/lanyard new darkmode.png" alt="Satya Widnyana Name Tag Dark" class="lanyard-card lanyard-dark" draggable="false" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="marquee-container">
+          <div class="marquee-mask">
+            <div class="marquee-content">
+            <span class="m-solid">WEB DEVELOPMENT</span><span class="m-dot">✦</span>
+            <span class="m-outline">INTERACTIVE DESIGN</span><span class="m-dot">✦</span>
+            <span class="m-solid">UI/UX DESIGNER</span><span class="m-dot">✦</span>
+            <span class="m-outline">PROMPT ENGINEERING</span><span class="m-dot">✦</span>
+            <span class="m-solid">MUSIC (HOBBY)</span><span class="m-dot">✦</span>
+            <span class="m-outline">VIBE CODING</span><span class="m-dot">✦</span>
+            <span class="m-solid">WEB DEVELOPMENT</span><span class="m-dot">✦</span>
+            <span class="m-outline">INTERACTIVE DESIGN</span><span class="m-dot">✦</span>
+            <span class="m-solid">UI/UX DESIGNER</span><span class="m-dot">✦</span>
+            <span class="m-outline">PROMPT ENGINEERING</span><span class="m-dot">✦</span>
+            <span class="m-solid">MUSIC (HOBBY)</span><span class="m-dot">✦</span>
+            <span class="m-outline">VIBE CODING</span><span class="m-dot">✦</span>
+            <span class="m-solid">WEB DEVELOPMENT</span><span class="m-dot">✦</span>
+            <span class="m-outline">INTERACTIVE DESIGN</span><span class="m-dot">✦</span>
+            <span class="m-solid">UI/UX DESIGNER</span><span class="m-dot">✦</span>
+            <span class="m-outline">PROMPT ENGINEERING</span><span class="m-dot">✦</span>
+            <span class="m-solid">MUSIC (HOBBY)</span><span class="m-dot">✦</span>
+            <span class="m-outline">VIBE CODING</span><span class="m-dot">✦</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio Section: folder popup -->
+      <section class="projects" id="projects">
+        <div class="folder-stage" id="folder-stage">
+          <div class="portfolio-folder" id="portfolio-folder" role="button" tabindex="0" aria-label="Click to open portfolio">
+            <div class="folder-3d">
+
+              <div class="folder-back" aria-hidden="true"></div>
+              <div class="folder-back-right" aria-hidden="true"></div>
+              <div class="folder-back-left" aria-hidden="true"></div>
+              <div class="folder-tab" aria-hidden="true">
+                <div class="red-accent-tab"></div>
+                <div class="folder-tab-text">WORK ARCHIVE</div>
+              </div>
+              <div class="folder-paper folder-paper-1" data-project-id="wga-ocean" role="button" tabindex="-1" aria-disabled="true" inert title="Click to view case study">
+                <div class="paper-img-wrapper">
+                  <img src="image portofolio/WGA OCEAN/cover.jpeg" alt="WGA Ocean" loading="lazy" decoding="async">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
+                </div>
+                <div class="paper-info">
+                  <div class="paper-text">
+                    <h3 class="paper-title">WGA Ocean</h3>
+                    <span class="paper-category">Water Sports &amp; Transport</span>
+                  </div>
+                  <span class="paper-tag">2024</span>
+                </div>
+              </div>
+              <div class="folder-paper folder-paper-2" data-project-id="wga-dekorasi" role="button" tabindex="-1" aria-disabled="true" inert title="Click to view case study">
+                <div class="paper-img-wrapper">
+                  <img src="image portofolio/WGA DEKORASI/cover.jpeg" alt="WGA Dekorasi" loading="lazy" decoding="async">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
+                </div>
+                <div class="paper-info">
+                  <div class="paper-text">
+                    <h3 class="paper-title">WGA Dekorasi</h3>
+                    <span class="paper-category">Event &amp; Equipment Rental</span>
+                  </div>
+                  <span class="paper-tag">2024</span>
+                </div>
+              </div>
+              <div class="folder-paper folder-paper-3" data-project-id="satya-portfolio" role="button" tabindex="-1" aria-disabled="true" inert title="Click to view case study">
+                <div class="paper-img-wrapper">
+                  <img src="image portofolio/MY PORTOFOLIO/cover.jpeg" alt="Satya Portfolio" loading="lazy" decoding="async">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
+                </div>
+                <div class="paper-info">
+                  <div class="paper-text">
+                    <h3 class="paper-title">Satya Portfolio</h3>
+                    <span class="paper-category">Personal Creative Portfolio</span>
+                  </div>
+                  <span class="paper-tag">2024</span>
+                </div>
+              </div>
+              <div class="folder-paper folder-paper-4" data-project-id="ketut-gajah-bali" role="button" tabindex="-1" aria-disabled="true" inert title="Click to view case study">
+                <div class="paper-img-wrapper">
+                  <img src="image portofolio/BALI ADVENTURE/Dekstop/cover.jpeg" alt="Ketut Gajah Bali" loading="lazy" decoding="async">
+                  <div class="paper-hover-hint"><span>VIEW CASE STUDY ↗</span></div>
+                </div>
+                <div class="paper-info">
+                  <div class="paper-text">
+                    <h3 class="paper-title">Ketut Gajah Bali</h3>
+                    <span class="paper-category">Private Tour &amp; Transport</span>
+                  </div>
+                  <span class="paper-tag">2026</span>
+                </div>
+              </div>
+              <div class="folder-clip" aria-hidden="true"></div>
+              <div class="folder-front">
+                <div class="folder-front-content">
+                  <div class="folder-top-meta">
+                    <div class="red-accent-line"></div>
+                    <div class="meta-text">SW / PORTFOLIO</div>
+                  </div>
+                  <div class="folder-title-area">
+                    <h2 class="folder-huge-title">Selected Works</h2>
+                    <p class="folder-sub-title">Web development &amp; digital design</p>
+                  </div>
+                  <div class="folder-bottom-meta">
+                    <div class="meta-num">01</div>
+                    <div class="folder-action swipe-container" id="swipe-container">
+                      <div class="swipe-thumb" id="swipe-thumb">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                      </div>
+                      <span class="swipe-text">SWIPE TO OPEN</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work Process & Skills Section -->
+      <section class="process-skills" id="about">
+        <div class="skills-col">
+          <h2 class="section-title">EDUCATION & SKILLS</h2>
+          <div class="education">
+             <h4 class="sub-heading">EDUCATION</h4>
+             <div class="edu-item">
+               <div>
+                 <h5>B.Sc. in Visual Communication Design</h5>
+                 <p>Binus University</p>
+               </div>
+               <span class="year">2018 - 2022</span>
+             </div>
+             <div class="edu-item">
+               <div>
+                 <h5>UI/UX Design Certification</h5>
+                 <p>Google Career Certificates</p>
+               </div>
+               <span class="year">2023</span>
+             </div>
+          </div>
+          <div class="skills">
+            <h4 class="sub-heading">SKILLS</h4>
+            <div class="skills-tags">
+              <span>WEB DESIGN</span>
+              <span>UI/UX DESIGN</span>
+              <span>FIGMA</span>
+              <span>FRAMER</span>
+              <span>JAVASCRIPT</span>
+              <span>HTML / CSS</span>
+              <span>GSAP ANIMATION</span>
+              <span>SEO BASICS</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="process-col">
+           <h2 class="section-title">WORK PROCESS</h2>
+           <div class="process-list">
+             <div class="process-item">
+               <span class="num">01</span>
+               <div class="icon">🔍</div>
+               <div class="process-text">
+                 <h4>DISCOVER</h4>
+                 <p>Understanding goals, audience, and project requirements.</p>
+               </div>
+             </div>
+             <div class="process-item">
+               <span class="num">02</span>
+               <div class="icon">💡</div>
+               <div class="process-text">
+                 <h4>IDEATE</h4>
+                 <p>Planning, wireframing, and creating the right concept.</p>
+               </div>
+             </div>
+             <div class="process-item">
+               <span class="num">03</span>
+               <div class="icon">✏️</div>
+               <div class="process-text">
+                 <h4>DESIGN</h4>
+                 <p>Crafting visual design with a focus on user experience.</p>
+               </div>
+             </div>
+             <div class="process-item">
+               <span class="num">04</span>
+               <div class="icon">&lt;/&gt;</div>
+               <div class="process-text">
+                 <h4>DEVELOP</h4>
+                 <p>Building fast, responsive, and high-performing websites.</p>
+               </div>
+             </div>
+           </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact" id="contact">
+        <div class="contact-wrap">
+          <div class="contact-left">
+             <h2 class="contact-title">LET'S WORK<br><em>TOGETHER</em><span class="sparkle">✦</span></h2>
+             <p>I'm currently open for new projects and collaborations. Let's create something amazing that drives results.</p>
+          </div>
+          <div class="contact-right">
+             <a href="mailto:hello@satyawidnyana.com" class="contact-link">
+               <span class="icon">✉</span> hello@satyawidnyana.com
+             </a>
+             <a href="#" class="contact-link">
+               <span class="icon">🌐</span> www.satyawidnyana.com
+             </a>
+             <a href="#" class="contact-link">
+               <span class="icon">📍</span> Jakarta, Indonesia
+             </a>
+          </div>
+        </div>
+      </section>
+      
+      <footer class="footer">
+        <div class="footer-brand">Satya<span>.</span></div>
+        <div class="footer-links">
+          <a href="#">LinkedIn</a>
+          <a href="#">Instagram</a>
+          <a href="#">Dribbble</a>
+        </div>
+        <div class="footer-copy">© 2024 Satya Widnyana. All rights reserved.</div>
+      </footer>
+    </main>
+    </div>
+  
+  <!-- Project Case Study Modal: Studio Lightbox -->
+  <div class="dossier-modal-overlay" id="dossierModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="dossier-modal-container mode-lightbox" id="dossierModalContainer">
+      
+      <!-- Top Header Bar -->
+      <div class="dossier-header-bar">
+        <div class="dossier-tab-badge">
+          <span class="dossier-stamp" id="dossierStampTag">STUDIO LIGHTBOX</span>
+          <span class="dossier-doc-id" id="dossierDocId">PROJECT SHOWCASE</span>
+        </div>
+
+        <!-- Concept Mode Switcher Toggle -->
+        <div class="concept-mode-switcher">
+          <button class="mode-btn active" id="btnModeDossier" title="Option 1: Folder Dossier File Mode">
+            <span>📁 Dossier File</span>
+          </button>
+          <button class="mode-btn" id="btnModeLightbox" title="Option 2: Studio Lightbox Mode">
+            <span>💎 Studio Lightbox</span>
+          </button>
+        </div>
+
+        <button class="dossier-close-btn" id="dossierCloseBtn" aria-label="Close Case Study">
+          <span>ESC</span> ✕
+        </button>
+      </div>
+
+      <!-- ==========================================
+           CONCEPT 1 VIEW: DOSSIER BINDER PAPER
+           ========================================== -->
+      <div class="dossier-paper-body concept-view-dossier" id="conceptViewDossier">
+        <div class="dossier-grid">
+          <!-- Left Column: Interactive Browser Window Preview -->
+          <div class="dossier-preview-col">
+            <div class="dossier-browser-frame">
+              <div class="browser-header">
+                <div class="browser-dots">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                </div>
+                <div class="browser-address-bar" id="dossierBrowserUrl">https://satyawidnyana.com/projects/...</div>
+              </div>
+              <div class="browser-screen">
+                <img id="dossierCoverImg" src="" alt="Project Preview">
+                <div class="browser-screen-overlay">
+                  <a id="dossierLiveBtnImg" href="#" target="_blank" rel="noopener noreferrer" class="btn-live-preview">
+                    <span>Explore Live Site ↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="dossier-quick-stats">
+              <div class="stat-box">
+                <span class="stat-label">YEAR</span>
+                <span class="stat-value" id="dossierYear">2024</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">ROLE</span>
+                <span class="stat-value" id="dossierRole">UI/UX &amp; Web Developer</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label">LOCATION</span>
+                <span class="stat-value" id="dossierClient">Bali, Indonesia</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Project Case Study Meta & Description -->
+          <div class="dossier-info-col">
+            <div class="dossier-meta-top">
+              <span class="dossier-category-pill" id="dossierCategory">PRIVATE TOUR &amp; TRANSPORT</span>
+              <span class="dossier-status-pill">● COMPLETED</span>
+            </div>
+
+            <h2 class="dossier-project-title" id="dossierTitle">Ketut Gajah Bali</h2>
+
+            <div class="dossier-section">
+              <h4 class="dossier-subheading">PROJECT OVERVIEW</h4>
+              <p class="dossier-description" id="dossierDescription">
+                A luxury private tour and personal driver booking platform in Bali, designed to awaken the traveler's soul with immersive visual storytelling and effortless booking experience.
+              </p>
+            </div>
+
+            <div class="dossier-section">
+              <h4 class="dossier-subheading">KEY HIGHLIGHTS</h4>
+              <ul class="dossier-features-list" id="dossierFeatures">
+                <!-- Populated dynamically -->
+              </ul>
+            </div>
+
+            <div class="dossier-section">
+              <h4 class="dossier-subheading">TECH STACK &amp; TOOLS</h4>
+              <div class="dossier-tech-tags" id="dossierTech">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <div class="dossier-actions">
+              <a id="dossierLiveBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary btn-dossier-primary">
+                <span>Visit Live Project ↗</span>
+              </a>
+              <button class="btn-secondary btn-dossier-secondary dossier-close-trigger">
+                Close Dossier
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STUDIO LIGHTBOX SHOWCASE
+           ========================================== -->
+      <div class="lightbox-body concept-view-lightbox" id="conceptViewLightbox">
+        <div class="editor-workspace">
+          <aside class="editor-activity-rail" aria-label="Editor activity">
+            <button class="editor-activity-icon active" data-editor-panel="explorer" aria-label="Explorer" aria-controls="editorExplorer" aria-pressed="true" title="Explorer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h6l2 2H20v11H4z"/><path d="M7 11h10M7 14h10M7 17h7"/></svg>
+            </button>
+            <button class="editor-activity-icon" data-editor-panel="search" aria-label="Search" aria-controls="editorExplorer" aria-pressed="false" title="Search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/></svg>
+            </button>
+            <button class="editor-activity-icon" data-editor-panel="extensions" aria-label="Extensions" aria-controls="editorExplorer" aria-pressed="false" title="Extensions">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>
+            </button>
+            <span class="editor-activity-spacer"></span>
+            <span class="editor-avatar" aria-label="Satya Widnyana">SW</span>
+          </aside>
+          <aside class="editor-explorer" id="editorExplorer" aria-label="Project tools">
+            <section class="editor-panel-view active" data-editor-view="explorer">
+              <div class="editor-panel-heading">EXPLORER</div>
+              <button class="editor-project-root editor-fold-toggle" aria-expanded="true" aria-controls="editorProjectContents"><span class="editor-chevron">⌄</span> SATYA PORTFOLIO</button>
+              <div id="editorProjectContents">
+                <button class="editor-folder-row editor-fold-toggle" aria-expanded="true" aria-controls="editorFileList"><span class="editor-chevron">⌄</span> case-study</button>
+                <div class="editor-file-list" id="editorFileList">
+                  <button class="editor-file active" data-lb-tab="overview"><span class="file-icon markdown">M</span> overview.md</button>
+                  <button class="editor-file" data-lb-tab="gallery"><span class="file-icon image">▧</span> mockup.png</button>
+                  <button class="editor-file" data-lb-tab="specs"><span class="file-icon json">{ }</span> tech-stack.json</button>
+                </div>
+              </div>
+              <button class="editor-explorer-footer" data-editor-outline><span>▸</span> OUTLINE</button>
+            </section>
+            <section class="editor-panel-view" data-editor-view="search" hidden>
+              <div class="editor-panel-heading">SEARCH</div>
+              <label class="editor-search-label" for="editorSearchInput">Search in project</label>
+              <input class="editor-search-input" id="editorSearchInput" type="search" placeholder="Type to search..." autocomplete="off">
+              <div class="editor-search-summary" id="editorSearchSummary">Enter a word to search this case study.</div>
+              <div class="editor-search-results" id="editorSearchResults" aria-live="polite"></div>
+            </section>
+            <section class="editor-panel-view" data-editor-view="extensions" hidden>
+              <div class="editor-panel-heading">EXTENSIONS</div>
+              <label class="editor-search-label" for="editorExtensionSearch">Recommended for this project</label>
+              <input class="editor-search-input" id="editorExtensionSearch" type="search" placeholder="Find an extension..." autocomplete="off">
+              <article class="editor-extension-card police-car-extension-card" data-extension-card="police-car">
+                <div class="editor-extension-icon police-car-extension-icon" aria-hidden="true">🚓</div>
+                <div class="editor-extension-copy"><strong>Pixel Police Cruiser</strong><span>A tiny patrol car cruises the status bar with spinning wheels and flashing rooftop lights.</span><small>Portfolio companion · Runs in this window</small></div>
+                <button class="editor-extension-action" id="catExtensionToggle" aria-pressed="false">Enable</button>
+              </article>
+              <div class="editor-extension-note">Pixel-art walk preview · alternating hinged legs · gentle tail fan.</div>
+            </section>
+          </aside>
+          <main class="editor-main">
+        <!-- Lightbox Sub-Header with Navigation Tabs -->
+        <div class="lightbox-tabs-bar" role="tablist" aria-label="Case study files">
+          <button class="lb-tab-btn active" data-lb-tab="overview" role="tab" aria-selected="true">
+            <span class="editor-tab-icon markdown">M</span> overview.md
+          </button>
+          <button class="editor-tab-close" data-close-tab="overview" aria-label="Close overview.md">×</button>
+          <button class="lb-tab-btn" data-lb-tab="gallery" role="tab" aria-selected="false">
+            <span class="editor-tab-icon image">▧</span> mockup.png
+          </button>
+          <button class="editor-tab-close" data-close-tab="gallery" aria-label="Close mockup.png">×</button>
+          <button class="lb-tab-btn" data-lb-tab="specs" role="tab" aria-selected="false">
+            <span class="editor-tab-icon json">{ }</span> tech-stack.json
+          </button>
+          <button class="editor-tab-close" data-close-tab="specs" aria-label="Close tech-stack.json">×</button>
+        </div>
+
+        <div class="editor-breadcrumb"><span>case-study</span><span>›</span><span id="editorProjectSlug">overview.md</span><span class="editor-breadcrumb-spacer"></span><span class="editor-line-info">UTF-8&nbsp;&nbsp; Spaces: 2</span></div>
+
+        <div class="lightbox-content-area">
+          <div class="editor-empty-state" id="editorEmptyState" hidden>
+            <div class="empty-state-mark">⌘</div>
+            <h2>Nothing open yet</h2>
+            <p>Choose a file from the Explorer to continue exploring this project.</p>
+            <button class="editor-empty-open" data-open-file="overview">Open overview.md</button>
+          </div>
+          <!-- Lightbox Tab 1: Overview -->
+          <div class="lb-tab-pane active" id="lbTabOverview">
+            <div class="lb-hero-banner">
+              <img id="lbHeroImg" src="" alt="Project Hero">
+              <div class="lb-hero-overlay">
+                <h1 class="lb-main-title" id="lbTitle">Ketut Gajah Bali</h1>
+                <p class="lb-tagline" id="lbTagline">High-craft digital web experience designed for modern travelers.</p>
+                <div class="lb-hero-buttons">
+                  <a id="lbLiveBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <span>Explore Live Website ↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="lb-overview-grid">
+              <div class="lb-desc-box">
+                <span class="lb-overline" id="lbOverviewCategory">PROJECT OVERVIEW</span>
+                <h3 class="lb-section-title" id="lbOverviewTitle">Project overview</h3>
+                <p id="lbDescription" lang="en">A concise summary of this project.</p>
+              </div>
+
+              <aside class="lb-meta-sidebar" aria-label="Project details">
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Client</span>
+                  <strong class="lb-meta-val" id="lbClient">Ketut Gajah Bali Adventure</strong>
+                </div>
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Location</span>
+                  <strong class="lb-meta-val" id="lbLocation">Bali, Indonesia</strong>
+                </div>
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Role</span>
+                  <strong class="lb-meta-val" id="lbRole">UI/UX &amp; Web Developer</strong>
+                </div>
+                <div class="lb-meta-card">
+                  <span class="lb-meta-label">Year</span>
+                  <strong class="lb-meta-val" id="lbYear">2024</strong>
+                </div>
+              </aside>
+            </div>
+
+            <div class="lb-features-section">
+              <span class="lb-overline">SELECTED DETAILS</span>
+              <h3 class="lb-section-title">Project highlights</h3>
+              <div class="lb-features-grid" id="lbFeaturesGrid">
+                <!-- Dynamic feature cards -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Lightbox Tab 2: Gallery & Mockup -->
+          <div class="lb-tab-pane" id="lbTabGallery" style="display: none;">
+            <div class="lb-gallery-view">
+              <div class="lb-device-selector">
+                <button class="device-btn active" id="btnDeviceDesktop" aria-controls="lbMockupWrapper" aria-pressed="true">
+                  <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <rect x="3" y="4" width="18" height="13" rx="2.5"/>
+                    <path d="M3 13.5h18M12 17v3M8 20h8"/>
+                  </svg>
+                  <span>Desktop</span>
+                </button>
+                <button class="device-btn" id="btnDeviceMobile" aria-controls="lbMockupMobile" aria-pressed="false">
+                  <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <rect x="6.5" y="2.5" width="11" height="19" rx="3"/>
+                    <path d="M10 5h4M11 18.5h2"/>
+                  </svg>
+                  <span>Mobile</span>
+                </button>
+              </div>
+              <div class="lb-device-stage">
+              <div class="lb-mockup-wrapper desktop-mode" id="lbMockupWrapper" role="region" aria-label="Desktop preview">
+                <div class="browser-frame-bar">
+                  <div class="browser-dots">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                  </div>
+                  <span class="browser-title-text" id="lbMockupUrl">https://satyawidnyana.com</span>
+                </div>
+                <div class="mockup-img-container">
+                  <img id="lbMockupImg" src="" alt="Full Mockup Preview" decoding="async">
+                </div>
+              </div>
+              <div class="lb-mockup-wrapper mobile-mode" id="lbMockupMobile" role="region" aria-label="Mobile preview" hidden>
+                <div class="browser-frame-bar">
+                  <span class="browser-title-text" id="lbMockupMobileUrl"></span>
+                </div>
+                <div class="mockup-img-container">
+                  <img id="lbMockupMobileImg" src="" alt="Mobile mockup preview" decoding="async">
+                </div>
+              </div>
+              </div>
+              <p class="lb-gallery-footnote"><span>✦</span> Drag the scroll inside the preview to explore the full page.</p>
+            </div>
+          </div>
+
+          <!-- Lightbox Tab 3: Tech Specs -->
+          <div class="lb-tab-pane" id="lbTabSpecs" style="display: none;">
+            <div class="lb-specs-grid">
+              <div class="lb-spec-card">
+                <div class="spec-icon">⚡</div>
+                <h4>Frontend &amp; Logic</h4>
+                <p id="lbSpecFrontend"></p>
+              </div>
+              <div class="lb-spec-card">
+                <div class="spec-icon">🎨</div>
+                <h4>Styling &amp; Architecture</h4>
+                <p id="lbSpecStyling"></p>
+              </div>
+              <div class="lb-spec-card">
+                <div class="spec-icon">🚀</div>
+                <h4>Performance &amp; SEO</h4>
+                <p></p>
+              </div>
+              <div class="lb-spec-card">
+                <div class="spec-icon">✨</div>
+                <h4>Interaction &amp; Booking</h4>
+                <p></p>
+              </div>
+            </div>
+            
+            <div class="lb-tech-chips-box">
+              <h4 class="lb-section-title">Technology Stack</h4>
+              <div class="dossier-tech-tags" id="lbTechChips">
+                <!-- Tech chips -->
+              </div>
+            </div>
+          </div>
+        </div>
+          </main>
+        </div>
+        <div class="editor-cat-track" id="editorCatTrack" aria-hidden="true" hidden>
+          <div class="editor-cat cat-facing-right cat-pixel-police-car" id="editorCat" data-pose="walk">
+            <span class="cat-rig" aria-hidden="true">
+              <svg class="pixel-cat-sprite" viewBox="0 0 124 100" role="img" aria-label="Pixel-art brown and cream tabby cat walking">
+                <g class="pixel-cat-facing">
+                  <ellipse class="pixel-cat-shadow" cx="63" cy="94" rx="43" ry="3" />
+                  <g class="pixel-cat-tail">
+                    <path d="M31 63H24V58H19V51H15V42H12V31H15V23H20V17H28V14H36V18H32V22H26V28H22V37H25V44H29V50H35V58H33V63Z" fill="#59351f" />
+                    <path d="M29 59H24V54H20V47H17V40H15V31H18V24H22V20H29V18H34V21H29V25H24V31H21V38H25V45H29V51H33V58Z" fill="#b96832" />
+                    <path d="M18 46H23V51H28V56H32V59H27V55H22V51H19Z" fill="#814526" />
+                    <path d="M16 35H21V40H23V45H18V41H16Z" fill="#d98947" />
+                    <path d="M19 25H24V30H21V35H17V30H19Z" fill="#834726" />
+                    <path d="M24 18H30V22H25V26H21V22H24Z" fill="#f3d7ad" />
+                    <path d="M24 20H29V22H25V25H22V22H24Z" fill="#f7ead4" />
+                  </g>
+
+                  <g class="pixel-leg pixel-hind-leg pixel-phase-b" style="transform-origin: 42px 61px">
+                    <path d="M36 55H51V62H48V69H45V75H39V72H36V64H34V58H36Z" fill="#59351f" />
+                    <path d="M39 57H47V63H44V70H41V73H37V68H39V61Z" fill="#b96832" />
+                    <g class="pixel-lower-leg" style="transform-origin: 41px 73px">
+                      <path d="M37 70H45V76H42V81H47V83H54V85H59V89H37V87H32V84H38V78H36Z" fill="#59351f" />
+                      <path d="M39 73H43V79H42V82H49V84H56V87H39V85H35V83H40Z" fill="#c7773c" />
+                      <path d="M38 82H45V84H53V86H58V88H39V86H34V84H38Z" fill="#f3e2c2" />
+                      <path d="M41 84H48V86H55V87H41Z" fill="#fff3dc" />
+                      <path d="M51 84V86H53V84Z" fill="#d4b995" />
+                    </g>
+                  </g>
+                  <g class="pixel-leg pixel-fore-leg pixel-phase-a" style="transform-origin: 84px 59px">
+                    <path d="M78 53H92V60H89V68H86V74H80V70H78V62H76V59H78Z" fill="#59351f" />
+                    <path d="M81 55H89V61H86V69H83V72H79V66H81V60H79Z" fill="#bd7138" />
+                    <g class="pixel-lower-leg" style="transform-origin: 83px 73px">
+                      <path d="M79 70H87V76H84V81H89V83H99V85H105V87H109V90H79V87H73V84H80V78Z" fill="#59351f" />
+                      <path d="M81 73H85V79H83V82H92V84H101V86H107V88H81V85H77V83H82Z" fill="#d58a49" />
+                      <path d="M80 82H87V84H96V86H104V88H107V89H81V86H76V84H80Z" fill="#f3e2c2" />
+                      <path d="M99 84V86H101V84Z" fill="#d5c09e" />
+                    </g>
+                  </g>
+
+                  <g class="pixel-cat-body">
+                    <path d="M24 60V53H28V47H34V42H42V38H52V35H67V37H78V40H88V43H96V48H100V55H98V62H94V68H88V73H78V76H48V73H37V70H29V66H24Z" fill="#59351f" />
+                    <path d="M28 58V52H33V47H39V43H48V40H58V38H68V40H79V43H89V46H95V51H97V56H93V63H88V68H78V71H49V69H39V66H32V63H28Z" fill="#bd7138" />
+                    <path d="M33 59V55H42V58H52V61H67V59H78V57H88V61H92V66H86V70H77V73H49V70H39V67H33V63H29V59Z" fill="#f0dcb9" />
+                    <path d="M38 45H43V48H40V52H35V49H38Z" fill="#794326" />
+                    <path d="M48 41H55V44H52V48H46V45H48Z" fill="#754024" />
+                    <path d="M60 39H67V43H64V47H58V44H60Z" fill="#804525" />
+                    <path d="M72 42H79V46H76V50H70V47H72Z" fill="#754024" />
+                    <path d="M83 46H89V49H87V53H81V50H83Z" fill="#804525" />
+                    <path d="M32 55H36V59H42V62H36V60H31Z" fill="#e9bb7d" />
+                    <path d="M45 51H49V55H55V58H49V56H44Z" fill="#e9bb7d" />
+                    <path d="M60 49H64V53H70V56H64V54H59Z" fill="#e9bb7d" />
+                    <path d="M75 51H79V55H84V58H78V56H74Z" fill="#e9bb7d" />
+                    <path d="M53 63H66V65H74V68H65V66H52Z" fill="#fff0d5" />
+                    <path d="M42 46H45V48H42Z M56 43H59V45H56Z M69 45H72V47H69Z" fill="#f5d49f" />
+                  </g>
+
+                  <g class="pixel-leg pixel-hind-leg pixel-phase-a" style="transform-origin: 48px 61px">
+                    <path d="M43 55H57V62H54V69H52V75H46V72H43V64H41V58H43Z" fill="#59351f" />
+                    <path d="M46 57H53V63H51V70H48V73H44V68H46V61H44Z" fill="#cf7e3d" />
+                    <g class="pixel-lower-leg" style="transform-origin: 48px 73px">
+                      <path d="M44 70H52V76H49V81H54V83H62V85H67V89H43V87H37V84H44V78Z" fill="#59351f" />
+                      <path d="M46 73H50V79H48V82H57V84H64V87H45V85H40V83H46Z" fill="#d58a49" />
+                      <path d="M44 82H51V84H60V86H65V88H45V86H39V84H44Z" fill="#f3e2c2" />
+                      <path d="M47 84V86H49V84Z" fill="#c6ae89" />
+                    </g>
+                  </g>
+                  <g class="pixel-leg pixel-fore-leg pixel-phase-b" style="transform-origin: 88px 59px">
+                    <path d="M83 52H97V59H94V67H92V74H86V70H83V62H81V58H83Z" fill="#59351f" />
+                    <path d="M86 55H94V61H91V69H89V72H85V66H87V60H84Z" fill="#d58a49" />
+                    <g class="pixel-lower-leg" style="transform-origin: 89px 73px">
+                      <path d="M85 70H93V76H90V81H95V83H104V85H110V87H113V90H84V87H78V84H85V78Z" fill="#59351f" />
+                      <path d="M87 73H91V79H89V82H98V84H106V86H111V88H86V85H81V83H87Z" fill="#e3a15f" />
+                      <path d="M85 82H92V84H101V86H109V88H111V89H86V86H80V84H85Z" fill="#f3e2c2" />
+                      <path d="M103 84V86H105V84Z" fill="#d5c09e" />
+                    </g>
+                  </g>
+
+                  <g class="pixel-cat-head">
+                    <path d="M75 41V34H79V27H84V20H88V15H96V18H100V27H105V24H109V16H117V19H121V27H123V37H121V44H118V50H114V55H109V60H100V59H92V56H85V52H80V48H76V44H73V41Z" fill="#47291c" />
+                    <path d="M79 40V34H83V28H87V21H91V19H95V24H99V31H105V28H109V20H115V22H118V29H120V37H118V44H115V49H112V53H108V56H100V56H93V53H86V49H81V45H78V41Z" fill="#cf7134" />
+                    <path d="M82 29H87V32H92V35H87V34H81Z" fill="#e9ae69" />
+                    <path d="M109 25H113V28H117V32H112V30H108Z" fill="#e9ae69" />
+                    <path d="M84 28V23H88V27H92V32H88V30H84Z" fill="#df8b91" />
+                    <path d="M110 25V20H114V23H117V29H113V27H110Z" fill="#df8b91" />
+                    <path d="M88 32H93V35H98V38H92V36H87Z" fill="#61371f" />
+                    <path d="M99 29H103V33H107V36H102V34H98Z" fill="#61371f" />
+                    <path d="M109 33H114V36H119V40H114V38H109Z" fill="#61371f" />
+                    <path d="M85 45H91V48H97V51H92V50H86Z" fill="#9d5129" />
+                    <path d="M88 46H94V49H99V52H93V50H88Z" fill="#f1ddbd" />
+                    <path d="M101 44H108V46H114V49H118V52H116V55H109V57H103V54H99V51H100V48H101Z" fill="#f4e6cf" />
+                    <path d="M107 47H113V49H118V52H115V54H109V55H104V52H101V49H107Z" fill="#fff5e4" />
+                    <path d="M96 34H103V36H106V41H104V46H99V44H95V40H93V37H96Z" fill="#47291c" />
+                    <path d="M98 36H102V38H104V42H102V44H98V41H96V38H98Z" fill="#ffbf45" />
+                    <path d="M100 36H102V44H99V41H98V38H100Z" fill="#261b17" />
+                    <path d="M98 36H100V38H98Z" fill="#fff6d9" />
+                    <path d="M115 47H118V49H121V51H119V53H115V51H117Z" fill="#a44d42" />
+                    <path d="M116 49H118V51H116Z" fill="#ffe0c2" />
+                    <path d="M116 51H119V53H116V55H113V53H116Z" fill="#47291c" />
+                    <path d="M110 54H114V56H110Z M114 56H118V58H114Z" fill="#47291c" />
+                    <path d="M115 46H119V47H115Z M116 50H121V51H116Z M114 54H119V55H114Z" fill="#fff1d9" />
+                    <path d="M78 40H82V42H78Z M81 36H85V38H81Z" fill="#f6e5ca" />
+                  </g>
+                </g>
+              </svg>
+              <svg class="police-car-sprite" viewBox="0 0 124 100" role="img" aria-label="Pixel-art police car on patrol">
+                <g class="police-car-facing">
+                  <ellipse class="police-car-shadow" cx="62" cy="89" rx="53" ry="4" />
+                  <g class="police-exhaust-smoke" aria-hidden="true">
+                    <circle class="police-exhaust-puff puff-one" cx="10" cy="66" r="2.4" />
+                    <circle class="police-exhaust-puff puff-two" cx="10" cy="66" r="2.8" />
+                    <circle class="police-exhaust-puff puff-three" cx="10" cy="66" r="3.2" />
+                    <circle class="police-exhaust-puff puff-four" cx="10" cy="66" r="3.6" />
+                  </g>
+                  <!-- Deep outline and low chassis give the cruiser a cleaner silhouette. -->
+                  <path d="M10 70V58H12V53H16V50H23V47H31V42H37V33H42V27H73V29H78V33H82V39H86V43H103V44H111V47H116V52H120V60H122V67H119V73H112V77H14V74H11V72Z" fill="#101a2a" />
+                  <path d="M13 68V58H15V54H18V52H24V49H32V45H40V33H44V30H72V32H77V36H81V42H86V46H103V47H110V50H115V55H118V62H119V66H116V71H111V74H15V70H13Z" fill="#286aa8" />
+                  <!-- Hood, fender and roof highlights add a little depth without losing the pixel look. -->
+                  <path d="M15 62H19V55H25V51H33V46H41V34H45V32H71V34H76V38H80V44H86V47H103V48H109V51H114V56H117V61H107V58H95V54H82V51H59V52H39V57H28V61H21V66H15Z" fill="#3986bd" />
+                  <path d="M38 34H44V30H72V32H77V36H81V42H77V39H71V36H43V43H38Z" fill="#78b8d4" />
+                  <!-- Split cabin glass: rear window and front windshield are distinct. -->
+                  <path d="M43 34H57V47H39V43H41V37H43Z" fill="#a9dced" />
+                  <path d="M61 34H71V36H76V40H80V46H61Z" fill="#bde8f1" />
+                  <path d="M45 36H55V38H46V43H41V41H43V38H45Z" fill="#e4f8fb" opacity=".72" />
+                  <path d="M63 36H71V38H76V41H78V43H63Z" fill="#e9fbfc" opacity=".7" />
+                  <path d="M59 34V48" stroke="#18324a" stroke-width="2" />
+                  <path d="M18 53H110V64H18Z" fill="#eaf1ed" />
+                  <path d="M19 54H109V56H19Z" fill="#fffaf0" opacity=".8" />
+                  <!-- Doors, handles, mirror and a small shield badge. -->
+                  <path d="M37 49V68M60 49V69M83 49V67" fill="none" stroke="#244c70" stroke-width="1.5" />
+                  <path d="M62 50V67M85 50V64" fill="none" stroke="#9fb3bf" stroke-width=".8" opacity=".8" />
+                  <path d="M64 52H71V54H64Z M87 51H93V53H87Z" fill="#173653" />
+                  <path d="M51 55H58V57H61V61H58V64H53V62H50V59H48V57H51Z" fill="#dcae43" />
+                  <path d="M54 57H57V59H59V61H57V63H54V61H52V59H54Z" fill="#365a76" />
+                  <text x="70" y="62" fill="#193b5d" font-family="monospace" font-size="4.4" font-weight="900" letter-spacing=".1">POLICE</text>
+                  <!-- Lights and bumpers make the front and rear readable at small sizes. -->
+                  <!-- Rear hatch and tail lamp; the short squared tail balances the nose. -->
+                  <path d="M12 52H16V59H12Z" fill="#d94645" />
+                  <path d="M13 53H15V55H13Z" fill="#ffaaa0" />
+                  <path d="M17 48V67" stroke="#183e61" stroke-width="1.2" />
+                  <!-- Level hood line, with the nose dropping only at the grille. -->
+                  <path d="M103 44H111V47H116V52H120V60H118V64H115V58H112V53H107V48H103Z" fill="#1c5686" />
+                  <path d="M115 53H119V58H115Z" fill="#fff0b1" />
+                  <path d="M116 54H118V55H116Z" fill="#fffbe3" />
+                  <path d="M119 59H122V66H117V64H120V62H118Z" fill="#152c40" />
+                  <path d="M8 67H14V71H9Z M117 66H122V70H117Z" fill="#26394a" />
+                  <path d="M10 69H14M118 68H121" stroke="#8194a1" stroke-width="1" />
+                  <!-- Two-tone rooftop light bar. -->
+                  <path d="M48 25H74V33H48Z" fill="#101a2a" />
+                  <path d="M50 26H59V31H50Z" class="police-light-red" fill="#ff4c4c" />
+                  <path d="M63 26H72V31H63Z" class="police-light-blue" fill="#3bbcff" />
+                  <path d="M48 31H74V34H48Z" fill="#d5e3e9" />
+                  <path d="M50 32H72" stroke="#fff" stroke-width=".8" opacity=".75" />
+                  <!-- Chunkier tires with bright hubs read clearly as wheels in motion. -->
+                  <path d="M18 72V66H21V62H25V60H35V62H39V66H42V75H39V81H35V84H25V82H21V78H18Z" fill="#10151c" />
+                  <path d="M82 72V66H85V62H89V60H99V62H103V66H106V75H103V81H99V84H89V82H85V78H82Z" fill="#10151c" />
+                  <g class="police-wheel-spin" style="transform-origin: 30px 72px">
+                    <circle cx="30" cy="72" r="7" fill="#c4d0d9" />
+                    <circle cx="30" cy="72" r="5" fill="#73899a" />
+                    <circle cx="30" cy="72" r="2.5" fill="#dce8eb" />
+                    <path d="M30 66V69M30 75V78M24 72H27M33 72H36" stroke="#edf3f3" stroke-width="1.3" />
+                  </g>
+                  <g class="police-wheel-spin" style="transform-origin: 94px 72px">
+                    <circle cx="94" cy="72" r="7" fill="#c4d0d9" />
+                    <circle cx="94" cy="72" r="5" fill="#73899a" />
+                    <circle cx="94" cy="72" r="2.5" fill="#dce8eb" />
+                    <path d="M94 66V69M94 75V78M88 72H91M97 72H100" stroke="#edf3f3" stroke-width="1.3" />
+                  </g>
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="editor-statusbar">
+          <span class="status-branch">⌥&nbsp; main</span>
+          <span>●&nbsp; <span id="editorProjectName">CASE STUDY // #01</span></span>
+          <span class="status-spacer"></span>
+          <span>Ln 1, Col 1</span><span>Spaces: 2</span><span>UTF-8</span><span>HTML</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
