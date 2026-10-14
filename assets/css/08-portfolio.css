@@ -689,3 +689,160 @@
   .folder-stage { transition: opacity 0.3s ease; transform: none; }
   .folder-3d, .folder-paper, .folder-front, .folder-back-left { transition: none; }
 }
+
+/* Mobile archive: the same folding sequence, arranged in one vertical column. */
+@media (max-width: 768px) {
+  .projects {
+    --w: min(420px, calc(100vw - 40px));
+    --mobile-panel-height: calc(var(--w) * 0.6265);
+    transition: padding-bottom 1s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .portfolio-folder { --w: inherit; }
+  .projects.is-open {
+    padding-top: 100px;
+    /* Reserve the scaled three-panel tail without shifting the archive sideways. */
+    padding-bottom: calc(100px + var(--mobile-panel-height) * 2.7 + 81px - var(--w) * 0.14);
+  }
+  .portfolio-folder.is-open {
+    transform: translate(0, -15%) scale(0.9) !important;
+  }
+  .portfolio-folder.is-open .folder-3d { transform: translateY(0); }
+
+  .folder-back-right,
+  .folder-back-left {
+    top: auto;
+    bottom: 0;
+    height: 72%;
+    transform-origin: 50% 100%;
+    transform: translateZ(22px) rotateX(-5deg);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease, background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+  }
+  .portfolio-folder:hover:not(.is-open) .folder-back-right,
+  .portfolio-folder:hover:not(.is-open) .folder-back-left {
+    transform: translateZ(22px) rotateX(-10deg);
+  }
+  .portfolio-folder.is-open .folder-back-right,
+  .folder-3d.is-open .folder-back-right {
+    height: 89.5%;
+    animation: mobile-cardboard-second 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  }
+  .portfolio-folder.is-open .folder-back-left,
+  .folder-3d.is-open .folder-back-left {
+    animation: mobile-cardboard-third 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  }
+
+  /* Each rotation follows the previous panel, then unfolds around its next edge. */
+  @keyframes mobile-cardboard-second {
+    0%, 5% {
+      transform: translateZ(22px) rotateX(-5deg) translateY(0px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px));
+      box-shadow: var(--shadow-3d-base);
+    }
+    35% {
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px));
+      box-shadow: var(--shadow-3d-invY);
+    }
+    65%, 100% {
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(-180deg) translateY(calc(var(--mobile-panel-height) + 15px));
+      box-shadow: var(--shadow-3d-base);
+    }
+  }
+  @keyframes mobile-cardboard-third {
+    0%, 5% {
+      transform: translateZ(21px) rotateX(-5deg) translateY(0px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(0deg) translateY(-15px);
+      box-shadow: var(--shadow-3d-base);
+    }
+    35% {
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(0deg) translateY(-15px);
+      box-shadow: var(--shadow-3d-invY);
+    }
+    65% {
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(-180deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(0deg) translateY(-15px);
+      box-shadow: var(--shadow-3d-base);
+    }
+    95%, 100% {
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(-180deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(-180deg) translateY(-15px);
+      box-shadow: var(--shadow-3d-invY);
+    }
+  }
+
+  .folder-back-right::before, .folder-back-right::after,
+  .folder-back-left::before, .folder-back-left::after {
+    right: auto;
+    top: auto;
+    bottom: -30px;
+    width: 16px;
+    height: 30px;
+    transform-origin: top center;
+    transform: scaleY(0);
+    box-shadow: inset 1px 0 3px rgba(0,0,0,0.15), inset -1px 0 3px rgba(0,0,0,0.15);
+  }
+  .folder-back-right::before, .folder-back-left::before { left: 25%; }
+  .folder-back-right::after, .folder-back-left::after { left: auto; right: 25%; }
+  /* This panel ends upright, so its connectors occupy the gap above it. */
+  .folder-back-right::before, .folder-back-right::after {
+    top: -30px;
+    bottom: auto;
+    transform-origin: bottom center;
+  }
+  .portfolio-folder.is-open .folder-back-right::before,
+  .portfolio-folder.is-open .folder-back-right::after {
+    animation: mobile-hinge-second 3.5s forwards !important;
+  }
+  .portfolio-folder.is-open .folder-back-left::before,
+  .portfolio-folder.is-open .folder-back-left::after {
+    animation: mobile-hinge-third 3.5s forwards !important;
+  }
+  @keyframes mobile-hinge-second {
+    0%, 35% { transform: scaleY(0); }
+    65%, 100% { transform: scaleY(1); }
+  }
+  @keyframes mobile-hinge-third {
+    0%, 65% { transform: scaleY(0); }
+    95%, 100% { transform: scaleY(1); }
+  }
+
+  .portfolio-folder.is-open .folder-paper-2 {
+    animation: mobile-paper-first 1.5s cubic-bezier(0.25, 1, 0.5, 1) 3.5s both !important;
+  }
+  .portfolio-folder.is-open .folder-paper-1 {
+    animation: mobile-paper-second 1.5s cubic-bezier(0.25, 1, 0.5, 1) 3.5s both !important;
+  }
+  .portfolio-folder.is-open .folder-paper-3 {
+    animation: mobile-paper-third 1.5s cubic-bezier(0.25, 1, 0.5, 1) 3.5s both !important;
+  }
+  @keyframes mobile-paper-first {
+    0% { transform: translateZ(8px) translateY(-1%) rotate(4deg); }
+    100% { transform: translateZ(1px) translateY(calc(var(--w) * 0.02975 + var(--mobile-panel-height) + 30px)) rotate(0deg); }
+  }
+  @keyframes mobile-paper-second {
+    0% { transform: translateZ(4px) translateY(0) rotate(-3deg); }
+    100% { transform: translateZ(1px) translateY(calc(var(--w) * 0.02975 + var(--mobile-panel-height) * 2 + 60px)) rotate(0deg); }
+  }
+  @keyframes mobile-paper-third {
+    0% { transform: translateZ(12px) translateY(1%) rotate(-1deg); }
+    100% { transform: translateZ(1px) translateY(calc(var(--w) * 0.02975 + var(--mobile-panel-height) * 3 + 90px)) rotate(0deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .projects { transition: none; }
+    .folder-back-right, .folder-back-left { transition: none; }
+    .portfolio-folder.is-open,
+    .portfolio-folder.is-open .folder-front,
+    .portfolio-folder.is-open .folder-back-right,
+    .portfolio-folder.is-open .folder-back-left,
+    .portfolio-folder.is-open .folder-paper-4 { transition: none !important; }
+    .portfolio-folder.is-open .folder-front,
+    .portfolio-folder.is-open .folder-back-right,
+    .portfolio-folder.is-open .folder-back-left,
+    .portfolio-folder.is-open .folder-paper,
+    .portfolio-folder.is-open .folder-front::before,
+    .portfolio-folder.is-open .folder-front::after,
+    .portfolio-folder.is-open .folder-back-right::before,
+    .portfolio-folder.is-open .folder-back-right::after,
+    .portfolio-folder.is-open .folder-back-left::before,
+    .portfolio-folder.is-open .folder-back-left::after {
+      animation-duration: 0.001s !important;
+      animation-delay: 0s !important;
+    }
+  }
+}
