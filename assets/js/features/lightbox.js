@@ -96,29 +96,84 @@ window.SatyaPortfolio.features['lightbox'] = function () {
       title: 'WGA Dekorasi',
       category: 'Event & Equipment Rental',
       year: '2024',
-      role: 'UI/UX & Frontend',
+      role: 'UI/UX & Web Developer',
       client: 'WGA Dekorasi',
       location: 'Bali, Indonesia',
-      url: 'https://satyawidnyana.com/projects/wga-dekorasi',
-      liveUrl: 'https://wgadekorasi.com',
-      cover: 'image portofolio/WGA DEKORASI/cover.jpeg',
-      description: 'A modern event decoration and rental catalog platform. Designed to help clients browse traditional Bali wedding setups, stage tents, and sound systems with transparent pricing and quotation requests.',
-      summary: 'Browse Bali event décor and rentals, compare setups, and request a quote.',
+      url: 'https://wga-dekorasi.vercel.app/',
+      liveUrl: 'https://wga-dekorasi.vercel.app/',
+      cover: 'image portofolio/WGA DEKORASI/Dekstop/cover.png',
+      previews: {
+        desktop: ['cover.png', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png'].map((file, index) => ({
+          src: `image portofolio/WGA DEKORASI/Dekstop/${file}`,
+          width: [1896, 1896, 1896, 1896, 1896, 1897, 1893, 1900, 1897][index],
+          height: [905, 907, 902, 903, 902, 905, 903, 905, 902][index]
+        })),
+        mobile: ['cover.png', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png'].map((file, index) => ({
+          src: `image portofolio/WGA DEKORASI/Mobile/${file}`,
+          width: [610, 605, 610, 610, 610, 608, 608, 610, 607][index],
+          height: [907, 901, 905, 905, 907, 905, 902, 902, 901][index]
+        }))
+      },
+      description: 'A website for event decoration and equipment rentals in Bali. Visitors can search the catalog, filter rental categories, view event photos, and read or submit client reviews. Quotes are arranged through WhatsApp. An admin interface manages catalog images, event photos, and reviews.',
+      summary: 'Find decorations and equipment for your event, explore past setups, and read client reviews. Contact the team through WhatsApp to discuss availability and a quote.',
+      overviewLayout: 'journey',
+      featuresOverline: 'SITE GUIDE // 05 PARTS',
+      featuresTitle: 'Explore the event essentials',
       features: [
-        'Interactive Decoration & Equipment Catalog',
-        'Category Filtering (Tenda, Meja-Kursi, Sound System)',
-        'Direct WhatsApp Quotation Request Flow',
-        'Lightweight Vanilla CSS Token Architecture',
-        'Mobile-First Responsive Layout'
+        'Searchable rental catalog with category filters',
+        'Event photo gallery with image previews',
+        'Client reviews, ratings, and review submission',
+        'WhatsApp consultation and quotation links',
+        'Admin tools for catalog, event photos, and reviews'
       ],
       overviewFeatures: [
-        { icon: 'catalog', title: 'Curated catalog', text: 'Décor, tents, and event essentials in one place.' },
-        { icon: 'filter', title: 'Clear categories', text: 'Narrow choices by rental type.' },
-        { icon: 'layers', title: 'Rental collections', text: 'Compare coordinated setups and equipment.' },
-        { icon: 'chat', title: 'Personal quote', text: 'Send an enquiry with your event details.' },
-        { icon: 'globe', title: 'Ready on mobile', text: 'Browse the collection from any screen.' }
+        { icon: 'catalog', label: 'COLLECTION', title: 'Browse the catalog', text: 'Explore decorations, tents, and event equipment in one collection.' },
+        { icon: 'camera', label: 'MOMENTS', title: 'See past events', text: 'Filter the event gallery and open photos for a closer look at each setup.' },
+        { icon: 'spark', label: 'REVIEWS', title: 'Hear from clients', text: 'Read client ratings and comments, or share your own event experience.' },
+        { icon: 'chat', label: 'WHATSAPP', title: 'Ask for a quote', text: 'Contact the team to discuss your event, availability, and rental needs.' },
+        { icon: 'folder', label: 'ADMIN', title: 'Manage the content', text: 'Upload and remove catalog or event photos, and manage client reviews.' }
       ],
-      tech: ['HTML5', 'Vanilla CSS Tokens', 'JavaScript', 'UI/UX Design', 'SEO Basics']
+      tech: ['HTML5', 'CSS3', 'JavaScript', 'Node.js', 'Vercel Functions', 'Supabase Database', 'Supabase Storage', 'Cloudflare Turnstile', 'WhatsApp', 'Google Maps', 'Google Fonts', 'Sharp', 'PGlite'],
+      stackAssetRoot: 'image portofolio/WGA DEKORASI/Stack',
+      stackGroups: [
+        {
+          title: 'Frontend',
+          description: 'The public pages and admin interface use HTML, CSS design tokens, and vanilla JavaScript.',
+          items: [
+            { name: 'HTML5', logo: 'FE/html5.svg', description: 'Structures the homepage, catalog, event gallery, review forms, and admin pages.' },
+            { name: 'CSS3', logo: 'FE/css3.svg', description: 'Uses shared design tokens for color, spacing, and responsive layouts. Animations respect reduced motion preferences.' },
+            { name: 'JavaScript', logo: 'FE/javascript.svg', description: 'Handles search, category filters, photo lightboxes, and cursor pagination. IntersectionObserver triggers scroll reveals and loading. Browser Canvas compresses uploaded photos.' }
+          ]
+        },
+        {
+          title: 'Backend & Data',
+          description: 'Node.js API handlers run as Vercel Functions. Supabase holds content and uploaded photos.',
+          items: [
+            { name: 'Node.js', logo: 'BE/nodejs.svg', description: 'The project targets Node.js 24.x. CommonJS API handlers serve catalog, event gallery, and review data.' },
+            { name: 'Vercel Functions', logo: 'BE/vercel.svg', logoSurface: 'paper', description: 'Provides the serverless runtime for the project’s API routes.' },
+            { name: 'Supabase Database', logo: 'BE/supabase.svg', description: 'Stores catalog entries, categories, event photos, and client reviews in PostgreSQL.' },
+            { name: 'Supabase Storage', logo: 'BE/supabase.svg', description: 'Stores uploaded photos and thumbnails. Photos are compressed in the browser before upload, with WebP and a JPEG fallback.' }
+          ]
+        },
+        {
+          title: 'Integrations',
+          description: 'Supporting services for form verification, enquiries, location information, and typography.',
+          items: [
+            { name: 'Cloudflare Turnstile', logo: 'Integrations/cloudflare.png', logoSurface: 'paper', description: 'Adds verification to review submissions and admin login.' },
+            { name: 'WhatsApp', logo: 'Integrations/whatsapp.svg', description: 'Opens a conversation with the team for consultation and rental quotes. Confirmation, deposit, and installation are arranged outside the website.' },
+            { name: 'Google Maps', logo: 'Integrations/google-maps.svg', description: 'Shows the business location through an embedded map.' },
+            { name: 'Google Fonts', logo: 'Integrations/google-fonts.png', description: 'Loads the project’s web fonts through Google Fonts stylesheets.' }
+          ]
+        },
+        {
+          title: 'Media & Testing',
+          description: 'Image processing during the build and local automated tests for database behavior.',
+          items: [
+            { name: 'Sharp', logo: 'Tools/sharp.svg', description: 'Creates responsive WebP hero images at 640px and 1280px during the build.' },
+            { name: 'PGlite', logo: 'Tools/pglite.svg', logoSurface: 'paper', description: 'Runs PostgreSQL locally for database tests with the Node.js test runner. Production data uses Supabase.' }
+          ]
+        }
+      ]
     },
     'wga-ocean': {
       docId: 'CASE STUDY // #03',
@@ -128,11 +183,14 @@ window.SatyaPortfolio.features['lightbox'] = function () {
       role: 'Web Design & Branding',
       client: 'WGA Ocean',
       location: 'Lovina, Bali',
-      url: 'https://satyawidnyana.com/projects/wga-ocean',
+      url: 'https://wgaocean.com',
       liveUrl: 'https://wgaocean.com',
       cover: 'image portofolio/WGA OCEAN/cover.jpeg',
-      description: 'An inspiring ocean adventure and wild dolphin watching tour website in Lovina. Built with ocean-inspired gradients, fluid scroll dynamics, and high-conversion excursion booking flows.',
+      description: 'A website for dolphin tours and water activities in Lovina. Visitors can explore tour options, preview experiences through photos and video, and send a booking enquiry.',
       summary: 'Discover Lovina dolphin tours, water sports, and ocean adventures in one visual guide.',
+      overviewLayout: 'journey',
+      featuresOverline: 'OCEAN FLOW // 05 STOPS',
+      featuresTitle: 'From the shoreline to your next trip',
       features: [
         'Immersive Ocean Visual Aesthetics',
         'Lovina Dolphin Tour & Water Sports Booking',
@@ -140,13 +198,32 @@ window.SatyaPortfolio.features['lightbox'] = function () {
         'Optimized Mobile Touch Navigation'
       ],
       overviewFeatures: [
-        { icon: 'compass', title: 'Dolphin encounters', text: 'Discover the waters around Lovina.' },
-        { icon: 'waves', title: 'Ocean activities', text: 'Explore water sports and sea adventures.' },
-        { icon: 'camera', title: 'Visual previews', text: 'See the experience through photos and video.' },
-        { icon: 'chat', title: 'Easy enquiries', text: 'Find a tour and ask about availability.' },
-        { icon: 'globe', title: 'Made for mobile', text: 'Plan comfortably while on the go.' }
+        { icon: 'compass', label: 'LOVINA', title: 'Discover Lovina', text: 'Explore dolphin encounters and the waters around Lovina.' },
+        { icon: 'waves', label: 'ACTIVITIES', title: 'Choose your trip', text: 'Browse water sports and ocean adventures that fit your plans.' },
+        { icon: 'camera', label: 'GALLERY', title: 'Preview the trip', text: 'See the experience through photos and video before making an enquiry.' },
+        { icon: 'chat', label: 'ENQUIRY', title: 'Ask about a tour', text: 'Find a tour and contact the team about availability and booking.' },
+        { icon: 'globe', label: 'ON THE GO', title: 'Plan on mobile', text: 'Explore activities and prepare your plans while on the go.' }
       ],
-      tech: ['HTML5 / CSS3', 'JavaScript Micro-animations', 'Flexbox & CSS Grid', 'Custom Branding']
+      tech: ['HTML5 / CSS3', 'JavaScript Micro-animations', 'Flexbox & CSS Grid', 'Custom Branding'],
+      stackGroups: [
+        {
+          title: 'Frontend',
+          description: 'Tour information, visual previews, and the booking enquiry experience.',
+          items: [
+            { name: 'HTML5', logo: 'FE/html5.svg', description: 'Structures tour information, activities, and gallery content.' },
+            { name: 'CSS3', logo: 'FE/css3.svg', description: 'Styles the ocean palette and layouts across desktop and mobile.' },
+            { name: 'JavaScript Micro-animations', logo: 'FE/javascript.svg', description: 'Adds small interface animations and interactive states.' }
+          ]
+        },
+        {
+          title: 'Layout & identity',
+          description: 'Responsive composition and the visual identity of the ocean experience.',
+          items: [
+            { name: 'Flexbox & CSS Grid', logoSrc: 'assets/svg/stack/layout.svg', description: 'Aligns page sections and adapts their layout to different screen widths.' },
+            { name: 'Custom Branding', logoSrc: 'assets/svg/stack/design.svg', description: 'Gives the site a consistent visual identity inspired by the ocean.' }
+          ]
+        }
+      ]
     },
     'satya-portfolio': {
       docId: 'CASE STUDY // #04',
@@ -159,8 +236,11 @@ window.SatyaPortfolio.features['lightbox'] = function () {
       url: 'https://satyawidnyana.com',
       liveUrl: 'https://satyawidnyana.com',
       cover: 'image portofolio/MY PORTOFOLIO/cover.jpeg',
-      description: 'An interactive, high-craft portfolio showcasing 3D origami folder physics, realistic interactive lanyard drag, terminal bio emulator, and retro-modern dark/light mode design tokens.',
+      description: 'A personal portfolio with an interactive project archive, 3D folder motion, a draggable lanyard, and a terminal profile. Visitors can open case studies and switch between light and dark themes.',
       summary: 'Selected web projects presented through an interactive archive and focused case studies.',
+      overviewLayout: 'journey',
+      featuresOverline: 'SITE FLOW // 05 STOPS',
+      featuresTitle: 'From the archive to each project story',
       features: [
         '3D Origami Cardboard Folder Physics',
         'Bungee String Interactive Draggable Lanyard',
@@ -169,13 +249,38 @@ window.SatyaPortfolio.features['lightbox'] = function () {
         'Fluid Light & Dark Mode Color Palette'
       ],
       overviewFeatures: [
-        { icon: 'layers', title: 'Project archive', text: 'A curated collection of selected work.' },
-        { icon: 'folder', title: '3D folder motion', text: 'Open projects through a paper-inspired folder.' },
-        { icon: 'layout', title: 'Case studies', text: 'Explore the thinking behind each project.' },
-        { icon: 'spark', title: 'Theme system', text: 'Shift between warm light and dark palettes.' },
-        { icon: 'globe', title: 'Responsive build', text: 'A considered experience across screens.' }
+        { icon: 'layers', label: 'ARCHIVE', title: 'Explore the work', text: 'Browse the project archive and choose a case study to explore.' },
+        { icon: 'folder', label: 'FOLDERS', title: 'Open a project', text: 'Use the animated folder to open the story behind each piece of work.' },
+        { icon: 'layout', label: 'CASE STUDY', title: 'Read the story', text: 'Explore the overview, visual preview, and technology stack for each project.' },
+        { icon: 'spark', label: 'APPEARANCE', title: 'Switch the theme', text: 'Change between light and dark palettes as you browse the portfolio.' },
+        { icon: 'globe', label: 'ANY DEVICE', title: 'Browse anywhere', text: 'Explore the archive and case studies across different screen sizes.' }
       ],
-      tech: ['Vanilla JavaScript', 'Web Animations API', 'CSS 3D Transforms', 'Semantic HTML5', 'Design Tokens']
+      tech: ['Vanilla JavaScript', 'Web Animations API', 'CSS 3D Transforms', 'Semantic HTML5', 'Design Tokens'],
+      stackGroups: [
+        {
+          title: 'Frontend',
+          description: 'The portfolio pages, interactive archive, and case study workspace.',
+          items: [
+            { name: 'Semantic HTML5', logo: 'FE/html5.svg', description: 'Structures the profile, project archive, and case study content.' },
+            { name: 'Vanilla JavaScript', logo: 'FE/javascript.svg', description: 'Coordinates the terminal, project selection, themes, and lightbox interactions.' }
+          ]
+        },
+        {
+          title: 'Motion',
+          description: 'Movement in the folders, interface transitions, and interactive details.',
+          items: [
+            { name: 'Web Animations API', logoSrc: 'assets/svg/stack/motion.svg', description: 'Runs timed interface animations and controlled transition sequences.' },
+            { name: 'CSS 3D Transforms', logoSrc: 'assets/svg/stack/layers.svg', description: 'Adds perspective and depth to the folder and paper interactions.' }
+          ]
+        },
+        {
+          title: 'Theme system',
+          description: 'Shared visual values for the light and dark palettes.',
+          items: [
+            { name: 'Design Tokens', logoSrc: 'assets/svg/stack/tokens.svg', description: 'Keeps colors, borders, surfaces, and spacing consistent across themes.' }
+          ]
+        }
+      ]
     }
   };
 
@@ -189,13 +294,13 @@ window.SatyaPortfolio.features['lightbox'] = function () {
       return node;
     };
     const logo = technology => {
-      if (!technology.logo) {
+      if (!technology.logo && !technology.logoSrc) {
         const monogram = element('span', 'stack-monogram', technology.name.replace(/[^a-z0-9]/gi, '').slice(0, 2).toUpperCase());
         monogram.setAttribute('aria-hidden', 'true');
         return monogram;
       }
-      const image = element('img', 'stack-logo');
-      image.src = `image portofolio/BALI ADVENTURE/Stack/${technology.logo}`;
+      const image = element('img', technology.logoSurface === 'paper' ? 'stack-logo stack-logo--paper' : 'stack-logo');
+      image.src = technology.logoSrc || `${data.stackAssetRoot || 'image portofolio/BALI ADVENTURE/Stack'}/${technology.logo}`;
       image.alt = '';
       image.width = 28;
       image.height = 28;

@@ -35,10 +35,11 @@ body[data-theme="dark"] #lbTabSpecs {
 #lbTabSpecs .stack-layer-heading { padding: 0; }
 #lbTabSpecs .stack-layer-heading h4 { margin: 0; font-size: .74rem; font-weight: 500; line-height: 1.5; color: var(--stack-muted); }
 #lbTabSpecs .stack-component-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-#lbTabSpecs .stack-component-list.has-two-components { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#lbTabSpecs .stack-component-list.has-two-components { display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); }
 #lbTabSpecs .stack-component { min-width: 0; max-width: 100%; }
 #lbTabSpecs .stack-component-button { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 48px; padding: 10px 12px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; color: var(--stack-muted); text-align: left; cursor: pointer; transition: background 180ms ease, border-color 180ms ease, color 180ms ease; }
 #lbTabSpecs .stack-logo { display: block; width: 26px; height: 26px; flex: 0 0 26px; object-fit: contain; }
+#lbTabSpecs .stack-logo--paper { box-sizing: border-box; padding: 3px; background: #fff; border-radius: 3px; }
 #lbTabSpecs .stack-monogram { display: grid; width: 26px; height: 26px; flex: 0 0 26px; place-items: center; border: 1px solid var(--stack-line); font: 600 .68rem/1 'Courier New', monospace; color: var(--stack-accent); }
 #lbTabSpecs .stack-component-name { min-width: 0; flex: 1; font-size: .82rem; font-weight: 500; line-height: 1.45; overflow-wrap: break-word; }
 #lbTabSpecs .stack-component-marker { margin-left: auto; color: var(--stack-accent); font-size: .85rem; opacity: 0; transition: opacity 180ms ease; }
@@ -54,6 +55,7 @@ body[data-theme="dark"] #lbTabSpecs {
 #lbTabSpecs .stack-inspector-logo { flex: 0 0 46px; }
 #lbTabSpecs .stack-inspector-logo .stack-logo,
 #lbTabSpecs .stack-inspector-logo .stack-monogram { width: 46px; height: 46px; font-size: 1rem; }
+#lbTabSpecs .stack-inspector-logo .stack-logo--paper { padding: 5px; }
 #lbTabSpecs .stack-inspector-title h3 { margin: 0; font-size: clamp(1.6rem, 2.2vw, 2rem); font-weight: 500; letter-spacing: -.04em; line-height: 1.25; overflow-wrap: anywhere; }
 #lbTabSpecs .stack-label { display: block; margin-bottom: 9px; color: var(--stack-muted); font-size: .73rem; font-weight: 500; }
 #lbTabSpecs .stack-inspector-copy p { max-width: 800px; margin: 0; color: var(--stack-ink); font-size: .96rem; line-height: 1.8; }
@@ -73,6 +75,7 @@ body[data-theme="dark"] #lbTabSpecs {
   #lbTabSpecs .stack-project-caption { font-size: .72rem; text-wrap: balance; }
 }
 @container (max-width: 700px) {
+  #lbTabSpecs .stack-component-list.has-two-components { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   #lbTabSpecs .stack-workbench { margin-top: 20px; }
   #lbTabSpecs .stack-layer { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-bottom: 20px; }
   #lbTabSpecs .stack-layer:last-child { padding-bottom: 0; }
