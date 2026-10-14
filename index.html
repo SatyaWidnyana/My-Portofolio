@@ -19,12 +19,13 @@
   <link rel="stylesheet" href="assets/css/07-marquee.css?v=183">
   <link rel="stylesheet" href="assets/css/08-portfolio.css?v=194">
   <link rel="stylesheet" href="assets/css/09-sections.css?v=183">
-  <link rel="stylesheet" href="assets/css/10-responsive.css?v=183">
+  <link rel="stylesheet" href="assets/css/10-responsive.css?v=186">
   <link rel="stylesheet" href="assets/css/11-project-details.css?v=183">
   <link rel="stylesheet" href="assets/css/12-lightbox-cream.css?v=183">
   <link rel="stylesheet" href="assets/css/13-lightbox-editorial.css?v=187">
   <link rel="stylesheet" href="assets/css/14-lightbox-base.css?v=190">
-  <link rel="stylesheet" href="assets/css/15-lightbox-workbench.css?v=51">
+  <link rel="stylesheet" href="assets/css/15-lightbox-workbench.css?v=69">
+  <link rel="stylesheet" href="assets/css/16-tech-fieldnotes.css?v=9">
   <script src="assets/js/app.js?v=78" defer></script>
   <script src="assets/js/features/intro.js?v=78" defer></script>
   <script src="assets/js/features/navigation.js?v=78" defer></script>
@@ -33,7 +34,7 @@
   <script src="assets/js/features/greetings.js?v=78" defer></script>
   <script src="assets/js/features/terminal-layout.js?v=78" defer></script>
   <script src="assets/js/features/portfolio.js?v=79" defer></script>
-  <script src="assets/js/features/lightbox.js?v=107" defer></script>
+  <script src="assets/js/features/lightbox.js?v=124" defer></script>
   <script src="assets/js/main.js?v=78" defer></script>
 </head>
 <body>
@@ -510,7 +511,15 @@
           </aside>
           <aside class="editor-explorer" id="editorExplorer" aria-label="Project tools">
             <section class="editor-panel-view active" data-editor-view="explorer">
-              <div class="editor-panel-heading">EXPLORER</div>
+              <div class="editor-panel-heading">
+                <span>EXPLORER</span>
+                <button class="editor-panel-hide" type="button" data-editor-hide aria-label="Hide Explorer panel" title="Hide Explorer">
+                  <span class="editor-panel-hide-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 14 14"><path d="M12 7H2M5.5 3.5 2 7l3.5 3.5" /></svg>
+                  </span>
+                  <span>HIDE</span>
+                </button>
+              </div>
               <button class="editor-project-root editor-fold-toggle" aria-expanded="true" aria-controls="editorProjectContents"><span class="editor-chevron">⌄</span> SATYA PORTFOLIO</button>
               <div id="editorProjectContents">
                 <button class="editor-folder-row editor-fold-toggle" aria-expanded="true" aria-controls="editorFileList"><span class="editor-chevron">⌄</span> case-study</button>
@@ -523,14 +532,30 @@
               <button class="editor-explorer-footer" data-editor-outline><span>▸</span> OUTLINE</button>
             </section>
             <section class="editor-panel-view" data-editor-view="search" hidden>
-              <div class="editor-panel-heading">SEARCH</div>
+              <div class="editor-panel-heading">
+                <span>SEARCH</span>
+                <button class="editor-panel-hide" type="button" data-editor-hide aria-label="Hide Search panel" title="Hide Search">
+                  <span class="editor-panel-hide-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 14 14"><path d="M12 7H2M5.5 3.5 2 7l3.5 3.5" /></svg>
+                  </span>
+                  <span>HIDE</span>
+                </button>
+              </div>
               <label class="editor-search-label" for="editorSearchInput">Search in project</label>
               <input class="editor-search-input" id="editorSearchInput" type="search" placeholder="Type to search..." autocomplete="off">
               <div class="editor-search-summary" id="editorSearchSummary">Enter a word to search this case study.</div>
               <div class="editor-search-results" id="editorSearchResults" aria-live="polite"></div>
             </section>
             <section class="editor-panel-view" data-editor-view="extensions" hidden>
-              <div class="editor-panel-heading">EXTENSIONS</div>
+              <div class="editor-panel-heading">
+                <span>EXTENSIONS</span>
+                <button class="editor-panel-hide" type="button" data-editor-hide aria-label="Hide Extensions panel" title="Hide Extensions">
+                  <span class="editor-panel-hide-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 14 14"><path d="M12 7H2M5.5 3.5 2 7l3.5 3.5" /></svg>
+                  </span>
+                  <span>HIDE</span>
+                </button>
+              </div>
               <label class="editor-search-label" for="editorExtensionSearch">Recommended for this project</label>
               <input class="editor-search-input" id="editorExtensionSearch" type="search" placeholder="Find an extension..." autocomplete="off">
               <article class="editor-extension-card police-car-extension-card" data-extension-card="police-car">
@@ -538,7 +563,12 @@
                 <div class="editor-extension-copy"><strong>Pixel Police Cruiser</strong><span>A tiny patrol car cruises the status bar with spinning wheels and flashing rooftop lights.</span><small>Portfolio companion · Runs in this window</small></div>
                 <button class="editor-extension-action" id="catExtensionToggle" aria-pressed="false">Enable</button>
               </article>
-              <div class="editor-extension-note">Pixel-art walk preview · alternating hinged legs · gentle tail fan.</div>
+              <article class="editor-extension-card music-extension-card" data-extension-card="music-player">
+                <div class="editor-extension-icon music-extension-icon" aria-hidden="true">♪</div>
+                <div class="editor-extension-copy"><strong>Holizna Lo-fi Player</strong><span>Three calm CC0 tracks with compact playback controls in the status bar.</span><small>Blue Skies · Windows Down · Waves</small></div>
+                <button class="editor-extension-action" id="musicExtensionToggle" aria-pressed="false">Enable</button>
+              </article>
+              <div class="editor-extension-note">Both extensions run locally in this portfolio window.</div>
             </section>
           </aside>
           <main class="editor-main">
@@ -610,8 +640,9 @@
             </div>
 
             <div class="lb-features-section">
-              <span class="lb-overline">SELECTED DETAILS</span>
-              <h3 class="lb-section-title">Project highlights</h3>
+              <span class="lb-overline" id="lbFeaturesOverline">SELECTED DETAILS</span>
+              <h3 class="lb-section-title" id="lbFeaturesTitle">Project highlights</h3>
+              <p class="lb-journey-hint" id="lbFeaturesHint" hidden>Select a stop to reveal its details.</p>
               <div class="lb-features-grid" id="lbFeaturesGrid">
                 <!-- Dynamic feature cards -->
               </div>
@@ -664,35 +695,34 @@
 
           <!-- Lightbox Tab 3: Tech Specs -->
           <div class="lb-tab-pane" id="lbTabSpecs" style="display: none;">
-            <div class="lb-specs-grid">
-              <div class="lb-spec-card">
-                <div class="spec-icon">⚡</div>
-                <h4>Frontend &amp; Logic</h4>
-                <p id="lbSpecFrontend"></p>
+            <section class="stack-sheet" aria-labelledby="stackSheetTitle">
+              <header class="stack-sheet-header">
+                <h2 id="stackSheetTitle">Tech-Stack</h2>
+                <div class="stack-project-meta">
+                  <span class="stack-project-label">PROJECT</span>
+                  <p class="stack-project-caption" id="stackProjectCaption"></p>
+                </div>
+              </header>
+
+              <div class="stack-workbench">
+                <section class="stack-map" aria-label="Technologies">
+                  <div class="stack-layers" id="lbTechChips"></div>
+                </section>
+                <aside class="stack-inspector" id="stackInspector" aria-labelledby="stackSelectedName">
+                  <div class="stack-inspector-kicker"><span id="stackSelectedGroup"></span></div>
+                  <div class="stack-inspector-title"><div class="stack-inspector-logo" id="stackSelectedLogo" aria-hidden="true"></div><h3 id="stackSelectedName"></h3></div>
+                  <div class="stack-inspector-copy" aria-live="polite" aria-atomic="true">
+                    <span class="stack-label">What it does</span>
+                    <p id="stackSelectedDescription"></p>
+                    <div class="stack-inspector-context"><span class="stack-label">In this project</span><p id="stackSelectedContext"></p></div>
+                  </div>
+                  <div class="stack-inspector-controls">
+                    <button id="stackPrevious" type="button" aria-label="Inspect previous technology"><span aria-hidden="true">←</span> Previous</button>
+                    <button id="stackNext" type="button" aria-label="Inspect next technology">Next <span aria-hidden="true">→</span></button>
+                  </div>
+                </aside>
               </div>
-              <div class="lb-spec-card">
-                <div class="spec-icon">🎨</div>
-                <h4>Styling &amp; Architecture</h4>
-                <p id="lbSpecStyling"></p>
-              </div>
-              <div class="lb-spec-card">
-                <div class="spec-icon">🚀</div>
-                <h4>Performance &amp; SEO</h4>
-                <p></p>
-              </div>
-              <div class="lb-spec-card">
-                <div class="spec-icon">✨</div>
-                <h4>Interaction &amp; Booking</h4>
-                <p></p>
-              </div>
-            </div>
-            
-            <div class="lb-tech-chips-box">
-              <h4 class="lb-section-title">Technology Stack</h4>
-              <div class="dossier-tech-tags" id="lbTechChips">
-                <!-- Tech chips -->
-              </div>
-            </div>
+            </section>
           </div>
         </div>
           </main>
@@ -804,16 +834,16 @@
                 <g class="police-car-facing">
                   <ellipse class="police-car-shadow" cx="62" cy="89" rx="53" ry="4" />
                   <g class="police-exhaust-smoke" aria-hidden="true">
-                    <circle class="police-exhaust-puff puff-one" cx="10" cy="66" r="2.4" />
-                    <circle class="police-exhaust-puff puff-two" cx="10" cy="66" r="2.8" />
-                    <circle class="police-exhaust-puff puff-three" cx="10" cy="66" r="3.2" />
-                    <circle class="police-exhaust-puff puff-four" cx="10" cy="66" r="3.6" />
+                    <circle class="police-exhaust-puff puff-one" cx="7" cy="74" r="2.4" />
+                    <circle class="police-exhaust-puff puff-two" cx="7" cy="74" r="2.8" />
+                    <circle class="police-exhaust-puff puff-three" cx="7" cy="74" r="3.2" />
+                    <circle class="police-exhaust-puff puff-four" cx="7" cy="74" r="3.6" />
                   </g>
                   <!-- Deep outline and low chassis give the cruiser a cleaner silhouette. -->
-                  <path d="M10 70V58H12V53H16V50H23V47H31V42H37V33H42V27H73V29H78V33H82V39H86V43H103V44H111V47H116V52H120V60H122V67H119V73H112V77H14V74H11V72Z" fill="#101a2a" />
-                  <path d="M13 68V58H15V54H18V52H24V49H32V45H40V33H44V30H72V32H77V36H81V42H86V46H103V47H110V50H115V55H118V62H119V66H116V71H111V74H15V70H13Z" fill="#286aa8" />
+                  <path class="police-car-body-outline" d="M8 70V56H10V52H14V48H28V46H34V42H37V33H42V27H73V29H78V33H82V39H86V43H103V44H111V47H116V52H120V60H122V67H119V73H112V77H14V74H10V72H8Z" fill="#101a2a" stroke="#101a2a" stroke-width="1" stroke-linejoin="miter" />
+                  <path d="M10 68V56H12V54H16V50H28V48H34V45H40V33H44V30H72V32H77V36H81V42H86V46H103V47H110V50H115V55H118V62H119V66H116V71H111V74H16V72H12V70H10Z" fill="#286aa8" />
                   <!-- Hood, fender and roof highlights add a little depth without losing the pixel look. -->
-                  <path d="M15 62H19V55H25V51H33V46H41V34H45V32H71V34H76V38H80V44H86V47H103V48H109V51H114V56H117V61H107V58H95V54H82V51H59V52H39V57H28V61H21V66H15Z" fill="#3986bd" />
+                  <path d="M12 62H16V54H28V52H34V48H41V34H45V32H71V34H76V38H80V44H86V47H103V48H109V51H114V56H117V61H107V58H95V54H82V51H59V52H39V57H28V61H21V66H12Z" fill="#3986bd" />
                   <path d="M38 34H44V30H72V32H77V36H81V42H77V39H71V36H43V43H38Z" fill="#78b8d4" />
                   <!-- Split cabin glass: rear window and front windshield are distinct. -->
                   <path d="M43 34H57V47H39V43H41V37H43Z" fill="#a9dced" />
@@ -831,17 +861,22 @@
                   <path d="M54 57H57V59H59V61H57V63H54V61H52V59H54Z" fill="#365a76" />
                   <text x="70" y="62" fill="#193b5d" font-family="monospace" font-size="4.4" font-weight="900" letter-spacing=".1">POLICE</text>
                   <!-- Lights and bumpers make the front and rear readable at small sizes. -->
-                  <!-- Rear hatch and tail lamp; the short squared tail balances the nose. -->
-                  <path d="M12 52H16V59H12Z" fill="#d94645" />
-                  <path d="M13 53H15V55H13Z" fill="#ffaaa0" />
-                  <path d="M17 48V67" stroke="#183e61" stroke-width="1.2" />
+                  <!-- Square rear quarter with an inset lamp and a continuous dark border. -->
+                  <path d="M10 54H16V64H10Z" fill="#101a2a" />
+                  <path d="M11 55H15V63H11Z" fill="#d94645" />
+                  <path d="M12 56H14V58H12Z" fill="#ffaaa0" />
+                  <path d="M18 50V66" stroke="#183e61" stroke-width="1" />
                   <!-- Level hood line, with the nose dropping only at the grille. -->
                   <path d="M103 44H111V47H116V52H120V60H118V64H115V58H112V53H107V48H103Z" fill="#1c5686" />
                   <path d="M115 53H119V58H115Z" fill="#fff0b1" />
                   <path d="M116 54H118V55H116Z" fill="#fffbe3" />
                   <path d="M119 59H122V66H117V64H120V62H118Z" fill="#152c40" />
-                  <path d="M8 67H14V71H9Z M117 66H122V70H117Z" fill="#26394a" />
-                  <path d="M10 69H14M118 68H121" stroke="#8194a1" stroke-width="1" />
+                  <path d="M6 66H16V72H6Z" fill="#101a2a" />
+                  <path d="M8 68H16V70H8Z" fill="#8194a1" />
+                  <path d="M6 72H12V76H6Z" fill="#101a2a" />
+                  <path d="M6 73H10V75H6Z" fill="#536878" />
+                  <path d="M117 66H122V70H117Z" fill="#26394a" />
+                  <path d="M118 68H121" stroke="#8194a1" stroke-width="1" />
                   <!-- Two-tone rooftop light bar. -->
                   <path d="M48 25H74V33H48Z" fill="#101a2a" />
                   <path d="M50 26H59V31H50Z" class="police-light-red" fill="#ff4c4c" />
@@ -849,8 +884,8 @@
                   <path d="M48 31H74V34H48Z" fill="#d5e3e9" />
                   <path d="M50 32H72" stroke="#fff" stroke-width=".8" opacity=".75" />
                   <!-- Chunkier tires with bright hubs read clearly as wheels in motion. -->
-                  <path d="M18 72V66H21V62H25V60H35V62H39V66H42V75H39V81H35V84H25V82H21V78H18Z" fill="#10151c" />
-                  <path d="M82 72V66H85V62H89V60H99V62H103V66H106V75H103V81H99V84H89V82H85V78H82Z" fill="#10151c" />
+                  <path d="M18 72V66H21V62H25V60H35V62H39V66H42V75H39V81H35V84H25V82H21V78H18Z" fill="#101a2a" />
+                  <path d="M82 72V66H85V62H89V60H99V62H103V66H106V75H103V81H99V84H89V82H85V78H82Z" fill="#101a2a" />
                   <g class="police-wheel-spin" style="transform-origin: 30px 72px">
                     <circle cx="30" cy="72" r="7" fill="#c4d0d9" />
                     <circle cx="30" cy="72" r="5" fill="#73899a" />
@@ -872,8 +907,22 @@
           <span class="status-branch">⌥&nbsp; main</span>
           <span>●&nbsp; <span id="editorProjectName">CASE STUDY // #01</span></span>
           <span class="status-spacer"></span>
+          <div class="editor-music-player" id="editorMusicPlayer" hidden>
+            <button class="music-control" id="musicPrevious" type="button" aria-label="Previous track" title="Previous track">‹</button>
+            <button class="music-control music-play" id="musicPlayPause" type="button" aria-label="Play Blue Skies" aria-pressed="false" title="Play">▶</button>
+            <button class="music-control" id="musicNext" type="button" aria-label="Next track" title="Next track">›</button>
+            <span class="music-track-copy" title="Blue Skies — HoliznaCC0">
+              <strong id="musicTrackTitle">Blue Skies</strong>
+              <small>HoliznaCC0 · CC0</small>
+            </span>
+            <input class="music-progress" id="musicProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Track progress">
+            <span class="music-time" id="musicTime">0:00</span>
+            <button class="music-control music-volume-button" id="musicMute" type="button" aria-label="Mute music" aria-pressed="false" title="Mute">◖</button>
+            <input class="music-volume" id="musicVolume" type="range" min="0" max="1" value="0.38" step="0.01" aria-label="Music volume">
+          </div>
           <span>Ln 1, Col 1</span><span>Spaces: 2</span><span>UTF-8</span><span>HTML</span>
         </div>
+        <audio id="editorMusicAudio" preload="none"></audio>
       </div>
 
     </div>

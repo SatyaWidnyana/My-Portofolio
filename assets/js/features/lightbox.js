@@ -27,7 +27,10 @@ window.SatyaPortfolio.features['lightbox'] = function () {
         }))
       },
       description: 'A website for Ketut Gajah Bali Adventure, a local tour and transport business founded by Ketut Widiana Yasa. Visitors can explore private tours, transport services, Mount Batur sunrise trekking, snorkeling, and diving, then send their activity, travel date, group size, and pickup location through a WhatsApp booking form.',
-      summary: 'Explore Bali tours and transport, then send trip details through a simple WhatsApp booking flow.',
+      summary: 'Explore Bali tours, outdoor activities, and private transport in one place, then send trip details through a simple WhatsApp booking flow. The experience helps travelers connect with a local guide quickly and easily.',
+      overviewLayout: 'journey',
+      featuresOverline: 'TRIP FLOW // 05 STOPS',
+      featuresTitle: 'How the booking journey works',
       features: [
         'Private tours, transport, and outdoor activities',
         'WhatsApp booking form with pickup and travel details',
@@ -43,11 +46,11 @@ window.SatyaPortfolio.features['lightbox'] = function () {
         { icon: 'pin', title: 'Contact & Location', text: 'Find contact channels, the location map, and a link to Google reviews.' }
       ],
       overviewFeatures: [
-        { icon: 'compass', title: 'Island experiences', text: 'Private tours across Bali’s coast and highlands.' },
-        { icon: 'route', title: 'Private transport', text: 'Flexible transfers with convenient pickup.' },
-        { icon: 'sun', title: 'Sunrise & ocean', text: 'From Mount Batur to snorkeling and diving.' },
-        { icon: 'chat', title: 'Simple booking', text: 'Share dates, group size, and trip details.' },
-        { icon: 'profile', title: 'Local guidance', text: 'Plan your trip with a Bali-based team.' }
+        { icon: 'compass', label: 'ISLAND', title: 'Discover Bali', text: 'Browse private tours, transport, and outdoor experiences.' },
+        { icon: 'sun', label: 'EXPERIENCE', title: 'Choose your trip', text: 'Pick Mount Batur, ocean activities, or a custom day out.' },
+        { icon: 'pin', label: 'DETAILS', title: 'Set the plan', text: 'Add your date, group size, and pickup location.' },
+        { icon: 'chat', label: 'WHATSAPP', title: 'Send the enquiry', text: 'Review the details and send them directly to the local team.' },
+        { icon: 'profile', label: 'BALI TEAM', title: 'Meet your guide', text: 'Continue planning with someone who knows the island.' }
       ],
       tech: ['HTML5', 'CSS3', 'Vanilla JavaScript', 'Cloud Firestore', 'Firebase Authentication'],
       stackGroups: [
@@ -73,7 +76,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
           description: 'Supporting services and libraries used by the website.',
           items: [
             { name: 'WhatsApp', logo: 'Integrations/whatsapp.svg', description: 'Booking enquiries open a pre-filled message through a wa.me link.' },
-            { name: 'Google Maps', logo: 'Integrations/google-maps.svg', description: 'An embedded location map; no custom Maps API implementation.' },
+            { name: 'Google Maps', logo: 'Integrations/google-maps.svg', description: 'Displays an embedded location map. It does not use a custom Maps API integration.' },
             { name: 'Google Fonts', logo: 'Integrations/google-fonts.png', description: 'Web fonts loaded from the Google Fonts stylesheet service.' },
             { name: 'Font Awesome', logo: 'Integrations/font-awesome.svg', description: 'Interface icons from Font Awesome 6.4.0.' }
           ]
@@ -82,7 +85,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
       specTitles: ['Frontend', 'Backend & Admin', 'Integrations & Booking', 'Performance & SEO'],
       specLogos: ['FE/javascript.svg', 'BE/firebase.svg', 'Integrations/whatsapp.svg', null],
       specs: [
-        'HTML5, custom responsive CSS, and native JavaScript modules. Scroll reveals use IntersectionObserver; the activity marquee uses requestAnimationFrame.',
+        'HTML5, custom responsive CSS, and native JavaScript modules. Scroll reveals use IntersectionObserver. The activity marquee uses requestAnimationFrame.',
         'Firebase Authentication handles admin login. Firestore supports adding, editing, and deleting services, plus adding and deleting promo and Moments entries. Photos are compressed in the browser and saved as Base64 in Firestore.',
         'The booking form prepares a WhatsApp message with travel details. The site also embeds Google Maps and loads Google Fonts and Font Awesome icons.',
         'Hero image preload, lazy-loaded images, and localStorage content caching are implemented. SEO includes a canonical URL, Open Graph tags, sitemap, and TravelAgency structured data. No Lighthouse score is claimed.'
@@ -176,14 +179,122 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     }
   };
 
+  function renderTechStack(data) {
+    const layers = document.getElementById('lbTechChips');
+    if (!layers) return;
+    const element = (tag, className, text) => {
+      const node = document.createElement(tag);
+      node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    };
+    const logo = technology => {
+      if (!technology.logo) {
+        const monogram = element('span', 'stack-monogram', technology.name.replace(/[^a-z0-9]/gi, '').slice(0, 2).toUpperCase());
+        monogram.setAttribute('aria-hidden', 'true');
+        return monogram;
+      }
+      const image = element('img', 'stack-logo');
+      image.src = `image portofolio/BALI ADVENTURE/Stack/${technology.logo}`;
+      image.alt = '';
+      image.width = 28;
+      image.height = 28;
+      image.decoding = 'async';
+      return image;
+    };
+    const groups = data.stackGroups || [{
+      title: 'Project stack',
+      description: data.summary || data.category,
+      items: data.tech.map(name => ({ name, description: 'Listed as part of this project’s technology stack.' }))
+    }];
+    const components = [];
+    layers.replaceChildren();
+    groups.forEach(group => {
+      const section = element('section', 'stack-layer');
+      const heading = element('div', 'stack-layer-heading');
+      heading.append(element('h4', '', group.title));
+      const list = element('ul', 'stack-component-list');
+      list.classList.toggle('has-two-components', group.items.length === 2);
+      group.items.forEach(technology => {
+        const item = element('li', 'stack-component');
+        const button = element('button', 'stack-component-button');
+        button.type = 'button';
+        button.setAttribute('aria-pressed', 'false');
+        button.append(logo(technology), element('span', 'stack-component-name', technology.name));
+        const marker = element('span', 'stack-component-marker', '↓');
+        marker.setAttribute('aria-hidden', 'true');
+        button.append(marker);
+        item.append(button);
+        list.append(item);
+        components.push({ technology, group, item, button });
+      });
+      section.append(heading, list);
+      layers.append(section);
+    });
+
+    document.getElementById('stackProjectCaption').textContent = data.title;
+    const previous = document.getElementById('stackPrevious');
+    const next = document.getElementById('stackNext');
+    let selectedIndex = -1;
+    let inspectorMotion = null;
+    const select = index => {
+      const selected = components[index];
+      if (!selected) return;
+      const animateChange = selectedIndex >= 0 && selectedIndex !== index;
+      selectedIndex = index;
+      components.forEach((component, componentIndex) => {
+        const active = componentIndex === index;
+        component.item.classList.toggle('is-selected', active);
+        component.button.setAttribute('aria-pressed', String(active));
+      });
+      document.getElementById('stackSelectedGroup').textContent = selected.group.title;
+      document.getElementById('stackSelectedLogo').replaceChildren(logo(selected.technology));
+      document.getElementById('stackSelectedName').textContent = selected.technology.name;
+      document.getElementById('stackSelectedDescription').textContent = selected.technology.description;
+      document.getElementById('stackSelectedContext').textContent = selected.group.description;
+      inspectorMotion?.cancel();
+      if (animateChange && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        inspectorMotion = document.querySelector('.stack-inspector-copy').animate([
+          { opacity: .25, transform: 'translateY(5px)' },
+          { opacity: 1, transform: 'translateY(0)' }
+        ], { duration: 200, easing: 'ease-out' });
+      }
+      previous.disabled = index === 0;
+      next.disabled = index === components.length - 1;
+    };
+    components.forEach((component, index) => {
+      component.button.addEventListener('click', () => select(index));
+      component.button.addEventListener('keydown', event => {
+        const movement = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[event.key];
+        if (!movement) return;
+        event.preventDefault();
+        const target = (index + movement + components.length) % components.length;
+        select(target);
+        components[target].button.focus();
+      });
+    });
+    previous.onclick = () => select(selectedIndex - 1);
+    next.onclick = () => select(selectedIndex + 1);
+    select(0);
+  }
+
   const dossierModal = document.getElementById('dossierModal');
+  const dossierModalContainer = document.getElementById('dossierModalContainer');
   const dossierCloseBtn = document.getElementById('dossierCloseBtn');
   const dossierCloseSecondary = document.getElementById('dossierCloseSecondary');
   let activeProjectData = null;
   let catExtensionEnabled = false;
+  let musicExtensionEnabled = false;
+  let currentMusicTrackIndex = 0;
   let catRoutineTimeout = null;
   let catCycleToken = 0;
   let catMotion = null;
+  let journeyObserver = null;
+  const musicTracks = [
+    { title: 'Blue Skies', src: 'assets/audio/holizna/blue-skies.mp3' },
+    { title: 'Windows Down', src: 'assets/audio/holizna/windows-down.mp3' },
+    { title: 'Waves', src: 'assets/audio/holizna/waves.mp3' }
+  ];
 
   // Lucide icon geometry is embedded inline so the overview does not fetch an icon font or runtime.
   const featureIcons = {
@@ -314,103 +425,118 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     if (lbLiveBtn) lbLiveBtn.href = data.liveUrl || '#';
     if (lbMockupUrl) lbMockupUrl.textContent = data.url;
 
-    const specCopy = data.specs || [
-      'See the listed technology stack for this project.',
-      'Project layout and visual styling.',
-      'Performance scores have not been independently measured.',
-      'See the project overview for its available features.'
-    ];
-    document.querySelectorAll('#lbTabSpecs .lb-spec-card').forEach((card, index) => {
-      card.querySelector('p').textContent = specCopy[index];
-      const title = card.querySelector('h4');
-      if (!title.dataset.defaultTitle) title.dataset.defaultTitle = title.textContent;
-      title.textContent = data.specTitles?.[index] || title.dataset.defaultTitle;
-      const icon = card.querySelector('.spec-icon');
-      icon.replaceChildren();
-      if (data.specLogos?.[index]) {
-        const image = document.createElement('img');
-        image.src = `image portofolio/BALI ADVENTURE/Stack/${data.specLogos[index]}`;
-        image.alt = '';
-        image.width = 32;
-        image.height = 32;
-        icon.appendChild(image);
-      } else {
-        icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M7.5 11.5l2-2 2 2 2-3"/></svg>';
-      }
-    });
+    renderTechStack(data);
 
     const lbFeaturesGrid = document.getElementById('lbFeaturesGrid');
     if (lbFeaturesGrid) {
+      const lbFeaturesOverline = document.getElementById('lbFeaturesOverline');
+      const lbFeaturesTitle = document.getElementById('lbFeaturesTitle');
+      const lbFeaturesHint = document.getElementById('lbFeaturesHint');
+      const usesJourneyLayout = data.overviewLayout === 'journey';
       const features = data.overviewFeatures || data.featureDetails || data.features.map(text => ({
         icon: featureIconFor(text), title: text
       }));
+      if (lbFeaturesOverline) lbFeaturesOverline.textContent = data.featuresOverline || 'SELECTED DETAILS';
+      if (lbFeaturesTitle) lbFeaturesTitle.textContent = data.featuresTitle || 'Project highlights';
+      if (lbFeaturesHint) lbFeaturesHint.hidden = !usesJourneyLayout;
       lbFeaturesGrid.classList.toggle('has-five-features', features.length === 5);
-      lbFeaturesGrid.replaceChildren(...features.map(feature => {
+      lbFeaturesGrid.classList.toggle('is-journey', usesJourneyLayout);
+      lbFeaturesGrid.classList.remove('is-visible');
+      const featureCards = features.map((feature, index) => {
         const card = document.createElement('div');
         card.className = 'lb-feature-card';
+        card.style.setProperty('--feature-delay', `${170 + index * 90}ms`);
+        if (usesJourneyLayout) {
+          card.tabIndex = 0;
+          card.setAttribute('role', 'button');
+          card.setAttribute('aria-expanded', 'false');
+          card.setAttribute('aria-label', `${feature.title}. Select to reveal details.`);
+        }
         const icon = document.createElement('div');
         icon.className = 'lb-feature-icon';
         icon.setAttribute('aria-hidden', 'true');
         icon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${featureIcons[feature.icon] || featureIcons.layout}</svg>`;
         const copy = document.createElement('div');
         copy.className = 'lb-feature-copy';
+        if (feature.label) {
+          const label = document.createElement('span');
+          label.className = 'lb-feature-location';
+          label.textContent = feature.label;
+          copy.appendChild(label);
+        }
         const title = document.createElement('h4');
         title.textContent = feature.title;
         copy.appendChild(title);
         if (feature.text) {
           const description = document.createElement('p');
+          if (usesJourneyLayout) {
+            description.id = `lbJourneyDetail${index + 1}`;
+            description.setAttribute('aria-hidden', 'true');
+            card.setAttribute('aria-controls', description.id);
+          }
           description.textContent = feature.text;
           copy.appendChild(description);
         }
         card.append(icon, copy);
         return card;
-      }));
-    }
-
-    const lbTechChips = document.getElementById('lbTechChips');
-    if (lbTechChips) {
-      lbTechChips.replaceChildren();
-      lbTechChips.classList.toggle('has-stack-groups', Boolean(data.stackGroups));
-      if (data.stackGroups) {
-        data.stackGroups.forEach(group => {
-          const section = document.createElement('section');
-          section.className = 'lb-stack-group';
-          const heading = document.createElement('h4');
-          heading.className = 'lb-stack-heading';
-          heading.textContent = group.title;
-          const introduction = document.createElement('p');
-          introduction.className = 'lb-stack-intro';
-          introduction.textContent = group.description;
-          const list = document.createElement('ul');
-          list.className = 'lb-stack-list';
-          group.items.forEach(technology => {
-            const item = document.createElement('li');
-            item.className = 'lb-stack-item';
-            const image = document.createElement('img');
-            image.className = 'lb-stack-logo';
-            image.src = `image portofolio/BALI ADVENTURE/Stack/${technology.logo}`;
-            image.alt = '';
-            image.width = 36;
-            image.height = 36;
-            image.decoding = 'async';
-            const copy = document.createElement('div');
-            const name = document.createElement('h5');
-            name.textContent = technology.name;
-            const description = document.createElement('p');
-            description.textContent = technology.description;
-            copy.append(name, description);
-            item.append(image, copy);
-            list.appendChild(item);
+      });
+      lbFeaturesGrid.replaceChildren(...featureCards);
+      if (lbFeaturesGrid.classList.contains('is-journey')) {
+        const setActiveJourneyStop = selectedCard => {
+          featureCards.forEach(card => {
+            const isActive = card === selectedCard;
+            const title = card.querySelector('h4')?.textContent || 'Journey stop';
+            card.classList.toggle('is-active', isActive);
+            card.setAttribute('aria-expanded', String(isActive));
+            card.setAttribute('aria-label', `${title}. Select to ${isActive ? 'hide' : 'reveal'} details.`);
+            card.querySelector('p')?.setAttribute('aria-hidden', String(!isActive));
           });
-          section.append(heading, introduction, list);
-          lbTechChips.appendChild(section);
+        };
+        featureCards.forEach(card => {
+          const toggleStop = () => setActiveJourneyStop(card.classList.contains('is-active') ? null : card);
+          card.addEventListener('click', toggleStop);
+          card.addEventListener('keydown', event => {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            toggleStop();
+          });
         });
-      } else {
-        data.tech.forEach(technology => {
-          const label = document.createElement('span');
-          label.textContent = technology;
-          lbTechChips.appendChild(label);
-        });
+
+        const mapArt = document.createElement('div');
+        mapArt.className = 'lb-journey-map-art';
+        mapArt.setAttribute('aria-hidden', 'true');
+
+        const route = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        route.classList.add('lb-journey-route');
+        route.setAttribute('viewBox', '0 0 1000 380');
+        route.setAttribute('preserveAspectRatio', 'none');
+        route.setAttribute('aria-hidden', 'true');
+        route.innerHTML = `
+          <defs>
+            <filter id="journeyRouteGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+          </defs>
+          <path class="lb-journey-route-shadow" pathLength="1" d="M100 58 C170 58 190 207 300 207 S390 58 500 58 S590 207 700 207 S800 58 900 58" />
+          <path class="lb-journey-route-line" pathLength="1" d="M100 58 C170 58 190 207 300 207 S390 58 500 58 S590 207 700 207 S800 58 900 58" />
+          <path class="lb-journey-route-arrow" d="m895 50 16 8-16 8 4-8-4-8Z" />`;
+        lbFeaturesGrid.append(mapArt, route);
+      }
+      journeyObserver?.disconnect();
+      journeyObserver = null;
+      if (lbFeaturesGrid.classList.contains('is-journey')) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          lbFeaturesGrid.classList.add('is-visible');
+        } else {
+          journeyObserver = new IntersectionObserver(entries => {
+            if (!entries.some(entry => entry.isIntersecting)) return;
+            lbFeaturesGrid.classList.add('is-visible');
+            journeyObserver?.disconnect();
+            journeyObserver = null;
+          }, { threshold: 0.22 });
+          journeyObserver.observe(lbFeaturesGrid);
+        }
       }
     }
 
@@ -419,9 +545,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     document.querySelectorAll('[data-close-tab]').forEach(button => { button.hidden = false; });
     activateLightboxTab('overview');
     if (editorWorkspace && editorExplorer) {
-      editorWorkspace.classList.remove('is-sidebar-collapsed');
-      editorWorkspace.classList.add('is-sidebar-open');
-      editorExplorer.hidden = false;
+      setEditorSidebarOpen(true);
       document.querySelectorAll('[data-editor-panel]').forEach(button => {
         const active = button.getAttribute('data-editor-panel') === 'explorer';
         button.classList.toggle('active', active);
@@ -462,6 +586,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     dossierModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     stopCatCompanion();
+    releaseMusicAudio();
   }
 
   // Workbench file tabs and Explorer entries share one navigation state.
@@ -493,6 +618,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     Object.entries(panes).forEach(([name, pane]) => {
       if (pane) pane.style.display = name === target ? 'block' : 'none';
     });
+    document.querySelector('.lightbox-content-area')?.classList.toggle('is-tech-stack-open', target === 'specs');
 
     const emptyState = document.getElementById('editorEmptyState');
     if (emptyState) emptyState.hidden = true;
@@ -526,6 +652,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
       if (button.hasAttribute('aria-selected')) button.setAttribute('aria-selected', 'false');
     });
     document.querySelectorAll('.lb-tab-pane').forEach(pane => { pane.style.display = 'none'; });
+    document.querySelector('.lightbox-content-area')?.classList.remove('is-tech-stack-open');
     const emptyState = document.getElementById('editorEmptyState');
     if (emptyState) emptyState.hidden = false;
     const fileName = document.getElementById('editorProjectSlug');
@@ -560,11 +687,21 @@ window.SatyaPortfolio.features['lightbox'] = function () {
 
   const editorWorkspace = document.querySelector('.editor-workspace');
   const editorExplorer = document.getElementById('editorExplorer');
+  function setEditorSidebarOpen(isOpen) {
+    if (!editorWorkspace || !editorExplorer) return;
+    // Keep the panel rendered so CSS can animate both opening and closing.
+    editorExplorer.hidden = false;
+    editorExplorer.inert = !isOpen;
+    editorExplorer.setAttribute('aria-hidden', String(!isOpen));
+    editorWorkspace.classList.toggle('is-sidebar-collapsed', !isOpen);
+    editorWorkspace.classList.toggle('is-sidebar-open', isOpen);
+  }
+
   document.querySelectorAll('[data-editor-panel]').forEach(button => {
     button.addEventListener('click', () => {
       const panel = button.getAttribute('data-editor-panel');
       const wasActive = button.classList.contains('active');
-      const sidebarIsVisible = editorExplorer && !editorExplorer.hidden;
+      const sidebarIsVisible = editorWorkspace?.classList.contains('is-sidebar-open');
       const shouldClose = wasActive && sidebarIsVisible;
 
       document.querySelectorAll('[data-editor-panel]').forEach(item => {
@@ -572,15 +709,26 @@ window.SatyaPortfolio.features['lightbox'] = function () {
         item.setAttribute('aria-pressed', String(!shouldClose && item === button));
       });
       if (!editorWorkspace || !editorExplorer) return;
-      editorWorkspace.classList.toggle('is-sidebar-collapsed', shouldClose);
-      editorWorkspace.classList.toggle('is-sidebar-open', !shouldClose);
-      editorExplorer.hidden = shouldClose;
+      setEditorSidebarOpen(!shouldClose);
       if (!shouldClose) {
         document.querySelectorAll('[data-editor-view]').forEach(view => {
           view.hidden = view.getAttribute('data-editor-view') !== panel;
         });
         if (panel === 'search') document.getElementById('editorSearchInput')?.focus();
       }
+    });
+  });
+
+  document.querySelectorAll('[data-editor-hide]').forEach(button => {
+    button.addEventListener('click', () => {
+      if (!editorWorkspace || !editorExplorer) return;
+      const panel = button.closest('[data-editor-view]')?.getAttribute('data-editor-view') || 'explorer';
+      setEditorSidebarOpen(false);
+      document.querySelectorAll('[data-editor-panel]').forEach(item => {
+        item.classList.remove('active');
+        item.setAttribute('aria-pressed', 'false');
+      });
+      document.querySelector(`[data-editor-panel="${panel}"]`)?.focus();
     });
   });
 
@@ -623,6 +771,139 @@ window.SatyaPortfolio.features['lightbox'] = function () {
       card.hidden = !card.textContent.toLowerCase().includes(term);
     });
   });
+
+  const musicExtensionToggle = document.getElementById('musicExtensionToggle');
+  const musicPlayer = document.getElementById('editorMusicPlayer');
+  const musicAudio = document.getElementById('editorMusicAudio');
+  const musicPrevious = document.getElementById('musicPrevious');
+  const musicPlayPause = document.getElementById('musicPlayPause');
+  const musicNext = document.getElementById('musicNext');
+  const musicTrackTitle = document.getElementById('musicTrackTitle');
+  const musicTrackCopy = musicPlayer?.querySelector('.music-track-copy');
+  const musicProgress = document.getElementById('musicProgress');
+  const musicTime = document.getElementById('musicTime');
+  const musicMute = document.getElementById('musicMute');
+  const musicVolume = document.getElementById('musicVolume');
+
+  function formatMusicTime(seconds) {
+    if (!Number.isFinite(seconds)) return '0:00';
+    const minutes = Math.floor(seconds / 60);
+    return `${minutes}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+  }
+
+  function updateMusicPlayState(isPlaying) {
+    if (!musicPlayPause) return;
+    const track = musicTracks[currentMusicTrackIndex];
+    musicPlayPause.textContent = isPlaying ? 'Ⅱ' : '▶';
+    musicPlayPause.setAttribute('aria-pressed', String(isPlaying));
+    musicPlayPause.setAttribute('aria-label', `${isPlaying ? 'Pause' : 'Play'} ${track.title}`);
+    musicPlayPause.title = isPlaying ? 'Pause' : 'Play';
+  }
+
+  function updateMusicTrackDisplay() {
+    const track = musicTracks[currentMusicTrackIndex];
+    if (musicTrackTitle) musicTrackTitle.textContent = track.title;
+    if (musicTrackCopy) musicTrackCopy.title = `${track.title} — HoliznaCC0`;
+    if (musicProgress) {
+      musicProgress.max = '100';
+      musicProgress.value = '0';
+    }
+    if (musicTime) musicTime.textContent = '0:00';
+    updateMusicPlayState(false);
+  }
+
+  async function loadAndPlayMusic() {
+    if (!musicAudio) return;
+    const track = musicTracks[currentMusicTrackIndex];
+    if (musicAudio.dataset.trackIndex !== String(currentMusicTrackIndex)) {
+      musicAudio.src = track.src;
+      musicAudio.dataset.trackIndex = String(currentMusicTrackIndex);
+      musicAudio.load();
+    }
+    try {
+      await musicAudio.play();
+    } catch (error) {
+      updateMusicPlayState(false);
+    }
+  }
+
+  function pauseMusicPlayback() {
+    musicAudio?.pause();
+    updateMusicPlayState(false);
+  }
+
+  function releaseMusicAudio() {
+    pauseMusicPlayback();
+    if (!musicAudio) return;
+    musicAudio.removeAttribute('src');
+    musicAudio.removeAttribute('data-track-index');
+    musicAudio.load();
+  }
+
+  function selectMusicTrack(offset, forcePlay = false) {
+    if (!musicAudio) return;
+    const wasPlaying = forcePlay || (!musicAudio.paused && Boolean(musicAudio.getAttribute('src')));
+    releaseMusicAudio();
+    currentMusicTrackIndex = (currentMusicTrackIndex + offset + musicTracks.length) % musicTracks.length;
+    updateMusicTrackDisplay();
+    if (wasPlaying) loadAndPlayMusic();
+  }
+
+  musicExtensionToggle?.addEventListener('click', () => {
+    musicExtensionEnabled = !musicExtensionEnabled;
+    musicExtensionToggle.setAttribute('aria-pressed', String(musicExtensionEnabled));
+    musicExtensionToggle.textContent = musicExtensionEnabled ? 'Enabled' : 'Enable';
+    if (musicPlayer) musicPlayer.hidden = !musicExtensionEnabled;
+    dossierModalContainer?.classList.toggle('music-extension-enabled', musicExtensionEnabled);
+    if (musicExtensionEnabled) {
+      updateMusicTrackDisplay();
+      return;
+    }
+    releaseMusicAudio();
+  });
+
+  musicPlayPause?.addEventListener('click', () => {
+    if (!musicAudio) return;
+    if (musicAudio.paused) loadAndPlayMusic();
+    else pauseMusicPlayback();
+  });
+  musicPrevious?.addEventListener('click', () => selectMusicTrack(-1));
+  musicNext?.addEventListener('click', () => selectMusicTrack(1));
+  musicAudio?.addEventListener('play', () => updateMusicPlayState(true));
+  musicAudio?.addEventListener('pause', () => updateMusicPlayState(false));
+  musicAudio?.addEventListener('ended', () => selectMusicTrack(1, true));
+  musicAudio?.addEventListener('loadedmetadata', () => {
+    if (musicProgress) musicProgress.max = String(musicAudio.duration || 100);
+  });
+  musicAudio?.addEventListener('timeupdate', () => {
+    if (musicProgress && !musicProgress.matches(':active')) musicProgress.value = String(musicAudio.currentTime || 0);
+    if (musicTime) musicTime.textContent = formatMusicTime(musicAudio.currentTime);
+  });
+  musicProgress?.addEventListener('input', () => {
+    if (musicAudio && Number.isFinite(musicAudio.duration)) musicAudio.currentTime = Number(musicProgress.value);
+  });
+  musicVolume?.addEventListener('input', () => {
+    if (!musicAudio) return;
+    musicAudio.volume = Number(musicVolume.value);
+    musicAudio.muted = false;
+    if (musicMute) {
+      musicMute.textContent = '◖';
+      musicMute.setAttribute('aria-pressed', 'false');
+      musicMute.setAttribute('aria-label', 'Mute music');
+    }
+  });
+  musicMute?.addEventListener('click', () => {
+    if (!musicAudio) return;
+    musicAudio.muted = !musicAudio.muted;
+    musicMute.textContent = musicAudio.muted ? '×' : '◖';
+    musicMute.setAttribute('aria-pressed', String(musicAudio.muted));
+    musicMute.setAttribute('aria-label', musicAudio.muted ? 'Unmute music' : 'Mute music');
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && musicAudio && !musicAudio.paused) pauseMusicPlayback();
+  });
+  if (musicAudio && musicVolume) musicAudio.volume = Number(musicVolume.value);
+  updateMusicTrackDisplay();
 
   const catExtensionToggle = document.getElementById('catExtensionToggle');
   const editorCatTrack = document.getElementById('editorCatTrack');
