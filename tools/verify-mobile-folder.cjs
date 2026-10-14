@@ -177,4 +177,36 @@ for (const paper of ['folder-paper-1', 'folder-paper-2', 'folder-paper-3']) {
 }
 assert.match(mobile, /animation-duration: 0\.001s !important/);
 assert.match(mobile, /animation-delay: 0s !important/);
-console.log(`PASS: eight mobile widths, closed hover layer separation, ${samples} projected fold corners, sequential vertical folds, three photo destinations, 30px hinge gaps, scroll space, original timing, and reduced motion.`);
+const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+assert.equal([...html.matchAll(/class="folder-fold-shadow" aria-hidden="true"/g)].length, 3);
+assert.match(css.slice(0, css.indexOf(marker)), /\.folder-fold-shadow \{ display: none; \}/, 'Shadow layers must be absent from desktop layout');
+assert.match(block(mobile, '.portfolio-folder .folder-front,'), /box-shadow: none !important/, 'Moving panels must not repaint interpolated blur');
+assert.match(block(mobile, '.folder-fold-shadow::before {'), /box-shadow: var\(--shadow-3d-base\); opacity: 1/, 'Closed and upright shadows must preserve the original appearance');
+assert.match(block(mobile, '.folder-fold-shadow::after { box-shadow:'), /box-shadow: var\(--shadow-3d-invY\); opacity: 0/, 'Flipped shadows must preserve the original appearance');
+for (const [name, end] of [['mobile-shadow-leave', 0], ['mobile-shadow-first', 1], ['mobile-shadow-second', 1], ['mobile-shadow-third', 1]]) {
+  const body = block(mobile, `@keyframes ${name} {`);
+  assert(!/transform:|box-shadow:/.test(body), 'Shadow animations must change opacity only');
+  const frames = [...body.matchAll(/([\d%,\s]+)\{\s*opacity:\s*([\d.]+);\s*\}/g)]
+    .flatMap(match => match[1].split(',').map(percent => ({ time: parseFloat(percent) / 100, value: Number(match[2]) })))
+    .sort((a, b) => a.time - b.time);
+  assert.equal(frames[0].time, 0);
+  assert.equal(frames.at(-1).time, 1);
+  assert.equal(frames.at(-1).value, end, 'Finished shadows must be fully restored or hidden');
+  let previous = frames[0].value;
+  for (let sample = 1; sample <= 10000; sample++) {
+    const time = sample / 10000;
+    const a = frames.filter(frame => frame.time <= time).at(-1);
+    const b = frames.find(frame => frame.time >= time);
+    const fraction = a.time === b.time ? 1 : easing((time - a.time) / (b.time - a.time), 0.42, 0, 0.58, 1);
+    const opacity = a.value + (b.value - a.value) * fraction;
+    assert(opacity >= 0 && opacity <= 1);
+    assert(Math.abs(opacity - previous) < 0.002, 'Shadow intensity must not jump at fold milestones');
+    previous = opacity;
+  }
+}
+for (const name of ['mobile-hinge-first', 'mobile-hinge-second', 'mobile-hinge-third']) {
+  assert(mobile.includes(`${name} 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards`), 'Hinges must follow the panel easing and duration');
+  assert.match(block(mobile, `@keyframes ${name} {`), /opacity: 0/);
+  assert.match(block(mobile, `@keyframes ${name} {`), /opacity: 1/);
+}
+console.log(`PASS: eight mobile widths, closed hover layer separation, ${samples} projected fold corners, sequential vertical folds, photo destinations, hinge gaps, scroll space, original timing, continuous shadow fades, final shadow appearance, and reduced motion.`);

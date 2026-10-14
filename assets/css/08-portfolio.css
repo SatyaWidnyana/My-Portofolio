@@ -380,25 +380,25 @@
 .paper-text {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--w) * 0.002);
+  gap: clamp(3px, calc(var(--w) * 0.006), 5px);
 }
 
 .paper-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: calc(var(--w) * 0.027);
-  font-weight: 600;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(13px, calc(var(--w) * 0.034), 24px);
+  font-weight: 500;
   color: #1a1a1a;
   margin: 0;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
 .paper-category {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: calc(var(--w) * 0.0135);
-  font-weight: 500;
+  font-size: clamp(7px, calc(var(--w) * 0.014), 10px);
+  font-weight: 400;
   color: #666666;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -690,6 +690,8 @@
   .folder-3d, .folder-paper, .folder-front, .folder-back-left { transition: none; }
 }
 
+.folder-fold-shadow { display: none; }
+
 /* Mobile archive: the same folding sequence, arranged in one vertical column. */
 @media (max-width: 768px) {
   .projects {
@@ -708,12 +710,66 @@
   }
   .portfolio-folder.is-open .folder-3d { transform: translateY(0); }
 
+  /* Keep the blur fixed while folding. Fade shadow layers instead of repainting it. */
+  .portfolio-folder .folder-front,
+  .portfolio-folder .folder-back-right,
+  .portfolio-folder .folder-back-left { box-shadow: none !important; }
+  .folder-fold-shadow,
+  .folder-fold-shadow::before,
+  .folder-fold-shadow::after {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .folder-fold-shadow { display: block; }
+  .folder-fold-shadow::before,
+  .folder-fold-shadow::after {
+    content: '';
+    will-change: opacity;
+  }
+  .folder-fold-shadow::before { box-shadow: var(--shadow-3d-base); opacity: 1; }
+  .folder-fold-shadow::after { box-shadow: var(--shadow-3d-invY); opacity: 0; }
+  .portfolio-folder.is-open .folder-front .folder-fold-shadow::before {
+    animation: mobile-shadow-leave 3.5s ease-in-out forwards;
+  }
+  .portfolio-folder.is-open .folder-front .folder-fold-shadow::after {
+    animation: mobile-shadow-first 3.5s ease-in-out forwards;
+  }
+  .portfolio-folder.is-open .folder-back-right .folder-fold-shadow::before {
+    animation: mobile-shadow-second 3.5s ease-in-out forwards;
+  }
+  .portfolio-folder.is-open .folder-back-left .folder-fold-shadow::before {
+    animation: mobile-shadow-leave 3.5s ease-in-out forwards;
+  }
+  .portfolio-folder.is-open .folder-back-left .folder-fold-shadow::after {
+    animation: mobile-shadow-third 3.5s ease-in-out forwards;
+  }
+  @keyframes mobile-shadow-leave {
+    0%, 5% { opacity: 1; }
+    20%, 100% { opacity: 0; }
+  }
+  @keyframes mobile-shadow-first {
+    0%, 20% { opacity: 0; }
+    35%, 100% { opacity: 1; }
+  }
+  @keyframes mobile-shadow-second {
+    0%, 5% { opacity: 1; }
+    20%, 50% { opacity: 0; }
+    65%, 100% { opacity: 1; }
+  }
+  @keyframes mobile-shadow-third {
+    0%, 80% { opacity: 0; }
+    95%, 100% { opacity: 1; }
+  }
+
   .folder-back-right,
   .folder-back-left {
     top: auto;
     bottom: 0;
     height: 72%;
     transform-origin: 50% 100%;
+    transform-style: preserve-3d;
     transform: translateZ(22px) rotateX(-5deg);
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease, background-color 0.1s ease-out, box-shadow 0.1s ease-out;
   }
@@ -776,6 +832,15 @@
     transform: scaleY(0);
     box-shadow: inset 1px 0 3px rgba(0,0,0,0.15), inset -1px 0 3px rgba(0,0,0,0.15);
   }
+  .folder-front::before, .folder-front::after,
+  .folder-back-right::before, .folder-back-right::after,
+  .folder-back-left::before, .folder-back-left::after {
+    --mobile-hinge-depth: -0.5px;
+    /* These flaps end upside down, so local bottom is the upper attachment. */
+    background-image: linear-gradient(to top, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.12) 25%, rgba(0,0,0,0.03) 60%, rgba(0,0,0,0) 100%);
+    box-shadow: none;
+    will-change: transform, opacity;
+  }
   .folder-back-right::before, .folder-back-left::before { left: 25%; }
   .folder-back-right::after, .folder-back-left::after { left: auto; right: 25%; }
   /* This panel ends upright, so its connectors occupy the gap above it. */
@@ -783,22 +848,32 @@
     top: -30px;
     bottom: auto;
     transform-origin: bottom center;
+    --mobile-hinge-depth: 0.5px;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.12) 25%, rgba(0,0,0,0.03) 60%, rgba(0,0,0,0) 100%);
   }
   .portfolio-folder.is-open .folder-back-right::before,
   .portfolio-folder.is-open .folder-back-right::after {
-    animation: mobile-hinge-second 3.5s forwards !important;
+    animation: mobile-hinge-second 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
   }
   .portfolio-folder.is-open .folder-back-left::before,
   .portfolio-folder.is-open .folder-back-left::after {
-    animation: mobile-hinge-third 3.5s forwards !important;
+    animation: mobile-hinge-third 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  }
+  .portfolio-folder.is-open .folder-front::before,
+  .portfolio-folder.is-open .folder-front::after {
+    animation: mobile-hinge-first 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  }
+  @keyframes mobile-hinge-first {
+    0%, 5% { transform: translateZ(var(--mobile-hinge-depth)) scaleY(0); opacity: 0; }
+    35%, 100% { transform: translateZ(var(--mobile-hinge-depth)) scaleY(1); opacity: 1; }
   }
   @keyframes mobile-hinge-second {
-    0%, 35% { transform: scaleY(0); }
-    65%, 100% { transform: scaleY(1); }
+    0%, 35% { transform: translateZ(var(--mobile-hinge-depth)) scaleY(0); opacity: 0; }
+    65%, 100% { transform: translateZ(var(--mobile-hinge-depth)) scaleY(1); opacity: 1; }
   }
   @keyframes mobile-hinge-third {
-    0%, 65% { transform: scaleY(0); }
-    95%, 100% { transform: scaleY(1); }
+    0%, 65% { transform: translateZ(var(--mobile-hinge-depth)) scaleY(0); opacity: 0; }
+    95%, 100% { transform: translateZ(var(--mobile-hinge-depth)) scaleY(1); opacity: 1; }
   }
 
   .portfolio-folder.is-open .folder-paper-2 {
@@ -840,7 +915,9 @@
     .portfolio-folder.is-open .folder-back-right::before,
     .portfolio-folder.is-open .folder-back-right::after,
     .portfolio-folder.is-open .folder-back-left::before,
-    .portfolio-folder.is-open .folder-back-left::after {
+    .portfolio-folder.is-open .folder-back-left::after,
+    .portfolio-folder.is-open .folder-fold-shadow::before,
+    .portfolio-folder.is-open .folder-fold-shadow::after {
       animation-duration: 0.001s !important;
       animation-delay: 0s !important;
     }
