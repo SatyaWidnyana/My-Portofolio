@@ -18,8 +18,8 @@
   <link rel="stylesheet" href="assets/css/06-terminal-lanyard.css?v=183">
   <link rel="stylesheet" href="assets/css/07-marquee.css?v=183">
   <link rel="stylesheet" href="assets/css/08-portfolio.css?v=207">
-  <link rel="stylesheet" href="assets/css/09-sections.css?v=208">
-  <link rel="stylesheet" href="assets/css/10-responsive.css?v=188">
+  <link rel="stylesheet" href="assets/css/09-sections.css?v=209">
+  <link rel="stylesheet" href="assets/css/10-responsive.css?v=189">
   <link rel="stylesheet" href="assets/css/11-project-details.css?v=183">
   <link rel="stylesheet" href="assets/css/12-lightbox-cream.css?v=183">
   <link rel="stylesheet" href="assets/css/13-lightbox-editorial.css?v=188">
@@ -37,7 +37,8 @@
   <script src="assets/js/features/lightbox.js?v=134" defer></script>
   <script src="assets/js/features/cabinet-motion.js?v=6" defer></script>
   <script src="assets/js/features/studio-notes.js?v=11" defer></script>
-  <script src="assets/js/main.js?v=79" defer></script>
+  <script src="assets/js/features/contact-letter.js?v=1" defer></script>
+  <script src="assets/js/main.js?v=80" defer></script>
 </head>
 <body>
   <!-- Intro Animation Overlay -->
@@ -328,24 +329,32 @@
       </section>
 
       <!-- Contact Section -->
-      <section class="contact" id="contact">
-        <div class="contact-wrap">
-          <div class="contact-left">
-             <h2 class="contact-title">LET'S WORK<br><em>TOGETHER</em><span class="sparkle">✦</span></h2>
-             <p>I'm currently open for new projects and collaborations. Let's create something amazing that drives results.</p>
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="contact-postmark"><span>SATYA / CORRESPONDENCE</span><span>BALI, INDONESIA</span></div>
+        <div class="contact-layout">
+          <div class="contact-copy">
+            <p class="contact-eyebrow"><span aria-hidden="true"></span>OPEN FOR COLLABORATION</p>
+            <h2 id="contact-title">A good project<br>starts with<br><em>a hello.</em></h2>
+            <p class="contact-description">Have an idea in mind? Leave a little note. Let's turn it into something worth putting out there.</p>
+            <a class="contact-cta" href="mailto:hello@satyawidnyana.com">Start a conversation <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="contact-right">
-             <a href="mailto:hello@satyawidnyana.com" class="contact-link">
-               <span class="icon">✉</span> hello@satyawidnyana.com
-             </a>
-             <a href="#" class="contact-link">
-               <span class="icon">🌐</span> www.satyawidnyana.com
-             </a>
-             <a href="#" class="contact-link">
-               <span class="icon">📍</span> Jakarta, Indonesia
-             </a>
+          <div class="contact-correspondence">
+            <div class="contact-tray-caption"><span>INCOMING IDEAS</span><span aria-hidden="true">↓</span></div>
+            <div class="contact-letter-tray" data-open="false">
+              <div class="contact-tray-back" aria-hidden="true"></div>
+              <div class="contact-letter" id="contact-letter-note">
+                <div class="contact-letter-meta"><span>A NOTE TO SATYA</span><span aria-hidden="true">↗</span></div>
+                <h3>Let's make<br>something <em>good.</em></h3>
+                <p>A website, a fresh direction,<br>or the next idea on your mind.</p>
+                <span class="contact-letter-signature">Your next collaborator</span>
+              </div>
+              <div class="contact-tray-front" aria-hidden="true"><span class="contact-tray-name">SATYA'S STUDIO</span><span class="contact-tray-slot"></span><span class="contact-tray-number">OPEN TO YOUR NEXT IDEA</span></div>
+              <button class="contact-letter-toggle" type="button" aria-expanded="false" aria-controls="contact-letter-note" hidden><span class="contact-toggle-label">Open letter</span><span class="contact-toggle-arrow" aria-hidden="true">↑</span></button>
+            </div>
+            <div class="contact-tray-footnote"><span>GOOD IDEAS WELCOME.</span><span>NO STAMPS NEEDED.</span></div>
           </div>
         </div>
+        <div class="contact-signoff"><a href="mailto:hello@satyawidnyana.com">hello@satyawidnyana.com <span aria-hidden="true">↗</span></a><span>DESIGNED TO CONNECT.</span></div>
       </section>
       
       <footer class="footer">

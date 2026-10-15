@@ -16,7 +16,7 @@
 | Marquee | — | `07-marquee.css` |
 | Folder portfolio dan swipe | `features/portfolio.js` | `08-portfolio.css` |
 | About: Tool Cabinet / Blueprint / Studio Notes | `features/studio-notes.js`, `features/cabinet-motion.js` | `09-sections.css` |
-| Contact, footer | — | `09-sections.css` |
+| Contact: letter tray, footer | `features/contact-letter.js` | `09-sections.css` |
 | Breakpoint halaman | `features/terminal-layout.js` | `10-responsive.css` |
 | Data project dan modal | `features/lightbox.js` | `11-project-details.css` sampai `14-lightbox-base.css` |
 

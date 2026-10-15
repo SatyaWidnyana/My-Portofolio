@@ -10,4 +10,5 @@
   features['portfolio']();
   features['lightbox']();
   features['studio-notes']();
+  features['contact-letter']();
 })();
