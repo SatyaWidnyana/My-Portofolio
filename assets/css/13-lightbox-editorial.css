@@ -361,6 +361,12 @@
   color: var(--folder-red, #cd4438);
 }
 
+.lb-gallery-preview-note {
+  margin: 0 4px 14px;
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.5;
+}
+
 .lb-tab-pane {
   animation: fadeInPane 220ms ease both;
   contain: content;

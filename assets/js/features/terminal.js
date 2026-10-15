@@ -6,6 +6,8 @@ window.SatyaPortfolio.features['terminal'] = function () {
   const termLogs = document.getElementById('termLogs');
   const termFinalText = document.getElementById('termFinalText');
   const termSourceHtml = document.getElementById('termSourceHtml');
+  // Its pulsing shadow should stop even when only the hero's bottom is visible.
+  if (termV2) window.SatyaPortfolio.observeMotion(termV2, () => {});
 
   if (termRunBtn && termV2) {
     let isRunning = false;
@@ -46,7 +48,7 @@ window.SatyaPortfolio.features['terminal'] = function () {
         }, 500); 
         
         function startTypingBio() {
-          const htmlString = "As a <strong>Web Designer & Digital Creator</strong>, I design digital experiences that <em>inspire</em> and <em>connect</em>. I focus on crafting elegant, functional, and user-centered interfaces.";
+          const htmlString = "I'm <strong>20 years old</strong> and from <strong>Bali, Indonesia</strong>. As a <strong>Web Designer & Digital Creator</strong>, I design digital experiences that <em>inspire</em> and <em>connect</em>. I focus on crafting elegant, functional, and user centered interfaces.";
           let i = 0;
           let currentHTML = "";
           let isTag = false;
@@ -91,7 +93,7 @@ window.SatyaPortfolio.features['terminal'] = function () {
         if (!isRunning) isRunning = true; // prevent multiple clicks
         termDelBtn.style.display = 'none'; // sembunyikan tombol delete saat ditekan
         
-        const rawText = "As a Web Designer & Digital Creator, I design digital experiences that inspire and connect. I focus on crafting elegant, functional, and user-centered interfaces.";
+        const rawText = "I'm 20 years old and from Bali, Indonesia. As a Web Designer & Digital Creator, I design digital experiences that inspire and connect. I focus on crafting elegant, functional, and user centered interfaces.";
         let i = rawText.length;
         
         termFinalText.innerHTML = '<p class="term-desc" style="margin-top: 15px;">' + rawText + '<span class="term-cursor"></span></p>';

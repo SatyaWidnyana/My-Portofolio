@@ -84,6 +84,20 @@ body:has(.main-wrapper[inert]) {
 }
 .main-wrapper:not([inert]) {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+
+/* Suspend offscreen hero effects; resume their current phase on return. */
+.hero[data-motion-paused="true"] *,
+.hero[data-motion-paused="true"] *::before,
+.hero[data-motion-paused="true"] *::after,
+.hero [data-motion-paused="true"],
+.hero [data-motion-paused="true"] *,
+.hero [data-motion-paused="true"]::before,
+.hero [data-motion-paused="true"]::after,
+.hero [data-motion-paused="true"] *::before,
+.hero [data-motion-paused="true"] *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
 }
 

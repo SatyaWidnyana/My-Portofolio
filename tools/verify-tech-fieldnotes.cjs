@@ -28,6 +28,7 @@ class Element {
   appendChild(node) { this.append(node); return node; }
   replaceChildren(...nodes) { this.text = ''; this.children = [...nodes]; }
   setAttribute(name, value) { this.attributes[name] = value; }
+  removeAttribute(name) { delete this.attributes[name]; }
   getAttribute(name) { return this.attributes[name]; }
   querySelector(selector) {
     return descendants(this).find(node => selector.startsWith('.') ? node.classList.contains(selector.slice(1)) : node.tagName === selector);
@@ -56,8 +57,20 @@ const context = {
   window: { matchMedia: () => ({ matches: reduceMotion }) }
 };
 const renderer = source.slice(source.indexOf('  const projectsData ='), source.indexOf('  const dossierModal ='));
-vm.runInNewContext(`${renderer}\nglobalThis.data = projectsData; globalThis.render = renderTechStack;`, context);
+vm.runInNewContext(`${renderer}\nglobalThis.data = projectsData; globalThis.render = renderTechStack; globalThis.updateLiveLink = updateLiveLink;`, context);
 const descendants = node => node.children.flatMap(child => [child, ...descendants(child)]);
+const liveLink = new Element('a');
+const liveLabel = new Element('span');
+liveLink.append(liveLabel);
+context.updateLiveLink(liveLink, context.data['wga-ocean'], 'Explore Live Website ↗');
+assert.equal(liveLabel.textContent, 'In Development');
+assert.equal(liveLink.getAttribute('href'), undefined);
+assert.equal(liveLink.getAttribute('aria-disabled'), 'true');
+context.updateLiveLink(liveLink, context.data['ketut-gajah-bali'], 'Explore Live Website ↗');
+assert.equal(liveLabel.textContent, 'Explore Live Website ↗', 'Switching project restores the live action');
+assert.equal(liveLink.href, context.data['ketut-gajah-bali'].liveUrl);
+assert.equal(liveLink.getAttribute('aria-disabled'), undefined);
+assert(!liveLink.classList.contains('project-in-development'));
 const geometry = source.slice(source.indexOf('  const featureIcons ='), source.indexOf('  function openDossier('));
 const journey = source.slice(source.indexOf('    const lbFeaturesGrid ='), source.indexOf('    // Every project opens'));
 vm.runInNewContext(`let journeyObserver = null; ${geometry}\nfunction renderJourney(data) { ${journey} }\nglobalThis.renderJourney = renderJourney; globalThis.renderPreview = renderDevicePreview;`, context);
@@ -137,7 +150,7 @@ for (const data of Object.values(context.data)) {
     previewContainers[mode].scrollTop = 120;
     context.renderPreview(data, mode);
     const images = previewContainers[mode].children;
-    const expectedCounts = { 'Ketut Gajah Bali': 8, 'WGA Dekorasi': 9, 'WGA Ocean': 1, 'Satya Portfolio': 1 };
+    const expectedCounts = { 'Ketut Gajah Bali': 8, 'WGA Dekorasi': 9, 'WGA Ocean': 1, 'My Portofolio': 1 };
     assert.equal(images.length, expectedCounts[data.title]);
     assert.equal(previewContainers[mode].scrollTop, 0);
     for (const [index, image] of images.entries()) {

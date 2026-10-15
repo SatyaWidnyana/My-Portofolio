@@ -31,6 +31,28 @@ window.SatyaPortfolio.features['portfolio'] = function () {
   }
 
   syncPaperAccess();
+  function openFolder() {
+    if (!folderBtn || folderBtn.classList.contains('is-open')) return;
+    const desktopMotion = window.matchMedia('(min-width: 769px)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const following = desktopMotion ? [...document.querySelectorAll('#about, .contact, .footer')] : [];
+    const before = following.map(element => element.getBoundingClientRect().top);
+    folderBtn.style.setProperty('--ry', '0deg');
+    folderBtn.style.setProperty('--rx', '0deg');
+    folderBtn.classList.add('is-open');
+    portfolioSection?.classList.add('is-open');
+    syncPaperAccess();
+    if (!desktopMotion) return;
+    folderBtn.classList.add('is-opening');
+    const offsets = following.map((element, index) => before[index] - element.getBoundingClientRect().top);
+    following.forEach((element, index) => {
+      if (Math.abs(offsets[index]) < .5 || !element.animate) return;
+      element.animate([
+        { transform: `translateY(${offsets[index]}px)` }, { transform: 'translateY(0)' }
+      ], { duration: 1200, easing: 'cubic-bezier(.4,0,.2,1)' });
+    });
+    window.setTimeout(() => folderBtn.classList.remove('is-opening'), 5100);
+  }
   if (folderBtn && window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     folderBtn.addEventListener('pointermove', (e) => {
@@ -78,13 +100,7 @@ window.SatyaPortfolio.features['portfolio'] = function () {
         isDragging = false;
         swipeThumb.classList.remove('swiping');
         
-        // Action to open portfolio goes here
-        console.log('Portfolio Opened!');
-        const folderBtn = document.getElementById('portfolio-folder');
-        if(folderBtn) folderBtn.classList.add('is-open');
-        syncPaperAccess();
-        const projectsSec = document.getElementById('projects');
-        if(projectsSec) projectsSec.classList.add('is-open');
+        openFolder();
         
         swipeThumb.style.transition = 'transform 0.3s ease';
         swipeThumb.style.transform = 'translateX(0px)';

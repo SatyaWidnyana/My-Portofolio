@@ -9,11 +9,21 @@ window.SatyaPortfolio.features['lanyard'] = function () {
     let vy = 0, va = 0;
     let animationFrame = null;
     let targetX = 0, targetY = 0;
+    let motionActive = false;
+    const strap = document.getElementById('lanyard-strap');
+    const body = document.getElementById('lanyard-body');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const needsSpring = () => isDragging || Math.abs(currentY) > 0.1 || Math.abs(angle) > 0.02 || Math.abs(vy) > 0.01 || Math.abs(va) > 0.01;
+    const scheduleSpring = () => {
+      if (motionActive && !animationFrame && needsSpring()) animationFrame = requestAnimationFrame(springLoop);
+    };
     
     // Set initial position out of view
     lanyard.style.transform = `translate(0px, -150vh) rotate(0deg)`;
 
     const springLoop = () => {
+      animationFrame = null;
+      if (!motionActive) return;
       if (isDragging) {
         // Menggunakan rumus pendulum murni (atan):
         // Kursor menjadi panduan sudut rotasi secara geometris, bukan sekadar nilai linear yang dibatasi.
@@ -73,8 +83,6 @@ window.SatyaPortfolio.features['lanyard'] = function () {
         cardOffset = 15 * (stretchY - 1); 
       }
       
-      const strap = document.getElementById('lanyard-strap');
-      const body = document.getElementById('lanyard-body');
       if (strap && body) {
         strap.style.transform = `scaleY(${stretchY})`;
         body.style.transform = `translateY(${cardOffset}%)`;
@@ -84,11 +92,13 @@ window.SatyaPortfolio.features['lanyard'] = function () {
       lanyard.style.transform = `translate(0px, ${currentY}px) rotate(${angle}deg) skewX(${bend}deg)`;
       
       // Terus berulang sampai benar-benar diam (threshold mikroskopis agar sisa ayunan benar-benar tuntas alami)
-      if (isDragging || Math.abs(currentY) > 0.1 || Math.abs(angle) > 0.02 || Math.abs(vy) > 0.01 || Math.abs(va) > 0.01) {
-        animationFrame = requestAnimationFrame(springLoop);
+      if (needsSpring()) {
+        scheduleSpring();
       } else {
         currentY = 0; angle = 0;
         lanyard.style.transform = `translate(0px, 0px) rotate(0deg) skewX(0deg)`;
+        if (strap) strap.style.transform = 'scaleY(1)';
+        if (body) body.style.transform = 'translateY(0%)';
         animationFrame = null;
       }
     };
@@ -111,9 +121,7 @@ window.SatyaPortfolio.features['lanyard'] = function () {
       lanyard.style.cursor = 'grabbing';
       
       // Pastikan loop berjalan
-      if (!animationFrame) {
-        animationFrame = requestAnimationFrame(springLoop);
-      }
+      if (!reduced.matches) scheduleSpring();
     };
 
     const doDrag = (e) => {
@@ -149,18 +157,34 @@ window.SatyaPortfolio.features['lanyard'] = function () {
     
     // Expose methods to trigger the initial drop or snap
     window.triggerLanyardDrop = () => {
+      if (reduced.matches) return window.snapLanyardToZero();
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      animationFrame = null;
       currentY = -800;
       vy = 0; va = 0;
       // Jatuh lurus tanpa goyang (angle = 0)
       angle = 0; 
-      springLoop();
+      scheduleSpring();
     };
     
     window.snapLanyardToZero = () => {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      animationFrame = null;
       currentY = 0; angle = 0;
       vy = 0; va = 0;
       lanyard.style.transform = `translate(0px, 0px) rotate(0deg)`;
+      if (strap) strap.style.transform = 'scaleY(1)';
+      if (body) body.style.transform = 'translateY(0%)';
     };
+    window.SatyaPortfolio.observeMotion(document.querySelector('.hero'), visible => {
+      motionActive = visible;
+      if (!visible) {
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+        animationFrame = null;
+        stopDrag();
+        if (reduced.matches) window.snapLanyardToZero();
+      } else scheduleSpring();
+    });
   }
 
 };

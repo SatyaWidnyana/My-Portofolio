@@ -9,4 +9,5 @@
   features['terminal-layout']();
   features['portfolio']();
   features['lightbox']();
+  features['studio-notes']();
 })();

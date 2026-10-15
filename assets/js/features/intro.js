@@ -97,8 +97,11 @@ window.SatyaPortfolio.features['intro'] = function () {
     const allChars = document.querySelectorAll('.glitch-char');
     if (allChars.length > 0) {
       let flowIndex = 0;
+      let mathTimer = null;
+      let mathActive = false;
       
       const animateMathFlow = () => {
+        if (!mathActive) return;
         const charEl = allChars[flowIndex];
         const randomWidth = (Math.random() * 50 + 20).toFixed(2);
         const randomHeight = (Math.random() * 80 + 40).toFixed(2);
@@ -107,7 +110,7 @@ window.SatyaPortfolio.features['intro'] = function () {
         charEl.classList.add('is-math-hover');
         
         // Ganti ke huruf selanjutnya setelah 400ms (pas mengalir, tidak terlalu cepat)
-        setTimeout(() => {
+        mathTimer = setTimeout(() => {
           // Seketika mengembalikan huruf ini ke aslinya
           charEl.classList.remove('is-math-hover');
           
@@ -119,12 +122,17 @@ window.SatyaPortfolio.features['intro'] = function () {
              nextDelay = 2000;
           }
           
-          setTimeout(animateMathFlow, nextDelay);
+          if (mathActive) mathTimer = setTimeout(animateMathFlow, nextDelay);
         }, 400);
       };
       
       // Mulai animasi mengalir 1 detik setelah teks selesai dimuat
-      setTimeout(animateMathFlow, 1000);
+      window.SatyaPortfolio.observeMotion(subtitle || document.querySelector('.hero'), visible => {
+        mathActive = visible;
+        clearTimeout(mathTimer);
+        allChars.forEach(char => char.classList.remove('is-math-hover'));
+        if (mathActive) mathTimer = setTimeout(animateMathFlow, 1000);
+      });
     }
 
     if (subtitle) subtitle.classList.add('glitch-ready');
@@ -138,6 +146,7 @@ window.SatyaPortfolio.features['intro'] = function () {
 
   async function playIntro() {
     if (reduced.matches) {
+      document.getElementById('transition-grid').hidden = true;
       overlay.style.display = 'none';
       wrapper.removeAttribute('inert');
       if (window.snapLanyardToZero) {
@@ -228,10 +237,12 @@ window.SatyaPortfolio.features['intro'] = function () {
 
     // Wait for the full 1.5s transition to finish before cleaning up
     await pause(1500 + (cols.length - 1) * 100);
+    document.getElementById('transition-grid').hidden = true;
   }
 
   // Handle skip if user clicks on overlay
   overlay.addEventListener('click', () => {
+    document.getElementById('transition-grid').hidden = true;
     overlay.style.display = 'none';
     wrapper.removeAttribute('inert');
     runScrambleAnimation();

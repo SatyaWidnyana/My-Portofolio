@@ -445,6 +445,16 @@
   font: 500 0.75rem/1.2 Inter, sans-serif;
 }
 
+#dossierModal .project-in-development {
+  background: #e9dfc6;
+  color: #6a5427;
+  border: 1px solid #c6b58c;
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+  transform: none;
+}
+
 .dossier-modal-container.mode-lightbox .lb-overline {
   color: #4fc1ff;
   font: 0.68rem/1.4 'Courier New', monospace;

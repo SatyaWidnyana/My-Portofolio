@@ -11,38 +11,41 @@ window.SatyaPortfolio.features['greetings'] = function () {
   ];
   let currentGreetingIndex = 0;
   
-  async function typeGreeting() {
-    const greetingEl = document.querySelector('.script-font');
-    if (!greetingEl) return;
-    
-    // Tunggu sebentar sebelum mulai ngetik pertama kali agar bareng dengan scramble
-    await new Promise(r => setTimeout(r, 1000));
-    
-    while (true) {
-      let currentWord = greetings[currentGreetingIndex];
-      
-      // Tulis maju (efek mengetik)
-      greetingEl.innerHTML = '<span class="greeting-cursor">|</span>';
-      for (let i = 0; i <= currentWord.length; i++) {
-        greetingEl.innerHTML = currentWord.substring(0, i) + '<span class="greeting-cursor">|</span>';
-        await new Promise(r => setTimeout(r, 70)); 
-      }
-      
-      // Tunggu 3 detik sebelum ganti bahasa
-      await new Promise(r => setTimeout(r, 3000));
-      
-      // Hapus teks mundur (efek backspace)
-      for (let i = currentWord.length; i >= 0; i--) {
-        greetingEl.innerHTML = currentWord.substring(0, i) + '<span class="greeting-cursor">|</span>';
-        await new Promise(r => setTimeout(r, 40)); 
-      }
-      
-      // Ganti indeks bahasa
+  const greetingEl = document.querySelector('.script-font');
+  if (!greetingEl) return;
+  const text = document.createTextNode('');
+  const cursor = document.createElement('span');
+  cursor.className = 'greeting-cursor';
+  cursor.textContent = '|';
+  greetingEl.replaceChildren(text, cursor);
+  let timer = null, active = false, position = 0, deleting = false;
+  function tick() {
+    timer = null;
+    if (!active) return;
+    const word = greetings[currentGreetingIndex];
+    text.textContent = word.slice(0, position);
+    let delay = deleting ? 40 : 70;
+    if (!deleting && position === word.length) {
+      deleting = true;
+      delay = 3000;
+    } else if (deleting && position === 0) {
+      deleting = false;
       currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+      delay = 70;
+    } else {
+      position += deleting ? -1 : 1;
     }
+    timer = setTimeout(tick, delay);
   }
-  
-  // Jalankan animasi ketik
-  typeGreeting();
+  window.SatyaPortfolio.observeMotion(greetingEl, visible => {
+    active = visible;
+    clearTimeout(timer);
+    timer = null;
+    if (active) timer = setTimeout(tick, 1000);
+    else if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) text.textContent = greetings[0];
+  });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    text.textContent = greetings[0];
+  }
   
 };

@@ -57,6 +57,18 @@
   0%, 100% { filter: invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.5)) brightness(1); }
   50% { filter: invert(1) drop-shadow(0 8px 12px rgba(0,0,0,0.7)) brightness(1.1); }
 }
+/* Keep the desktop logo static instead of running a permanent filter animation. */
+@media (min-width: 769px) {
+  .navbar { backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); }
+  .brand-logo { animation: none; }
+  [data-theme="dark"] .brand-logo { animation: none; filter: invert(1) drop-shadow(0 4px 6px rgba(0,0,0,.5)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-logo, [data-theme="dark"] .brand-logo { animation: none; }
+}
+@media (max-width: 768px) {
+  .navbar.cabinet-in-view .brand-logo { animation-play-state: paused; }
+}
 .nav-links { 
   display: flex; 
   gap: 5px; 

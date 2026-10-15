@@ -1,0 +1,177 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&display=swap');
+#about-concepts { --ac-ink: light-dark(#282721,#eeebe4); --ac-muted: light-dark(#747167,#b3aea2); --ac-paper: light-dark(#f8f5ef,#20201e); --ac-surface: light-dark(#fffdf8,#2c2b27); --ac-line: light-dark(#d9d3c9,#4a473f); --ac-red: light-dark(#b84135,#e97d6d); --ac-soft: light-dark(#ebe5d9,#353229); --ac-duration: 520ms; }
+#about-concepts .ac-page { font-family: Outfit, sans-serif; color: var(--ac-ink); background: var(--ac-paper); padding: 28px; min-height: 680px; display: flex; flex-direction: column; box-sizing: border-box; overflow-wrap: anywhere; }
+#about-concepts .ac-page * { box-sizing: border-box; }
+#about-concepts .ac-kicker { font: 400 11px/1.5 'Courier New', monospace; letter-spacing: .12em; color: var(--ac-muted); }
+#about-concepts .ac-head { display: flex; justify-content: space-between; align-items: start; gap: 18px; padding-bottom: 24px; border-bottom: 1px solid var(--ac-line); }
+#about-concepts .ac-head h2 { font: 500 34px/1.1 Outfit, sans-serif; letter-spacing: -.035em; margin: 6px 0 0; }
+#about-concepts .ac-mark { color: var(--ac-red); font-size: 22px; margin-right: 72px; }
+#about-concepts .ac-page p { margin: 0; font-size: 14px; line-height: 1.6; }
+#about-concepts .ac-page h3 { margin: 0; font: 500 23px/1.2 Outfit, sans-serif; letter-spacing: -.025em; }
+#about-concepts .ac-page h4 { font: 500 16px/1.4 Outfit, sans-serif; margin: 0; }
+#about-concepts .ac-page small { color: var(--ac-muted); font-size: 12px; line-height: 1.6; }
+#about-concepts .ac-foot { display: flex; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 22px; color: var(--ac-muted); font: 400 11px/1.5 'Courier New', monospace; }
+#about-concepts .ac-button { font: 400 13px/1.4 Outfit, sans-serif; border: 0; padding: 11px 12px; color: var(--ac-muted); background: transparent; text-align: left; }
+#about-concepts .ac-button:hover { color: var(--ac-ink); background: var(--ac-soft); }
+#about-concepts .ac-button[aria-pressed="true"] { color: var(--ac-ink); box-shadow: inset 0 -2px var(--ac-red); }
+#about-concepts .ac-layout { display: grid; grid-template-columns: 130px minmax(0,1fr); gap: 28px; padding-top: 26px; }
+#about-concepts .ac-index { display: flex; flex-direction: column; gap: 8px; }
+#about-concepts .ac-index .ac-button { display: flex; gap: 16px; }
+#about-concepts .ac-index .ac-number { font-family: 'Courier New', monospace; color: var(--ac-red); }
+#about-concepts .ac-pane { min-height: 320px; }
+#about-concepts .ac-pane[hidden], #about-concepts .ac-drawer-body[hidden] { display: none; }
+#about-concepts .ac-subnav { display: flex; flex-wrap: wrap; gap: 3px; margin: 18px 0; border-bottom: 1px solid var(--ac-line); }
+#about-concepts .ac-tools { color: var(--ac-red); font-size: 12px; margin: 12px 0 20px; }
+#about-concepts .ac-note { position: relative; padding: 20px 0 20px 22px; border-left: 2px solid var(--ac-red); }
+#about-concepts .ac-note::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: repeating-linear-gradient(transparent 0 27px, color-mix(in srgb,var(--ac-line) 40%,transparent) 27px 28px); opacity: .45; }
+#about-concepts .ac-note > * { position: relative; }
+#about-concepts .ac-note h4 { margin-bottom: 12px; }
+#about-concepts .ac-note small { display: block; margin-top: 18px; }
+#about-concepts .ac-edu { display: grid; grid-template-columns: 92px minmax(0,1fr); gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--ac-line); }
+#about-concepts .ac-date { color: var(--ac-red); font: 400 12px/1.5 'Courier New', monospace; }
+#about-concepts .ac-edu small { display: block; margin-top: 6px; }
+#about-concepts .ac-stages { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0; }
+#about-concepts .ac-flow-visual { padding: 24px; border: 1px solid var(--ac-line); background: var(--ac-surface); }
+#about-concepts .ac-wire { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+#about-concepts .ac-wire div { background: var(--ac-soft); height: 36px; transition: background var(--ac-duration) ease, transform var(--ac-duration) ease, opacity var(--ac-duration) ease; }
+#about-concepts .ac-wire div:first-child { grid-column: 1/-1; height: 14px; }
+#about-concepts .ac-wire div:last-child { grid-column: 1/-1; height: 8px; width: 55%; }
+#about-concepts .ac-wire[data-stage="0"] div { opacity: .25; transform: scaleX(.45); transform-origin: left; }
+#about-concepts .ac-wire[data-stage="1"] div { opacity: .7; }
+#about-concepts .ac-wire[data-stage="2"] div:nth-child(2) { background: var(--ac-red); opacity: .7; }
+#about-concepts .ac-wire[data-stage="3"] div:nth-child(2) { background: var(--ac-red); }
+#about-concepts .ac-wire[data-stage="3"] div:last-child { transform: scaleX(1.5); transform-origin: left; }
+#about-concepts .ac-blueprint { background-image: linear-gradient(color-mix(in srgb,var(--ac-line) 30%,transparent) 1px,transparent 1px), linear-gradient(90deg,color-mix(in srgb,var(--ac-line) 30%,transparent) 1px,transparent 1px); background-size: 24px 24px; }
+#about-concepts .ac-blue-main { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); gap: 28px; padding: 28px 0; }
+#about-concepts .ac-blue-steps { display: flex; flex-direction: column; align-items: stretch; gap: 9px; }
+#about-concepts .ac-blue-steps .ac-button { padding: 10px 0; }
+#about-concepts .ac-blue-steps .ac-button[aria-pressed="true"] { box-shadow: none; color: var(--ac-red); }
+#about-concepts .ac-blue-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; border-top: 1px solid var(--ac-line); padding-top: 20px; }
+#about-concepts .ac-blue-bottom p { margin-top: 10px; font-size: 13px; }
+#about-concepts .ac-cabinet { padding-top: 28px; }
+#about-concepts .ac-drawer { border: 1px solid var(--ac-line); background: var(--ac-surface); margin-bottom: 10px; }
+#about-concepts .ac-drawer-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 17px 20px; border: 0; background: var(--ac-surface); color: var(--ac-ink); font: 500 16px/1.4 Outfit,sans-serif; text-align: left; }
+#about-concepts .ac-handle { display: block; width: 28px; height: 7px; border: 1px solid var(--ac-line); border-radius: 2px; flex-shrink: 0; }
+#about-concepts .ac-drawer-head[aria-expanded="true"] .ac-handle { border-color: var(--ac-red); }
+#about-concepts .ac-drawer-body { padding: 4px 20px 24px; }
+#about-concepts .ac-drawer-body p { padding: 8px 0; }
+#about-concepts .ac-drawer-body small { display: block; }
+#about-concepts .ac-drawer-body .ac-edu { padding: 14px 0; }
+@media(max-width:520px) {
+  #about-concepts .ac-page { min-height: 720px; padding: 20px; }
+  #about-concepts .ac-head h2 { font-size: 28px; }
+  #about-concepts .ac-layout { grid-template-columns: 1fr; gap: 20px; }
+  #about-concepts .ac-index { flex-direction: row; flex-wrap: wrap; gap: 2px; }
+  #about-concepts .ac-index .ac-button { gap: 6px; padding: 10px 7px; }
+  #about-concepts .ac-edu { grid-template-columns: 72px minmax(0,1fr); gap: 12px; }
+  #about-concepts .ac-blue-main { grid-template-columns: 1fr; gap: 18px; }
+  #about-concepts .ac-blue-steps { flex-direction: row; flex-wrap: wrap; gap: 14px; }
+  #about-concepts .ac-blue-bottom { grid-template-columns: 1fr; gap: 18px; }
+  #about-concepts .ac-mark { display: none; }
+}
+@media (prefers-reduced-motion:reduce) { #about-concepts .ac-wire div { transition: none; } }
+</style>
+<div id="about-concepts" class="viz-carousel" aria-label="Konsep halaman Education dan Skills" data-previous-label="Sebelumnya" data-next-label="Berikutnya">
+  <section data-variant="Studio Notes" aria-label="Studio Notes">
+    <div class="ac-page" aria-label="Studio Notes layout">
+      <header class="ac-head"><div><div class="ac-kicker">SATYA / PERSONAL NOTES</div><h2>Behind the work.</h2></div><span class="ac-mark" aria-hidden="true">✦</span></header>
+      <div class="ac-layout">
+        <nav class="ac-index" aria-label="Bagian catatan studio">
+          <button type="button" class="ac-button cursor-interaction" data-chapter="education" aria-controls="sn-education" aria-pressed="false"><span class="ac-number">01</span>Education</button>
+          <button type="button" class="ac-button cursor-interaction" data-chapter="skills" aria-controls="sn-skills" aria-pressed="true"><span class="ac-number">02</span>Skills</button>
+          <button type="button" class="ac-button cursor-interaction" data-chapter="process" aria-controls="sn-process" aria-pressed="false"><span class="ac-number">03</span>Process</button>
+        </nav>
+        <div>
+          <section id="sn-education" class="ac-pane" data-pane="education" hidden><h3>A foundation in design.</h3><div class="ac-edu"><span class="ac-date">2018–2022</span><div><h4>Visual Communication Design</h4><small>Binus University</small></div></div><div class="ac-edu"><span class="ac-date">2023</span><div><h4>UI/UX Design Certification</h4><small>Google Career Certificates</small></div></div></section>
+          <section id="sn-skills" class="ac-pane" data-pane="skills"><h3>Ideas into interfaces.</h3><div class="ac-subnav" aria-label="Kelompok kemampuan"><button type="button" class="ac-button cursor-interaction" data-skill="design" aria-pressed="true">Design</button><button type="button" class="ac-button cursor-interaction" data-skill="build" aria-pressed="false">Build</button><button type="button" class="ac-button cursor-interaction" data-skill="motion" aria-pressed="false">Motion</button></div><div class="ac-tools" id="sn-tools">Figma · Framer · UI/UX Design</div><div class="ac-note" id="sn-note" aria-live="polite"><h4 id="sn-skill-title">Make the page easy to read.</h4><p id="sn-skill-copy">Layout, typography, and navigation that guide visitors through the content.</p><small id="sn-skill-project">Applied in: WGA Dekorasi</small></div></section>
+          <section id="sn-process" class="ac-pane" data-pane="process" hidden><h3>From brief to browser.</h3><div class="ac-stages" aria-label="Tahap kerja"><button type="button" class="ac-button cursor-interaction" data-flow="notes" data-step="0" aria-pressed="true">Discover</button><button type="button" class="ac-button cursor-interaction" data-flow="notes" data-step="1" aria-pressed="false">Ideate</button><button type="button" class="ac-button cursor-interaction" data-flow="notes" data-step="2" aria-pressed="false">Design</button><button type="button" class="ac-button cursor-interaction" data-flow="notes" data-step="3" aria-pressed="false">Develop</button></div><div class="ac-flow-visual"><div class="ac-wire" data-visual="notes" data-stage="0" aria-hidden="true"><div></div><div></div><div></div><div></div></div><p data-flow-copy="notes" aria-live="polite">Understand the audience and define what the page needs to do.</p></div></section>
+        </div>
+      </div><footer class="ac-foot"><span>STUDIO NOTES</span><span>EDUCATION / SKILLS / PROCESS</span></footer>
+    </div>
+  </section>
+  <section data-variant="Blueprint" aria-label="Blueprint" hidden>
+    <div class="ac-page ac-blueprint" aria-label="Blueprint layout">
+      <header class="ac-head"><div><div class="ac-kicker">SATYA / WORKING METHOD</div><h2>From brief to browser.</h2></div><span class="ac-mark" aria-hidden="true">✦</span></header>
+      <div class="ac-blue-main"><nav class="ac-blue-steps" aria-label="Tahap kerja"><button type="button" class="ac-button cursor-interaction" data-flow="blueprint" data-step="0" aria-pressed="true">01 / Discover</button><button type="button" class="ac-button cursor-interaction" data-flow="blueprint" data-step="1" aria-pressed="false">02 / Ideate</button><button type="button" class="ac-button cursor-interaction" data-flow="blueprint" data-step="2" aria-pressed="false">03 / Design</button><button type="button" class="ac-button cursor-interaction" data-flow="blueprint" data-step="3" aria-pressed="false">04 / Develop</button></nav><div class="ac-flow-visual"><div class="ac-wire" data-visual="blueprint" data-stage="0" aria-hidden="true"><div></div><div></div><div></div><div></div></div><p data-flow-copy="blueprint" aria-live="polite">Understand the audience and define what the page needs to do.</p></div></div>
+      <div class="ac-blue-bottom"><section><h4>Education</h4><p>Visual Communication Design<br><small>Binus University · 2018–2022</small></p><p>UI/UX Design Certification<br><small>Google Career Certificates · 2023</small></p></section><section><h4>Toolkit</h4><p>Design / Figma, Framer, UI/UX</p><p>Build / HTML, CSS, JavaScript</p><p>Motion / Animation and interaction</p></section></div><footer class="ac-foot"><span>WORKING BLUEPRINT</span><span>DESIGN → BUILD</span></footer>
+    </div>
+  </section>
+  <section data-variant="Tool Cabinet" aria-label="Tool Cabinet" hidden>
+    <div class="ac-page" aria-label="Tool Cabinet layout">
+      <header class="ac-head"><div><div class="ac-kicker">SATYA / STUDIO INVENTORY</div><h2>Inside the studio.</h2></div><span class="ac-mark" aria-hidden="true">✦</span></header>
+      <div class="ac-cabinet">
+        <section class="ac-drawer"><button type="button" class="ac-drawer-head cursor-interaction" data-drawer="education" aria-expanded="false" aria-controls="cab-education">Education<span class="ac-handle" aria-hidden="true"></span></button><div id="cab-education" class="ac-drawer-body" hidden><div class="ac-edu"><span class="ac-date">2018–2022</span><div><h4>Visual Communication Design</h4><small>Binus University</small></div></div><div class="ac-edu"><span class="ac-date">2023</span><div><h4>UI/UX Design Certification</h4><small>Google Career Certificates</small></div></div></div></section>
+        <section class="ac-drawer"><button type="button" class="ac-drawer-head cursor-interaction" data-drawer="design" aria-expanded="true" aria-controls="cab-design">Design tools<span class="ac-handle" aria-hidden="true"></span></button><div id="cab-design" class="ac-drawer-body"><p>Figma · Framer · Web Design · UI/UX</p><small>Layouts, visual hierarchy, and the way a visitor moves through a page.</small></div></section>
+        <section class="ac-drawer"><button type="button" class="ac-drawer-head cursor-interaction" data-drawer="development" aria-expanded="false" aria-controls="cab-development">Development & Motion<span class="ac-handle" aria-hidden="true"></span></button><div id="cab-development" class="ac-drawer-body" hidden><p>HTML / CSS · JavaScript · GSAP Animation · SEO Basics</p><small>Responsive interfaces, interaction, and motion.</small></div></section>
+        <section class="ac-drawer"><button type="button" class="ac-drawer-head cursor-interaction" data-drawer="process" aria-expanded="false" aria-controls="cab-process">Working method<span class="ac-handle" aria-hidden="true"></span></button><div id="cab-process" class="ac-drawer-body" hidden><p>Discover → Ideate → Design → Develop</p><small>From understanding the brief to building the final experience.</small></div></section>
+      </div><footer class="ac-foot"><span>TOOL CABINET</span><span>OPEN A DRAWER</span></footer>
+    </div>
+  </section>
+</div>
+<script>
+(() => {
+  const root = document.getElementById('about-concepts');
+  const state = { chapter: 'skills', skill: 'design', notes: 0, blueprint: 0, drawer: 'design', motion: true, duration: 520 };
+  const skills = {
+    design: ['Figma · Framer · UI/UX Design', 'Make the page easy to read.', 'Layout, typography, and navigation that guide visitors through the content.', 'Applied in: WGA Dekorasi'],
+    build: ['HTML / CSS · JavaScript · SEO Basics', 'Give the design a working structure.', 'Responsive layouts and interactions that connect content, forms, and navigation.', 'Applied in: Ketut Gajah Bali'],
+    motion: ['JavaScript · CSS Animation', 'Let movement explain the interface.', 'Transitions that connect one state to the next, with a clear start and finish.', 'Applied in: Satya Portfolio']
+  };
+  const flow = ['Understand the audience and define what the page needs to do.', 'Map the content and sketch the layout before polishing the details.', 'Set the visual hierarchy, typography, color, and interactive states.', 'Build a responsive interface and check how it behaves across screen sizes.'];
+  const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const save = () => {
+    if (window.openai?.setWidgetState) window.openai.setWidgetState({ modelContent: { concept: 'Studio Notes, Blueprint, Tool Cabinet', chapter: state.chapter, skill: state.skill }, privateContent: { ...state } }).catch(() => {});
+  };
+  function render() {
+    root.style.setProperty('--ac-duration', state.motion && !reduced() ? state.duration + 'ms' : '0ms');
+    root.querySelectorAll('[data-chapter]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.chapter === state.chapter)));
+    root.querySelectorAll('[data-pane]').forEach(pane => pane.hidden = pane.dataset.pane !== state.chapter);
+    root.querySelectorAll('[data-skill]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.skill === state.skill)));
+    const selected = skills[state.skill];
+    ['sn-tools', 'sn-skill-title', 'sn-skill-copy', 'sn-skill-project'].forEach((id, index) => root.querySelector('#' + id).textContent = selected[index]);
+    for (const name of ['notes', 'blueprint']) {
+      root.querySelectorAll('[data-flow="' + name + '"]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.step) === state[name])));
+      root.querySelector('[data-visual="' + name + '"]').dataset.stage = String(state[name]);
+      root.querySelector('[data-flow-copy="' + name + '"]').textContent = flow[state[name]];
+    }
+    root.querySelectorAll('[data-drawer]').forEach(button => {
+      const open = state.drawer === button.dataset.drawer;
+      button.setAttribute('aria-expanded', String(open));
+      root.querySelector('#' + button.getAttribute('aria-controls')).hidden = !open;
+    });
+  }
+  function applySaved(saved) {
+    const incoming = saved?.privateContent;
+    if (!incoming) return;
+    if (['education', 'skills', 'process'].includes(incoming.chapter)) state.chapter = incoming.chapter;
+    if (skills[incoming.skill]) state.skill = incoming.skill;
+    for (const name of ['notes', 'blueprint']) if ([0,1,2,3].includes(incoming[name])) state[name] = incoming[name];
+    if (['education', 'design', 'development', 'process', ''].includes(incoming.drawer)) state.drawer = incoming.drawer;
+    if (typeof incoming.motion === 'boolean') state.motion = incoming.motion;
+    if (Number.isFinite(incoming.duration)) state.duration = Math.max(200, Math.min(1000, incoming.duration));
+    render();
+  }
+  root.addEventListener('click', event => {
+    const button = event.target.closest('button');
+    if (!button || !root.contains(button)) return;
+    let target;
+    if (button.dataset.chapter) { state.chapter = button.dataset.chapter; target = root.querySelector('#sn-' + state.chapter); }
+    else if (button.dataset.skill) { state.skill = button.dataset.skill; target = root.querySelector('#sn-note'); }
+    else if (button.dataset.flow) state[button.dataset.flow] = Number(button.dataset.step);
+    else if (button.dataset.drawer) { state.drawer = state.drawer === button.dataset.drawer ? '' : button.dataset.drawer; target = root.querySelector('#' + button.getAttribute('aria-controls')); }
+    else return;
+    render();
+    if (target && !target.hidden && state.motion && !reduced()) target.animate([{ transform: 'translateY(8px)', opacity: .3 }, { transform: 'translateY(0)', opacity: 1 }], { duration: state.duration, easing: 'cubic-bezier(.22,1,.36,1)' });
+    save();
+  });
+  render();
+  applySaved(window.openai?.widgetState);
+  window.addEventListener('openai:set_globals', event => applySaved(event.detail?.globals?.widgetState));
+  if (globalThis.Tweak) {
+    const tweak = new Tweak({ container: root, onChange: render });
+    tweak.addToggle(state, 'motion', { label: 'Animasi' });
+    tweak.addSlider(state, 'duration', { label: 'Durasi gerak', min: 200, max: 1000, step: 100, unit: 'ms' });
+  }
+})();
+</script>

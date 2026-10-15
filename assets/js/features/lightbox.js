@@ -177,6 +177,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     },
     'wga-ocean': {
       docId: 'CASE STUDY // #03',
+      status: 'development',
       title: 'WGA Ocean',
       category: 'Water Sports & Transport',
       year: '2024',
@@ -204,30 +205,42 @@ window.SatyaPortfolio.features['lightbox'] = function () {
         { icon: 'chat', label: 'ENQUIRY', title: 'Ask about a tour', text: 'Find a tour and contact the team about availability and booking.' },
         { icon: 'globe', label: 'ON THE GO', title: 'Plan on mobile', text: 'Explore activities and prepare your plans while on the go.' }
       ],
-      tech: ['HTML5 / CSS3', 'JavaScript Micro-animations', 'Flexbox & CSS Grid', 'Custom Branding'],
+      tech: ['TypeScript', 'React', 'Next.js', 'CSS Modules', 'Framer Motion', 'Prisma', 'PostgreSQL'],
       stackGroups: [
         {
           title: 'Frontend',
-          description: 'Tour information, visual previews, and the booking enquiry experience.',
+          description: 'A typed React application using the Next.js App Router, custom CSS, and animated UI components.',
           items: [
-            { name: 'HTML5', logo: 'FE/html5.svg', description: 'Structures tour information, activities, and gallery content.' },
-            { name: 'CSS3', logo: 'FE/css3.svg', description: 'Styles the ocean palette and layouts across desktop and mobile.' },
-            { name: 'JavaScript Micro-animations', logo: 'FE/javascript.svg', description: 'Adds small interface animations and interactive states.' }
+            { name: 'TypeScript', logoSrc: 'assets/svg/tech/typescript.svg', description: 'Types the React components, page data, and API route handlers.' },
+            { name: 'React', logoSrc: 'assets/svg/tech/react.svg', description: 'Builds the interactive home page, activity details, booking form, and photo gallery.' },
+            { name: 'Next.js', logoSrc: 'assets/svg/tech/nextjs.svg', description: 'Provides the App Router, server-rendered pages, image components, and application routes.' },
+            { name: 'CSS Modules', logo: 'FE/css3.svg', description: 'Component and page styles use .module.css files alongside shared CSS variables.' },
+            { name: 'Framer Motion', logoSrc: 'assets/svg/tech/framermotion.svg', description: 'Animates the home page and the Moments photo gallery. This is the React animation library.' }
           ]
         },
         {
-          title: 'Layout & identity',
-          description: 'Responsive composition and the visual identity of the ocean experience.',
+          title: 'Backend & Data',
+          description: 'Next.js Route Handlers access relational project data through Prisma. The schema declares PostgreSQL.',
           items: [
-            { name: 'Flexbox & CSS Grid', logoSrc: 'assets/svg/stack/layout.svg', description: 'Aligns page sections and adapts their layout to different screen widths.' },
-            { name: 'Custom Branding', logoSrc: 'assets/svg/stack/design.svg', description: 'Gives the site a consistent visual identity inspired by the ocean.' }
+            { name: 'Next.js Route Handlers', logoSrc: 'assets/svg/tech/nextjs.svg', description: 'Implements API endpoints for activities, Moments, bookings, and uploads.' },
+            { name: 'Prisma', logoSrc: 'assets/svg/tech/prisma.svg', description: 'Queries Activity, Moment, and Booking records from server-side pages and API handlers.' },
+            { name: 'PostgreSQL', logoSrc: 'assets/svg/tech/postgresql.svg', description: 'The relational database provider used by the Prisma schema for activities, Moments, and bookings.' }
+          ]
+        },
+        {
+          title: 'Integrations & UI assets',
+          description: 'Supporting services used in the checked source.',
+          items: [
+            { name: 'WhatsApp', logo: 'Integrations/whatsapp.svg', description: 'The booking flow posts to the booking API and prepares a WhatsApp enquiry.' },
+            { name: 'Google Fonts', logo: 'Integrations/google-fonts.png', description: 'Loads the typography through next/font/google.' },
+            { name: 'Lucide React', logoSrc: 'assets/svg/tech/lucide.svg', description: 'Provides interface icons in React components.' }
           ]
         }
       ]
     },
     'satya-portfolio': {
       docId: 'CASE STUDY // #04',
-      title: 'Satya Portfolio',
+      title: 'My Portofolio',
       category: 'Personal Creative Portfolio',
       year: '2024',
       role: 'Creative Direction & Fullstack',
@@ -269,15 +282,15 @@ window.SatyaPortfolio.features['lightbox'] = function () {
           title: 'Motion',
           description: 'Movement in the folders, interface transitions, and interactive details.',
           items: [
-            { name: 'Web Animations API', logoSrc: 'assets/svg/stack/motion.svg', description: 'Runs timed interface animations and controlled transition sequences.' },
-            { name: 'CSS 3D Transforms', logoSrc: 'assets/svg/stack/layers.svg', description: 'Adds perspective and depth to the folder and paper interactions.' }
+            { name: 'Web Animations API', logo: 'FE/javascript.svg', description: 'The browser’s JavaScript API for timed animations and controlled transition sequences.' },
+            { name: 'CSS 3D Transforms', logo: 'FE/css3.svg', description: 'Adds perspective and depth to the folder and paper interactions using CSS.' }
           ]
         },
         {
           title: 'Theme system',
           description: 'Shared visual values for the light and dark palettes.',
           items: [
-            { name: 'Design Tokens', logoSrc: 'assets/svg/stack/tokens.svg', description: 'Keeps colors, borders, surfaces, and spacing consistent across themes.' }
+            { name: 'Design Tokens', logo: 'FE/css3.svg', description: 'Uses CSS custom properties to keep colors, borders, surfaces, and spacing consistent across themes.' }
           ]
         }
       ]
@@ -383,6 +396,24 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     select(0);
   }
 
+  function updateLiveLink(link, data, liveLabel) {
+    if (!link) return;
+    const developing = data.status === 'development';
+    (link.querySelector('span') || link).textContent = developing ? 'In Development' : liveLabel;
+    link.classList.toggle('project-in-development', developing);
+    if (developing) {
+      link.removeAttribute('href');
+      link.setAttribute('aria-disabled', 'true');
+      link.setAttribute('role', 'status');
+      link.setAttribute('tabindex', '-1');
+    } else {
+      link.href = data.liveUrl || '#';
+      link.removeAttribute('aria-disabled');
+      link.removeAttribute('role');
+      link.removeAttribute('tabindex');
+    }
+  }
+
   const dossierModal = document.getElementById('dossierModal');
   const dossierModalContainer = document.getElementById('dossierModalContainer');
   const dossierCloseBtn = document.getElementById('dossierCloseBtn');
@@ -481,8 +512,8 @@ window.SatyaPortfolio.features['lightbox'] = function () {
 
     const liveBtn = document.getElementById('dossierLiveBtn');
     const liveBtnImg = document.getElementById('dossierLiveBtnImg');
-    if (liveBtn) liveBtn.href = data.liveUrl || '#';
-    if (liveBtnImg) liveBtnImg.href = data.liveUrl || '#';
+    updateLiveLink(liveBtn, data, 'Visit Live Project ↗');
+    updateLiveLink(liveBtnImg, data, 'Explore Live Site ↗');
 
     // Render Features
     const featuresList = document.getElementById('dossierFeatures');
@@ -527,7 +558,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     renderDevicePreview(data, 'desktop');
     renderDevicePreview(data, 'mobile');
     setDeviceMode('desktop');
-    if (lbLiveBtn) lbLiveBtn.href = data.liveUrl || '#';
+    updateLiveLink(lbLiveBtn, data, 'Explore Live Website ↗');
     if (lbMockupUrl) lbMockupUrl.textContent = data.url;
 
     renderTechStack(data);

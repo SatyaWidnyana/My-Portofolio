@@ -6,9 +6,12 @@ const css = fs.readFileSync(path.join(__dirname, '../assets/css/08-portfolio.css
 const marker = '/* Mobile archive:';
 const mobile = css.slice(css.indexOf(marker));
 assert(mobile.startsWith(marker));
+assert.match(css.slice(0, css.indexOf(marker)), /\.projects\s*\{\s*min-height: 100vh;/, 'Desktop keeps its original vertical position');
+assert.match(mobile, /\.projects\s*\{\s*min-height: 80vh;/, 'The raised position belongs only to mobile');
 assert.match(mobile, /@media \(max-width: 768px\)/);
 assert.match(mobile, /transform: translate\(0, -15%\) scale\([\d.]+\) !important/);
 assert.match(css.slice(0, css.indexOf(marker)), /translate\(-42%, -15%\) scale\(0\.8\)/);
+assert.doesNotMatch(css.slice(0, css.indexOf(marker)), /transform:\s*translate\(-42%, -15%\) scale\(0\.8\)\s*!important/, 'Desktop movement must remain eligible for compositing');
 
 function block(source, selector) {
   const start = source.indexOf(selector);

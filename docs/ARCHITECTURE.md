@@ -15,11 +15,72 @@
 | Lanyard | `features/lanyard.js` | `06-terminal-lanyard.css` |
 | Marquee | — | `07-marquee.css` |
 | Folder portfolio dan swipe | `features/portfolio.js` | `08-portfolio.css` |
-| Process, skills, contact, footer | — | `09-sections.css` |
+| About: Tool Cabinet / Blueprint / Studio Notes | `features/studio-notes.js`, `features/cabinet-motion.js` | `09-sections.css` |
+| Contact, footer | — | `09-sections.css` |
 | Breakpoint halaman | `features/terminal-layout.js` | `10-responsive.css` |
 | Data project dan modal | `features/lightbox.js` | `11-project-details.css` sampai `14-lightbox-base.css` |
 
 `app.js` membuat registry `window.SatyaPortfolio.features`; setiap fitur memiliki scope lokal. Hook `window.triggerLanyardDrop` dan `window.snapLanyardToZero` tetap menghubungkan intro dan lanyard seperti sebelumnya.
+
+Tool Cabinet menjadi tampilan aktif pada `#about`: empat laci untuk Education,
+Frontend, Backend & Data, dan Tools & Workflow. Satu laci terbuka dalam
+satu waktu, dengan semua laci tertutup saat awal. Browser dengan ResizeObserver
+mengukur tinggi baki saat dibuka dan ketika ukuran kontennya berubah.
+`cabinet-motion.js` dimuat sebelum `studio-notes.js`: pada desktop dan mobile, layout langsung
+memakai tinggi akhir sekali, lalu posisi laci, cangkang, kaki, dan bagian berikutnya
+bergerak dengan transform (FLIP). Isi muncul dengan clip-path. Tidak ada animasi
+height per frame pada jalur ini. Transisi tinggi terukur menjadi fallback bila
+Web Animations API tidak tersedia; grid bila ResizeObserver tidak tersedia. Panel tertutup tidak dipaint dan cache
+layout tetap dipertahankan. Layer sementara dilepas saat animasi selesai.
+Gerak desktop berlangsung 800 ms dan mobile 600 ms dengan cubic-bezier(.32,0,.2,1): mulai pelan,
+kemudian melambat sebelum berhenti. Semua layer memakai timing yang sama.
+Logo cabinet dimuat eager agar request tidak menunggu laci dibuka. Empat aset
+besar memakai salinan WebP kecil di assets/images/cabinet; logo JB mempertahankan
+crop kiri yang semula diterapkan oleh CSS. Aset asli tetap menjadi sumber.
+`inert` dan ARIA langsung mengikuti state yang dituju. Event transisi yang
+terlambat tidak boleh menyembunyikan laci yang sudah dibuka ulang.
+Tools & Workflow memiliki lima tahap visual: Discover, Explore, Build, Refine,
+dan Deploy. Deploy mencakup hosting, domain bila diperlukan, serta pemeriksaan
+halaman, tautan, dan form setelah website diterbitkan.
+Kartu stack berisi logo, nama, dan deskripsi singkat tanpa nama proyek.
+Logo Lucide berasal dari repositori resminya; lisensi tersimpan di
+assets/svg/tech/lucide.LICENSE.txt. Analisis pemakaian per proyek dicatat
+di docs/TECH_STACK.md serta audit Ocean/Dekorasi. Motion study di Frontend bisa diputar
+ulang dan berhenti saat laci berganti atau reduced motion diaktifkan.
+Initializer yang sama mendukung Blueprint dan Studio Notes bila dipakai lagi.
+Snapshot keduanya tersimpan di `work/design-variants/blueprint/` dan
+`work/design-variants/studio-notes/` sebagai referensi source, bukan halaman aktif.
+Tes ketiga layout:
+`node tools/verify-about.cjs`. Tes gerak desktop dan klik cepat:
+`node tools/verify-cabinet-motion.cjs`.
+
+Folder portfolio memakai tinggi section 100vh pada desktop; pengurangan ke
+80vh hanya berlaku sampai 768px. Saat dibuka, desktop memakai tinggi flap akhir
+sekali, scale pada transform untuk menjaga siluet awal, serta layer bayangan
+statis dengan fade opacity. Tekstur SVG grain dibekukan menjadi tile PNG 180px
+khusus desktop. Hindari !important pada transform yang ditransisikan: trace
+Chrome menandainya sebagai penghalang compositing. Ruang akhir untuk Studio
+Notes ditetapkan sekali dan pergeseran tampilannya memakai FLIP di portfolio.js.
+Profil folder: `node tools/profile-cabinet.cjs folder-check 1920 light folder`.
+
+`app.js` juga menyediakan `observeMotion`: satu observer bersama untuk setiap
+elemen, dengan state viewport, tab, dan reduced motion. Sapaan, efek pengukuran
+nama, animasi CSS hero/marquee, serta fisika lanyard berhenti saat tidak terlihat.
+Loop lanyard hanya boleh memiliki satu requestAnimationFrame aktif.
+Sapaan, subtitle, dan terminal juga diamati secara terpisah agar efeknya berhenti
+saat hanya bagian bawah hero yang masih dekat viewport.
+Intro melepaskan lapisan transisi setelah selesai. Logo navbar desktop tidak lagi
+menjalankan animasi filter terus-menerus. Background desktop memakai satu layer
+fixed, dan blur navbar desktop dikurangi. Bentuk dan bayangan cabinet dipertahankan.
+Pulse filter logo navbar mobile dijeda selama cabinet terlihat. Warna dasar,
+teks, dan border pintu laci memakai transisi 160 ms yang sama; gradient permukaan
+tetap statis supaya warna teks tidak mendahului warna pintu saat ganti tema.
+
+Tes lifecycle: `node tools/verify-motion-lifecycle.cjs`. Profil browser lokal:
+`node tools/profile-cabinet.cjs check` (desktop) atau
+`node tools/profile-cabinet.cjs mobile 390`. Chrome/Edge headless memakai profil
+sementara terpisah; laporan dan screenshot ditulis ke `tmp/`. Pengujian mencakup
+idle, buka/tutup, scroll, perubahan lebar konten, serta buka ulang cepat.
 
 ## Urutan CSS
 
