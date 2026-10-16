@@ -270,3 +270,10 @@ Menu tidak lagi menganimasikan max-height, padding dan margin. Tinggi akhir dipa
 Profil 390px CPU 4x: LayoutCount buka 74 -> 4, tutup 95 -> 12; Paint buka 240 -> 21, tutup 286 -> 33. Paint duration buka 146.17 -> 13.63ms, tutup 155.57 -> 14.85ms. Angka ini merupakan pengukuran headless, bukan FPS perangkat fisik. Laporan sementara di tmp/cabinet-menu-before.json dan tmp/cabinet-menu-final2.json.
 
 Verifikasi kontrol pada 320/390/768px lolos: ikon tutup terlihat, tidak ada clipping setelah reveal, tombol tema, Escape, klik link, reduced motion, dan reset menu saat pindah ke desktop. Audit fungsi mobile dan build/deploy verification juga lolos.
+
+
+### Pembukaan proyek tanpa blending — 17 Oktober 2026
+
+Setelah pergantian tab stabil, pengguna masih melihat kilatan pada pembukaan pertama. Overlay sebelumnya masih transparan (.86) dan memudar selama 400ms, sementara container membesar dari scale .92 selama 450ms. Pembukaan proyek kini langsung: overlay memakai warna opaque #080a0d tanpa transisi, container tanpa transform/transisi, dan modal tidak aktif memakai visibility: hidden. Folder 3D tidak lagi terlihat melalui proses fade saat workspace muncul. Perbaikan tab sebelumnya tetap dipertahankan.
+
+Uji tmp/verify-project-opening.cjs pada 390/1440px dan light/dark memeriksa opacity 1, background opaque, transitionDuration 0s, dan transform none segera setelah klik. Sampel frame sepanjang buka, lima perpindahan tab, dan tutup menunjukkan palette serta geometri folder tetap stabil, tanpa error runtime. Build/deploy verification lolos. Ini verifikasi browser headless; hasil pada GPU perangkat pengguna tetap perlu dicoba setelah deploy.

@@ -2195,3 +2195,16 @@ body[data-theme="dark"] .dossier-modal-container.mode-lightbox {
 
 /* Keep tab surfaces opaque instead of fading through the page below. */
 .dossier-modal-container.mode-lightbox .lb-tab-pane { animation: none; }
+
+/* Open onto an opaque, stable surface: never blend the workspace with the 3D folder. */
+.dossier-modal-overlay {
+  background: #080a0d;
+  visibility: hidden;
+  transition: none;
+}
+.dossier-modal-overlay.active { visibility: visible; }
+.dossier-modal-container.mode-lightbox,
+.dossier-modal-overlay.active .dossier-modal-container.mode-lightbox {
+  transform: none;
+  transition: none;
+}
