@@ -96,10 +96,11 @@
     margin-left: auto;
     order: 2;
   }
-  .mobile-menu-btn svg {
+  .mobile-menu-btn > span {
     position: absolute;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.4s ease;
+    transition: transform .18s ease, opacity .18s ease;
   }
+  .mobile-menu-btn svg { display: block; }
   .mobile-menu-btn .hamburger-icon {
     opacity: 1;
     transform: rotate(0);
@@ -137,7 +138,7 @@
     border-top: 1px solid var(--nav-border);
     margin-top: 8px; /* Menyeimbangkan dengan 8px top padding navbar */
     gap: 12px;
-    animation: expandHeightLinks 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards, fadeSlideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.04s backwards;
+    animation: fadeSlideIn .16s ease-out .04s backwards;
   }
   
   .navbar.menu-open .nav-links a {
@@ -164,9 +165,12 @@
     border-top: 1px solid var(--nav-border);
     align-items: center;
     gap: 12px;
-    animation: expandHeightAction 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards, fadeSlideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s backwards;
+    animation: fadeSlideIn .16s ease-out .06s backwards;
   }
   
+  .navbar .theme-toggle { width: 32px; height: 32px; transition: transform .16s ease; }
+  .navbar .theme-toggle svg { width: 18px; height: 18px; }
+  .navbar .nav-action .btn-primary { transition: transform .16s ease; }
   .navbar.menu-open .theme-toggle {
     width: 32px;
     height: 32px;
@@ -191,46 +195,35 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   }
   
-  @keyframes fadeInMenu {
-    from { opacity: 0; transform: translateY(-8px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
+  /* Lay out the menu once, then reveal its fixed surface on the compositor. */
+  .navbar.menu-open { animation: mobile-menu-reveal .26s cubic-bezier(.2,.72,.2,1) backwards; }
+  .navbar.menu-open.menu-closing { animation: mobile-menu-hide .22s ease-in forwards; }
 
-  /* Pop-in: height expands (expo ease-out) while content fades/slides in right away */
-  @keyframes expandHeightLinks {
-    0% { max-height: 0; padding-top: 0; margin-top: 0; overflow: hidden; }
-    100% { max-height: 180px; padding-top: 12px; margin-top: 8px; overflow: hidden; }
+  @keyframes mobile-menu-reveal {
+    from { clip-path: inset(0 0 calc(100% - var(--nav-collapsed-height, 50px)) 0 round 24px); }
+    to { clip-path: inset(0 0 0 0 round 24px); }
   }
-  @keyframes expandHeightAction {
-    0% { max-height: 0; padding-top: 0; margin-top: 0; overflow: hidden; }
-    100% { max-height: 48px; padding-top: 8px; margin-top: 12px; overflow: hidden; }
+  @keyframes mobile-menu-hide {
+    from { clip-path: inset(0 0 0 0 round 24px); }
+    to { clip-path: inset(0 0 calc(100% - var(--nav-collapsed-height, 50px)) 0 round 24px); }
   }
   @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(-10px); }
+    from { opacity: 0; transform: translateY(-6px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
-  /* Pop-out: fade + slide up while collapsing height so the navbar shrinks smoothly */
-  @keyframes fadeOutMenuLinks {
-    0% { opacity: 1; transform: translateY(0) scale(1); max-height: 180px; padding-top: 12px; margin-top: 8px; }
-    60% { opacity: 0; transform: translateY(-8px) scale(0.98); }
-    100% { opacity: 0; transform: translateY(-8px) scale(0.98); max-height: 0; padding-top: 0; margin-top: 0; }
+  @keyframes fadeSlideOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-4px); }
   }
-  @keyframes fadeOutMenuAction {
-    0% { opacity: 1; transform: translateY(0) scale(1); max-height: 48px; padding-top: 8px; margin-top: 12px; }
-    60% { opacity: 0; transform: translateY(-8px) scale(0.98); }
-    100% { opacity: 0; transform: translateY(-8px) scale(0.98); max-height: 0; padding-top: 0; margin-top: 0; }
-  }
-
-  .navbar.menu-closing .nav-links {
-    overflow: hidden;
-    pointer-events: none;
-    animation: fadeOutMenuLinks 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
+  .navbar.menu-closing .nav-links,
   .navbar.menu-closing .nav-action {
-    overflow: hidden;
     pointer-events: none;
-    animation: fadeOutMenuAction 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: fadeSlideOut .12s ease-in forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .navbar.menu-open, .navbar.menu-open.menu-closing,
+    .navbar.menu-open .nav-links, .navbar.menu-open .nav-action { animation: none; }
+    .mobile-menu-btn > span { transition: none; }
   }
 
   .navbar.menu-open .mobile-menu-btn .hamburger-icon {
@@ -338,3 +331,9 @@
   .paper-hover-hint, .paper-hover-hint span { transition: none; }
 }
 
+
+/* A project preview must not keep sweeping light behind an open modal. */
+.main-wrapper.modal-background .paper-img-wrapper::after { animation: none !important; opacity: 0; }
+@media (hover: none), (pointer: coarse) {
+  .portfolio-folder.is-open .folder-paper .paper-img-wrapper::after { animation: none !important; opacity: 0; }
+}

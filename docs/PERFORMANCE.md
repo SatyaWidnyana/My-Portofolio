@@ -252,3 +252,21 @@ Tombol Enter/Delete mobile dipindahkan dari posisi absolute ke baris grid tersen
 Pada journey mobile (sampai 900px), pergantian tahap tidak lagi menganimasikan max-height, margin, min-height, max-width atau box-shadow. Layout dipasang sekali; posisi kartu berikutnya memakai FLIP 180ms dan isi memakai fade/translate 160ms. Animasi sebelumnya dibatalkan dengan posisi saat ini sebagai awal ketika diklik cepat. Desktop mempertahankan interaksi panelnya. Kartu tahap menonaktifkan native tap highlight serta user-select untuk menghilangkan blok biru; fokus keyboard merah tetap tersedia.
 
 Profil 390px CPU 4x untuk rangkaian lima tahap: LayoutCount 150 -> 73; Paint 650 -> 233; Paint duration 1500.19 -> 158.54ms. Angka headless ini bukan jaminan FPS ponsel; masih ada pekerjaan rendering animasi dekorasi modal. Uji fungsi memeriksa kelima isi tidak terpotong, satu tahap aktif, Enter untuk menutup, klik cepat, CSS tap highlight transparan, serta nol error runtime. Laporan sementara di tmp/cabinet-journey-before.json dan tmp/cabinet-journey-after.json.
+
+
+### Kilatan warna saat proyek dibuka — 17 Oktober 2026
+
+Overlay proyek tidak lagi memakai backdrop-filter (termasuk prefiks WebKit), sehingga tidak perlu mengambil ulang permukaan folder 3D sebagai input blur ketika modal/tab berubah. Latar dim sedikit lebih pekat, dari alpha .76 ke .86. Kilap putih preview dihentikan selama main-wrapper menjadi modal-background; pada pointer sentuh/coarse kilap tidak dijalankan. Pane Overview/Mockup/Tech Stack berganti tanpa fade-through. Scrollbar-gutter: stable menjaga lebar layout desktop saat scroll body dikunci. Tema halaman tidak diubah oleh pembukaan modal.
+
+Uji tmp/verify-project-flash.cjs mengambil 467 sampel frame pada kombinasi 390/1440px dan light/dark, saat modal dibuka, lima pergantian tab, dan ditutup. Warna background flap, atribut tema root/body, lebar dan posisi folder tetap sama, tidak ada blur aktif, dan pane tidak memulai fade. Ini memverifikasi state dan layout browser headless; kilatan GPU khusus perangkat fisik tetap perlu dicoba di perangkat pengguna. Audit fungsi mobile serta build/deploy verification lolos.
+
+Tombol terminal mobile kini kembali satu baris dengan perintah, sesuai permintaan pengguna: tinggi minimum 28px, font 10px, padding horizontal 6px. Pada layar sampai 360px baris perintah memakai 10px agar Delete tetap muat. Uji geometri Enter/Delete pada 320/390/768px lolos tanpa overlap, kursor tetap menempel pada perintah.
+
+
+### Navbar mobile — 17 Oktober 2026
+
+Menu tidak lagi menganimasikan max-height, padding dan margin. Tinggi akhir dipasang sekali, lalu permukaan navbar memakai clip-path reveal 260ms (tutup 220ms) dan isi memakai transform/opacity singkat. Ikon hamburger/tutup dipindahkan ke wrapper HTML dengan SVG statis agar perubahan transform tidak membuat layout SVG per frame. Ukuran tombol tema tetap 32px dan ukuran ikon tetap 18px, serta transisi tombol tema/Let's Talk dibatasi ke transform agar ukuran tidak ikut diinterpolasi. Reduced motion membuka/menutup tanpa animasi. Layout dan isi menu akhir tetap sama (275px terbuka, 50px tertutup pada profil 390px).
+
+Profil 390px CPU 4x: LayoutCount buka 74 -> 4, tutup 95 -> 12; Paint buka 240 -> 21, tutup 286 -> 33. Paint duration buka 146.17 -> 13.63ms, tutup 155.57 -> 14.85ms. Angka ini merupakan pengukuran headless, bukan FPS perangkat fisik. Laporan sementara di tmp/cabinet-menu-before.json dan tmp/cabinet-menu-final2.json.
+
+Verifikasi kontrol pada 320/390/768px lolos: ikon tutup terlihat, tidak ada clipping setelah reveal, tombol tema, Escape, klik link, reduced motion, dan reset menu saat pindah ke desktop. Audit fungsi mobile dan build/deploy verification juga lolos.

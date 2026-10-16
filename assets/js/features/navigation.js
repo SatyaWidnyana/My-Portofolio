@@ -72,13 +72,14 @@ window.SatyaPortfolio.features['navigation'] = function () {
       clearTimeout(closeTimer);
       closeTimer = setTimeout(() => {
         navbar.classList.remove('menu-open', 'menu-closing');
-      }, 400); // Matches CSS fadeOutMenu animation duration
+      }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 220);
     };
 
     mobileMenuBtn.addEventListener('click', () => {
       if (navbar.classList.contains('menu-open') && !navbar.classList.contains('menu-closing')) {
         closeMenu();
       } else if (!navbar.classList.contains('menu-closing')) {
+        navbar.style.setProperty('--nav-collapsed-height', navbar.offsetHeight + 'px');
         navbar.classList.add('menu-open');
         setMenuState(true);
       }
