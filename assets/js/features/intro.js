@@ -66,13 +66,6 @@ window.SatyaPortfolio.features['intro'] = function () {
     scrambleHasRun = true;
     
     if (reduced.matches) return;
-    // Keep mobile text stable instead of repeatedly rebuilding and repainting letters.
-    if (matchMedia('(max-width: 992px)').matches) {
-      if (window.triggerLanyardDrop) window.triggerLanyardDrop();
-      document.querySelector('.hero-subtitle')?.classList.add('glitch-ready');
-      return;
-    }
-
     // Referensi teks Hello I'm
     const scriptFont = document.querySelector('.script-font');
 

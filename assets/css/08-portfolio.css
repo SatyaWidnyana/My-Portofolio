@@ -765,16 +765,28 @@
     min-height: 80vh;
     --w: min(420px, calc(100vw - 40px));
     --mobile-panel-height: calc(var(--w) * 0.6265);
-    transition: padding-bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: none;
+    --folder-noise: url('../images/folder-grain-light.png');
   }
+  [data-theme="dark"] .projects { --folder-noise: url('../images/folder-grain-dark.png'); }
   .portfolio-folder { --w: inherit; }
+  .portfolio-folder.is-opening,
+  .portfolio-folder.is-opening .folder-front,
+  .portfolio-folder.is-opening .folder-back-right,
+  .portfolio-folder.is-opening .folder-back-left { will-change: transform; }
+  .portfolio-folder .folder-front { transition: transform .7s cubic-bezier(.22,1,.36,1); }
+  .portfolio-folder.is-open .folder-front { animation-name: mobile-cardboard-first !important; }
+  @keyframes mobile-cardboard-first {
+    0%, 5% { transform: translateZ(24px) rotateX(-5deg) translateY(0px) scaleY(.8044692737); }
+    35%, 100% { transform: translateZ(0px) rotateX(-180deg) translateY(-30px) scaleY(1); }
+  }
   .projects.is-open {
     padding-top: 100px;
     /* Reserve the scaled three-panel tail without shifting the archive sideways. */
     padding-bottom: calc(100px + var(--mobile-panel-height) * 2.7 + 81px - var(--w) * 0.14);
   }
   .portfolio-folder.is-open {
-    transform: translate(0, -15%) scale(0.9) !important;
+    transform: translate(0, -15%) scale(0.9);
   }
   .portfolio-folder.is-open .folder-3d { transform: translateY(0); }
 
@@ -790,12 +802,14 @@
     border-radius: inherit;
     pointer-events: none;
   }
-  .folder-fold-shadow { display: block; }
+  .folder-fold-shadow { display: block; transform: translateZ(0); }
   .folder-fold-shadow::before,
   .folder-fold-shadow::after {
     content: '';
-    will-change: opacity;
+
   }
+  .portfolio-folder.is-opening .folder-fold-shadow::before,
+  .portfolio-folder.is-opening .folder-fold-shadow::after { will-change: opacity; }
   .folder-fold-shadow::before { box-shadow: var(--shadow-3d-base); opacity: 1; }
   .folder-fold-shadow::after { box-shadow: var(--shadow-3d-invY); opacity: 0; }
   .portfolio-folder.is-open .folder-front .folder-fold-shadow::before {
@@ -839,7 +853,7 @@
     transform-origin: 50% 100%;
     transform-style: preserve-3d;
     transform: translateZ(22px) rotateX(-5deg);
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .portfolio-folder:hover:not(.is-open) .folder-back-right,
   .portfolio-folder:hover:not(.is-open) .folder-back-left {
@@ -858,34 +872,27 @@
   /* Each rotation follows the previous panel, then unfolds around its next edge. */
   @keyframes mobile-cardboard-second {
     0%, 5% {
-      transform: translateZ(22px) rotateX(-5deg) translateY(0px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px));
-      box-shadow: var(--shadow-3d-base);
+      transform: translateZ(22px) rotateX(-5deg) translateY(0px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px)) scaleY(.8044692737);
     }
     35% {
-      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px));
-      box-shadow: var(--shadow-3d-invY);
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px)) scaleY(1);
     }
     65%, 100% {
-      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(-180deg) translateY(calc(var(--mobile-panel-height) + 15px));
-      box-shadow: var(--shadow-3d-base);
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(-180deg) translateY(calc(var(--mobile-panel-height) + 15px)) scaleY(1);
     }
   }
   @keyframes mobile-cardboard-third {
     0%, 5% {
-      transform: translateZ(21px) rotateX(-5deg) translateY(0px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(0deg) translateY(-15px);
-      box-shadow: var(--shadow-3d-base);
+      transform: translateZ(21px) rotateX(-5deg) translateY(0px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(0deg) translateY(-15px) scaleY(.8044692737);
     }
     35% {
-      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(0deg) translateY(-15px);
-      box-shadow: var(--shadow-3d-invY);
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(0deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(0deg) translateY(-15px) scaleY(1);
     }
     65% {
-      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(-180deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(0deg) translateY(-15px);
-      box-shadow: var(--shadow-3d-base);
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(-180deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(0deg) translateY(-15px) scaleY(1);
     }
     95%, 100% {
-      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(-180deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(-180deg) translateY(-15px);
-      box-shadow: var(--shadow-3d-invY);
+      transform: translateZ(0px) rotateX(-180deg) translateY(-30px) translateY(calc(var(--mobile-panel-height) * -1 - 15px)) rotateX(-180deg) translateY(calc(var(--mobile-panel-height) + 15px)) translateY(15px) rotateX(-180deg) translateY(-15px) scaleY(1);
     }
   }
 

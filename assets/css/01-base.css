@@ -87,3 +87,10 @@ body::before {
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
 
+
+/* Theme changes are applied in one style update, including image crossfades.
+   Normal hover, drawer and entrance motion resumes after that update. */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after { transition: none !important; }

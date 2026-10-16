@@ -33,9 +33,11 @@ window.SatyaPortfolio.features['portfolio'] = function () {
   syncPaperAccess();
   function openFolder() {
     if (!folderBtn || folderBtn.classList.contains('is-open')) return;
-    const desktopMotion = window.matchMedia('(min-width: 769px)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const following = desktopMotion ? [...document.querySelectorAll('#about, .contact, .footer')] : [];
+    const motion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const desktopMotion = window.matchMedia('(min-width: 769px)').matches;
+    const following = !motion ? [] : desktopMotion
+      ? [...document.querySelectorAll('#about, .contact, .footer')]
+      : [...portfolioSection.querySelectorAll('.folder-stage')];
     const before = following.map(element => element.getBoundingClientRect().top);
     folderBtn.style.setProperty('--ry', '0deg');
     folderBtn.style.setProperty('--rx', '0deg');
@@ -46,7 +48,7 @@ window.SatyaPortfolio.features['portfolio'] = function () {
       swipeThumb.tabIndex = -1;
       swipeThumb.setAttribute('aria-expanded', 'true');
     }
-    if (!desktopMotion) return;
+    if (!motion) return;
     folderBtn.classList.add('is-opening');
     const offsets = following.map((element, index) => before[index] - element.getBoundingClientRect().top);
     following.forEach((element, index) => {

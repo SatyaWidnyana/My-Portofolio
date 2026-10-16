@@ -9,7 +9,8 @@ assert(mobile.startsWith(marker));
 assert.match(css.slice(0, css.indexOf(marker)), /\.projects\s*\{\s*min-height: 100vh;/, 'Desktop keeps its original vertical position');
 assert.match(mobile, /\.projects\s*\{\s*min-height: 80vh;/, 'The raised position belongs only to mobile');
 assert.match(mobile, /@media \(max-width: 768px\)/);
-assert.match(mobile, /transform: translate\(0, -15%\) scale\([\d.]+\) !important/);
+assert.match(mobile, /transform: translate\(0, -15%\) scale\([\d.]+\);/);
+assert.doesNotMatch(mobile, /transform: translate\(0, -15%\)[^;]*!important/, 'Mobile upward motion must be eligible for compositing');
 assert.match(css.slice(0, css.indexOf(marker)), /translate\(-42%, -15%\) scale\(0\.8\)/);
 assert.doesNotMatch(css.slice(0, css.indexOf(marker)), /transform:\s*translate\(-42%, -15%\) scale\(0\.8\)\s*!important/, 'Desktop movement must remain eligible for compositing');
 
@@ -82,7 +83,8 @@ function point(x, y, transforms) {
   let z = 0;
   for (const { name, value } of [...transforms].reverse()) {
     const radians = value * Math.PI / 180;
-    if (name === 'translateY') y += value;
+    if (name === 'scaleY') y *= value;
+    else if (name === 'translateY') y += value;
     else if (name === 'translateZ') z += value;
     else if (name === 'rotateX') [y, z] = [y * Math.cos(radians) - z * Math.sin(radians), y * Math.sin(radians) + z * Math.cos(radians)];
     else if (name === 'rotate') [x, y] = [x * Math.cos(radians) - y * Math.sin(radians), x * Math.sin(radians) + y * Math.cos(radians)];
@@ -94,7 +96,7 @@ function panelBounds(transforms, width, height) {
   const corners = [-width / 2, width / 2].flatMap(x => [-height, 0].map(y => point(x, y, transforms)));
   return { top: Math.min(...corners.map(p => p.y)) + width * 0.7, bottom: Math.max(...corners.map(p => p.y)) + width * 0.7, corners };
 }
-const names = ['cardboard-down', 'mobile-cardboard-second', 'mobile-cardboard-third'];
+const names = ['mobile-cardboard-first', 'mobile-cardboard-second', 'mobile-cardboard-third'];
 const frames = names.map(keyframes);
 const front = block(css, '.folder-front {');
 const rear = block(mobile, '.folder-back-right,\n  .folder-back-left {');
@@ -165,7 +167,7 @@ for (const viewport of [320, 360, 375, 390, 414, 480, 600, 768]) {
     const seconds = time * 3.5;
     const scale = 1 - (1 - openScale) * easing(seconds, 0.25, 1, 0.5, 1);
     const initialHeight = width * 0.7 * 0.72;
-    const currentHeight = initialHeight + (height - initialHeight) * easing(seconds, 0.25, 0.1, 0.25, 1);
+    const currentHeight = height; // Layout height changes once; scaleY preserves the closed silhouette.
     for (const list of frames) {
       for (const corner of panelBounds(transformsAt(list, time, width, currentHeight), width, currentHeight).corners) {
         const projectedX = viewport / 2 + corner.x * 1600 / (1600 - corner.z) * scale;

@@ -26,6 +26,9 @@ window.SatyaPortfolio.features['navigation'] = function () {
 
   function setTheme(isDark) {
     const page = document.documentElement;
+    page.classList.add('theme-switching');
+    // Commit the suppression before changing theme tokens.
+    void page.offsetWidth;
     if (isDark) page.setAttribute('data-theme', 'dark');
     else page.removeAttribute('data-theme');
     page.style.colorScheme = isDark ? 'dark' : 'light';
@@ -37,6 +40,9 @@ window.SatyaPortfolio.features['navigation'] = function () {
       document.body.removeAttribute('data-theme');
       try { localStorage.setItem('theme', 'light'); } catch { /* Theme still works when storage is blocked. */ }
     }
+    // Resolve final theme colors before restoring ordinary interaction transitions.
+    void page.offsetWidth;
+    page.classList.remove('theme-switching');
   }
 
   // Check saved theme or system preference

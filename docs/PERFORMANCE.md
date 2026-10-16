@@ -212,3 +212,23 @@ Pemeriksaan browser verify-mobile-hero kini menguji lebar canvas, probe posisi s
 ### Kondisi final sebelum push — 17 Oktober 2026
 
 Atas permintaan pengguna, perubahan ukuran, pivot, physics, seleksi, dan struktur lanyard di atas telah dikembalikan ke save-16-vercel-deploy-ready. Satu-satunya perubahan posisi lanyard dari save point adalah top mobile -580px menjadi -550px (turun 30px). Hasil pengujian pivot dan drag versi eksperimen di atas merupakan catatan historis, bukan perilaku versi final. Pemeriksaan khusus eksperimen dipindahkan ke tmp. Grid, pengurangan efek navbar/intro mobile, jeda marquee di luar layar, dan pergantian warna folder/cabinet tanpa transisi tetap dipertahankan. Build dan verifikasi deploy versi final lolos.
+
+
+### Pemulihan efek cover dan tema instan — 17 Oktober 2026
+
+Efek scramble dan pengukuran per huruf pada nama dipulihkan di mobile dengan menghapus early return optimasi mobile. Ukuran dan physics lanyard tetap versi save-16; hanya top mobile bergeser dari -550px ke -490px (turun 60px lagi). Pada viewport 390px, lebar canvas tetap 351px, bagian kartu mulai sekitar y127.5px dan navbar berakhir di y70px.
+
+setTheme kini menonaktifkan transisi sementara secara global, mengaplikasikan token tema beserta warna root/body, melakukan style flush, lalu memulihkan transisi interaksi biasa. Ini juga menghilangkan crossfade gambar lanyard dan perpindahan warna navbar saat tema berubah. Animasi hover, math, buka-tutup, dan gerakan lain di luar pergantian tema tetap tersedia.
+
+Verifikasi browser lokal tmp/verify-cover-theme.cjs: 6 mutasi pengukuran huruf dalam 2.5 detik, 13 huruf memiliki atribut ukuran, nol CSSTransition baru saat dua arah pergantian tema, snapshot warna/opacity langsung sama dengan snapshot 450ms kemudian, dan nol error runtime. Build/deploy verification lolos.
+
+
+### Optimasi lipatan folder mobile — 17 Oktober 2026
+
+Animasi padding-bottom section dan tinggi flap sebelumnya menghitung ulang layout setiap frame. Mobile kini memasang ruang akhir sekali, lalu memakai FLIP transform pada folder-stage untuk perpindahan ke atas. Tinggi flap berubah sekali; scaleY 72/89.5 mempertahankan siluet tertutup dan berakhir di ukuran asli. Keyframe bayangan pada flap dihapus, digantikan layer bayangan statis yang hanya mengubah opacity. Transform parent tidak lagi memakai !important yang menghalangi compositing. Tekstur grain mobile memakai raster yang sama dengan desktop, dan will-change hanya aktif selama pembukaan.
+
+Urutan 3 lipatan, durasi 3.5 detik + slide foto 1.5 detik, bayangan akhir, jarak engsel 30px, dan koordinat akhir seluruh kartu dipertahankan. Source test mengevaluasi 67.296 sudut proyeksi pada 8 lebar mobile; laporan before/after dibandingkan langsung dan geometri final identik.
+
+Run 390px CPU 4x, jendela awal 1.2 detik: LayoutCount 41 -> 1, Paint 220 -> 17, LayoutDuration 69.34 -> 1.23ms, Paint duration 378.10 -> 18.31ms, dan daftar kegagalan compositing menjadi kosong. Run seluruh 5.2 detik mencatat satu layout dan 20 paint; scroll sesudahnya nol layout dan nol paint. Masih ada style recalculation serta lonjakan frame awal; angka ini bukan jaminan FPS ponsel. Pengujian browser/headless berbeda dari perangkat fisik. Laporan tersimpan sementara di tmp/folder-folder-mobile-before2.json, tmp/folder-folder-mobile-after2.json, dan tmp/folder-mobile-full-light.json.
+
+Audit fungsi mobile lolos: menu, semua proyek, fokus modal, draft Gmail, terminal, breakpoint reload, serta nol overflow atau error runtime.
