@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
+  <script src="assets/js/theme-bootstrap.js?v=1"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Portofolio Satya Widnyana, UI/UX Designer & Web Creator.">
   <title>Satya Widnyana — Creative Portfolio</title>
@@ -11,14 +12,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/01-base.css?v=184">
-  <link rel="stylesheet" href="assets/css/02-intro.css?v=183">
-  <link rel="stylesheet" href="assets/css/03-typography-layout.css?v=185">
+  <link rel="stylesheet" href="assets/css/02-intro.css?v=184">
+  <link rel="stylesheet" href="assets/css/03-typography-layout.css?v=186">
   <link rel="stylesheet" href="assets/css/04-navigation.css?v=189">
   <link rel="stylesheet" href="assets/css/05-hero.css?v=183">
   <link rel="stylesheet" href="assets/css/06-terminal-lanyard.css?v=183">
   <link rel="stylesheet" href="assets/css/07-marquee.css?v=183">
   <link rel="stylesheet" href="assets/css/08-portfolio.css?v=207">
-  <link rel="stylesheet" href="assets/css/09-sections.css?v=222">
+  <link rel="stylesheet" href="assets/css/09-sections.css?v=225">
   <link rel="stylesheet" href="assets/css/10-responsive.css?v=191">
   <link rel="stylesheet" href="assets/css/11-project-details.css?v=183">
   <link rel="stylesheet" href="assets/css/12-lightbox-cream.css?v=183">
@@ -27,16 +28,16 @@
   <link rel="stylesheet" href="assets/css/15-lightbox-workbench.css?v=71">
   <link rel="stylesheet" href="assets/css/16-tech-fieldnotes.css?v=11">
   <script src="assets/js/app.js?v=79" defer></script>
-  <script src="assets/js/features/intro.js?v=80" defer></script>
-  <script src="assets/js/features/navigation.js?v=78" defer></script>
+  <script src="assets/js/features/intro.js?v=81" defer></script>
+  <script src="assets/js/features/navigation.js?v=80" defer></script>
   <script src="assets/js/features/lanyard.js?v=79" defer></script>
   <script src="assets/js/features/terminal.js?v=81" defer></script>
   <script src="assets/js/features/greetings.js?v=81" defer></script>
-  <script src="assets/js/features/terminal-layout.js?v=78" defer></script>
-  <script src="assets/js/features/portfolio.js?v=80" defer></script>
-  <script src="assets/js/features/lightbox.js?v=134" defer></script>
+  <script src="assets/js/features/terminal-layout.js?v=81" defer></script>
+  <script src="assets/js/features/portfolio.js?v=81" defer></script>
+  <script src="assets/js/features/lightbox.js?v=138" defer></script>
   <script src="assets/js/features/cabinet-motion.js?v=12" defer></script>
-  <script src="assets/js/features/studio-notes.js?v=11" defer></script>
+  <script src="assets/js/features/studio-notes.js?v=12" defer></script>
   <script src="assets/js/features/contact-letter.js?v=5" defer></script>
   <script src="assets/js/main.js?v=80" defer></script>
 </head>
@@ -58,7 +59,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="transition-grid" id="transition-grid">
     <div class="transition-col"></div>
     <div class="transition-col"></div>
@@ -85,7 +86,7 @@
       <div class="nav-divider"></div>
       <a href="#contact" class="btn-primary">Let's Talk</a>
     </div>
-    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open Menu">
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
       <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
@@ -95,7 +96,7 @@
     <main>
       <!-- Hero Section -->
       <section class="hero">
-        
+
         <div class="hero-content">
           <div class="hero-text">
             <h2 class="hero-subtitle" style="position: relative;">
@@ -105,7 +106,7 @@
                 <span class="name-solid">SATYA</span><br>
                 <span class="name-solid" id="widnyana-dummy">WIDNYANA</span>
               </div>
-              
+
               <!-- Teks asli yang di-animasikan -->
               <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                 <span class="script-font"></span>
@@ -144,13 +145,13 @@
           <div class="hero-image" id="lanyard">
             <!-- Ghost image to maintain container dimensions -->
             <img src="image/lanyard new lightmode.png" class="lanyard-card" style="visibility: hidden;" draggable="false" />
-            
+
             <!-- Strap Part (Top 30%) -->
             <div class="lanyard-strap" id="lanyard-strap">
               <img src="image/lanyard new lightmode.png" alt="" class="lanyard-card lanyard-light" draggable="false" />
               <img src="image/lanyard new darkmode.png" alt="" class="lanyard-card lanyard-dark" draggable="false" />
             </div>
-            
+
             <!-- Card Body Part (Bottom 70%) -->
             <div class="lanyard-body" id="lanyard-body">
               <img src="image/lanyard new lightmode.png" alt="Satya Widnyana Name Tag Light" class="lanyard-card lanyard-light" draggable="false" />
@@ -158,7 +159,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="marquee-container">
           <div class="marquee-mask">
             <div class="marquee-content">
@@ -262,7 +263,7 @@
                   <div class="folder-bottom-meta">
                     <div class="meta-num">01</div>
                     <div class="folder-action swipe-container" id="swipe-container">
-                      <div class="swipe-thumb" id="swipe-thumb">
+                      <div class="swipe-thumb" id="swipe-thumb" role="button" tabindex="0" aria-label="Open portfolio folder" aria-expanded="false" aria-controls="portfolio-folder">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                       </div>
                       <span class="swipe-text">SWIPE TO OPEN</span>
@@ -284,45 +285,16 @@
           </header>
           <div class="cabinet-case">
             <div class="cabinet-cat" role="img" aria-label="A sleeping ginger tabby, curled up on the cabinet">
-              <svg class="cabinet-cat-art" viewBox="0 0 160 72" shape-rendering="crispEdges" aria-hidden="true">
-                <path fill="#2a211b" opacity=".2" d="M20 62h106v2H20zM28 64h90v2H28z"/>
+              <div class="cabinet-cat-rig" aria-hidden="true">
+                <svg class="cabinet-cat-art cabinet-cat-base" viewBox="0 0 160 72" shape-rendering="crispEdges" aria-hidden="true">
+                <path fill="#2a211b" opacity=".2" d="M30 62h96v2H30zM36 64h82v2H36z"/>
                 <g transform="translate(0 4)">
-                <g class="cabinet-cat-breath"><g transform="translate(10 0) scale(.83 1)">
-                  <path fill="#51382c" d="M44 44h4v-6h10v-4h12v-4h16v-2h22v2h12v4h10v6h6v8h2v8h-6v4H58v-2H44z"/>
-                  <path fill="#c48750" d="M48 44h4v-4h10v-4h12v-4h32v2h12v4h10v6h4v10h-6v4H60v-2H48z"/>
-                  <path fill="#dda76a" d="M58 42h6v-4h14v-4h26v2h12v4h10v6h-8v4H60z"/>
-                  <path fill="#edbd80" d="M76 36h12v-2h14v2h10v2H80v4H68v-2h8z"/>
-                  <path fill="#8d5739" d="M78 34h4v8h-4v4h-4v-6h4zM98 32h4v8h-4v6h-4v-6h4zM118 38h4v8h-4v4h-4v-6h4z"/>
-                  <path fill="#b17645" d="M62 50h10v4h48v-4h10v4h-4v4H62z"/>
-                  <path fill="#ebca97" d="M48 46h8v-4h8v6h6v8H50v-2h-4v-6h2z"/>
-                </g></g>
-                <g transform="translate(-14 7.2) scale(1 .85)">
-                  <g class="cabinet-cat-tail">
-                    <path fill="#51382c" d="M126 48h10v6h6v8h4v14h-10V64h-4v-6h-6z"/>
-                    <path fill="#cd935a" d="M128 50h6v6h6v8h4v10h-6V62h-4v-6h-6z"/>
-                    <path fill="#e4af73" d="M130 50h4v6h4v8h2v8h-2V64h-4v-6h-4z"/>
-                    <path fill="#8d5739" d="M138 64h6v4h-6z"/>
-                    <g class="cabinet-cat-tail-middle">
-                      <path fill="#51382c" d="M136 70h10v10h-2v10h-4v6h-10v-8h4V78h2z"/>
-                      <path fill="#cd935a" d="M138 70h6v8h-2v10h-4v6h-6v-4h4V78h2z"/>
-                      <path fill="#8d5739" d="M136 80h6v4h-6z"/>
-                      <g class="cabinet-cat-tail-tip">
-                        <path fill="#51382c" d="M132 88h10v8h-4v6h-8v4h-10v-2h-4v-6h4v-2h8v-2h4z"/>
-                        <path fill="#cd935a" d="M134 88h6v6h-4v6h-8v4h-6v-2h-4v-2h4v-2h8v-2h4z"/>
-                        <path fill="#8d5739" d="M132 94h6v4h-6z"/>
-                        <path fill="#efd0a0" d="M122 100h8v4h-8v-2h-4v-2z"/>
-                      </g>
-                      <circle cx="137" cy="90" r="4.5" fill="#51382c"/>
-                      <circle cx="137" cy="90" r="3" fill="#cd935a"/>
-                    </g>
-                    <circle cx="141" cy="72" r="4.5" fill="#51382c"/>
-                    <circle cx="141" cy="72" r="3" fill="#cd935a"/>
-                  </g>
-                </g>
-                <path fill="#51382c" d="M22 48h8v-4h22v4h12v4h8v8H22v-2h-6v-6h6z"/>
-                <path fill="#edd0a2" d="M24 50h26v2h12v2h6v4H22v-2h-2v-2h4z"/>
-                <path fill="#b38a65" d="M28 54h2v4h-2zM36 54h2v4h-2zM58 56h2v2h-2z"/>
-                <g class="cabinet-cat-head" transform="translate(3 9) scale(.94 .84)">
+
+
+                <path fill="#51382c" d="M34 52h8v-2h24v2h8v4h4v4H34v-2h-4v-4h4z"/>
+                <path fill="#edd0a2" d="M36 54h8v-2h20v2h8v4H34v-2h2z"/>
+                <path fill="#b38a65" d="M42 56h2v2h-2zM48 56h2v2h-2zM58 54h2v4h-2zM68 56h2v2h-2z"/>
+                <g class="cabinet-cat-head" transform="translate(14 9) scale(.94 .84)">
                   <path fill="#51382c" d="M24 38V24h4v2h4v4h6v-2h10v-6h4v4h4v8h6v6h2v10h-4v4H30v-4h-6v-6h-2v-6z"/>
                   <path fill="#d99f60" d="M28 36v-8h2v4h8v-2h12v-4h2v10h6v6h2v6h-4v4H32v-4h-6v-8h2z"/>
                   <path fill="#e6b982" d="M30 36h24v4h4v8h-4v4H34v-4h-6v-6h2z"/>
@@ -335,6 +307,43 @@
                 </g>
                 </g>
               </svg>
+                <div class="cabinet-cat-breath"><svg class="cabinet-cat-art" viewBox="0 0 160 72" shape-rendering="crispEdges" aria-hidden="true"><g transform="translate(10 0) scale(.83 1)">
+                  <path fill="#51382c" d="M44 44h4v-6h10v-4h12v-4h16v-2h22v2h12v4h10v6h6v8h2v8h-6v4H58v-2H44z"/>
+                  <path fill="#c48750" d="M48 44h4v-4h10v-4h12v-4h32v2h12v4h10v6h4v10h-6v4H60v-2H48z"/>
+                  <path fill="#dda76a" d="M58 42h6v-4h14v-4h26v2h12v4h10v6h-8v4H60z"/>
+                  <path fill="#edbd80" d="M76 36h12v-2h14v2h10v2H80v4H68v-2h8z"/>
+                  <path fill="#8d5739" d="M78 34h4v8h-4v4h-4v-6h4zM98 32h4v8h-4v6h-4v-6h4zM118 38h4v8h-4v4h-4v-6h4z"/>
+                  <path fill="#b17645" d="M62 50h10v4h48v-4h10v4h-4v4H62z"/>
+                  <path fill="#ebca97" d="M48 46h8v-4h8v6h6v8H50v-2h-4v-6h2z"/>
+                </g></svg></div>
+                <div class="cabinet-cat-tail-anchor"><div class="cabinet-cat-tail">
+                  <svg class="cabinet-cat-art" viewBox="0 0 160 72" shape-rendering="crispEdges" aria-hidden="true">
+                    <path fill="#51382c" d="M126 48h10v6h6v8h4v14h-10V64h-4v-6h-6z"/>
+                    <path fill="#cd935a" d="M128 50h6v6h6v8h4v10h-6V62h-4v-6h-6z"/>
+                    <path fill="#e4af73" d="M130 50h4v6h4v8h2v8h-2V64h-4v-6h-4z"/>
+                    <path fill="#8d5739" d="M138 64h6v4h-6z"/>
+
+                    <circle cx="141" cy="72" r="4.5" fill="#51382c"/>
+                    <circle cx="141" cy="72" r="3" fill="#cd935a"/>
+                  </svg>
+                  <div class="cabinet-cat-tail-middle">
+                    <svg class="cabinet-cat-art" viewBox="0 0 160 72" shape-rendering="crispEdges" aria-hidden="true">
+                      <path fill="#51382c" d="M136 70h10v10h-2v10h-4v6h-10v-8h4V78h2z"/>
+                      <path fill="#cd935a" d="M138 70h6v8h-2v10h-4v6h-6v-4h4V78h2z"/>
+                      <path fill="#8d5739" d="M136 80h6v4h-6z"/>
+
+                      <circle cx="137" cy="90" r="4.5" fill="#51382c"/>
+                      <circle cx="137" cy="90" r="3" fill="#cd935a"/>
+                    </svg>
+                    <div class="cabinet-cat-tail-tip"><svg class="cabinet-cat-art" viewBox="0 0 160 72" shape-rendering="crispEdges" aria-hidden="true">
+                        <path fill="#51382c" d="M132 88h10v8h-4v6h-8v4h-10v-2h-4v-6h4v-2h8v-2h4z"/>
+                        <path fill="#cd935a" d="M134 88h6v6h-4v6h-8v4h-6v-2h-4v-2h4v-2h8v-2h4z"/>
+                        <path fill="#8d5739" d="M132 94h6v4h-6z"/>
+                        <path fill="#efd0a0" d="M122 100h8v4h-8v-2h-4v-2z"/>
+                      </svg></div>
+                  </div>
+                </div></div>
+              </div>
               <span class="cabinet-cat-sleep" aria-hidden="true"><span>Zzzz</span></span>
             </div>
 
@@ -419,22 +428,22 @@
           </div>
         </div>
         <div class="contact-signoff"><a class="contact-email" href="mailto:satyawidnyana55@gmail.com">satyawidnyana55@gmail.com <span aria-hidden="true">↗</span></a><nav class="contact-socials" aria-label="Social media">
-          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3.5 9h3v12h-3V9Zm5.5 0h3v1.6c.8-1.2 2-1.9 3.6-1.9 3 0 4.4 1.8 4.4 5.2V21h-3v-6.5c0-1.9-.6-3-2.2-3-1.8 0-2.8 1.2-2.8 3.4V21H9V9Z"/></svg></a>
-          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-          <a href="#" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 4c5 6 7 11 8 16M3 10c7 1 12-1 16-5M5 19c3-6 8-9 16-6"/></svg></a>
+          <span class="contact-social-static" role="img" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3.5 9h3v12h-3V9Zm5.5 0h3v1.6c.8-1.2 2-1.9 3.6-1.9 3 0 4.4 1.8 4.4 5.2V21h-3v-6.5c0-1.9-.6-3-2.2-3-1.8 0-2.8 1.2-2.8 3.4V21H9V9Z"/></svg></span>
+          <a href="https://www.instagram.com/syllvstone/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <span class="contact-social-static" role="img" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 4c5 6 7 11 8 16M3 10c7 1 12-1 16-5M5 19c3-6 8-9 16-6"/></svg></span>
         </nav><span>DESIGNED TO CONNECT.</span></div>
       </section>
-      
+
       <footer class="footer">
         <div class="footer-copy">© 2024 Satya Widnyana. All rights reserved.</div>
       </footer>
     </main>
     </div>
-  
+
   <!-- Project Case Study Modal: Studio Lightbox -->
-  <div class="dossier-modal-overlay" id="dossierModal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="dossier-modal-overlay" id="dossierModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project details" tabindex="-1">
     <div class="dossier-modal-container mode-lightbox" id="dossierModalContainer">
-      
+
       <!-- Top Header Bar -->
       <div class="dossier-header-bar">
         <div class="dossier-tab-badge">

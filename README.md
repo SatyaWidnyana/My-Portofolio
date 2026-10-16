@@ -43,3 +43,13 @@ Verifikasi membandingkan source CSS, fitur JavaScript, dan markup dengan snapsho
 ## Save point sebelum refactor
 
 Commit `683dd5d`, tag `save-3-before-structure-refactor`. Gunakan `git status` untuk melihat perubahan setelah save point.
+
+
+## Audit source aktif
+
+Gunakan `node tools/verify-current.cjs` untuk integritas source aktif dan `node tools/verify-server.mjs` untuk regresi keamanan server lokal. `verify-structure.cjs` membandingkan snapshot migrasi historis, sehingga desain baru tidak identik dengannya. Detail dan perintah audit browser tersedia di [laporan audit 16 Oktober 2026](docs/AUDIT_2026-10-16.md).
+
+
+## Build untuk Vercel
+
+Jalankan `node tools/build-deploy.mjs`, lalu `node tools/verify-deploy.mjs`. Konfigurasi Vercel memakai folder output `dist`; hanya file publik yang diterbitkan. Lihat [panduan deploy](docs/DEPLOYMENT.md).

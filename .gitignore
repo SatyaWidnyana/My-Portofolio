@@ -1,2 +1,11 @@
 # Generated browser profiles, traces, screenshots, and local diagnostics.
 /tmp/
+
+# Generated deployment output and local hosting metadata.
+/dist/
+/release/
+/.vercel/
+/.netlify/
+.env
+.env.*
+!.env.example

@@ -25,20 +25,24 @@ window.SatyaPortfolio.features['navigation'] = function () {
   const moonIcon = themeToggle.querySelector('.moon-icon');
 
   function setTheme(isDark) {
+    const page = document.documentElement;
+    if (isDark) page.setAttribute('data-theme', 'dark');
+    else page.removeAttribute('data-theme');
+    page.style.colorScheme = isDark ? 'dark' : 'light';
+    page.style.backgroundColor = isDark ? '#121212' : '#fafafa';
     if (isDark) {
       document.body.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
+      try { localStorage.setItem('theme', 'dark'); } catch { /* Theme still works when storage is blocked. */ }
     } else {
       document.body.removeAttribute('data-theme');
-      localStorage.setItem('theme', 'light');
+      try { localStorage.setItem('theme', 'light'); } catch { /* Theme still works when storage is blocked. */ }
     }
   }
 
   // Check saved theme or system preference
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    setTheme(true);
-  }
+  let savedTheme = null;
+  try { savedTheme = localStorage.getItem('theme'); } catch { /* Use the system preference. */ }
+  setTheme(savedTheme === 'dark' || (savedTheme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches));
 
   themeToggle.addEventListener('click', () => {
     const isDark = document.body.hasAttribute('data-theme');
@@ -50,9 +54,17 @@ window.SatyaPortfolio.features['navigation'] = function () {
   const navbar = document.getElementById('navbar');
   
   if (mobileMenuBtn && navbar) {
+    let closeTimer;
+    const setMenuState = open => {
+      mobileMenuBtn.setAttribute('aria-expanded', String(open));
+      mobileMenuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    setMenuState(false);
     const closeMenu = () => {
+      setMenuState(false);
       navbar.classList.add('menu-closing');
-      setTimeout(() => {
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(() => {
         navbar.classList.remove('menu-open', 'menu-closing');
       }, 400); // Matches CSS fadeOutMenu animation duration
     };
@@ -62,9 +74,23 @@ window.SatyaPortfolio.features['navigation'] = function () {
         closeMenu();
       } else if (!navbar.classList.contains('menu-closing')) {
         navbar.classList.add('menu-open');
+        setMenuState(true);
       }
     });
     
+    navbar.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && navbar.classList.contains('menu-open')) {
+        closeMenu();
+        mobileMenuBtn.focus();
+      }
+    });
+    window.matchMedia('(min-width: 769px)').addEventListener?.('change', event => {
+      if (event.matches) {
+        clearTimeout(closeTimer);
+        navbar.classList.remove('menu-open', 'menu-closing');
+        setMenuState(false);
+      }
+    });
     // Close menu when a link is clicked
     const navLinksList = navbar.querySelectorAll('.nav-links a, .nav-action .btn-primary');
     navLinksList.forEach(link => {

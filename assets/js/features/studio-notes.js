@@ -7,6 +7,8 @@ window.SatyaPortfolio.features['studio-notes'] = function () {
   window.SatyaPortfolio.observeMotion?.(root, visible => {
     byId('navbar')?.classList.toggle('cabinet-in-view', visible);
   });
+  // The cat can leave the viewport while the tall cabinet is still visible.
+  window.SatyaPortfolio.observeMotion?.(root.querySelector('.cabinet-cat'), () => {});
   const chapters = [...root.querySelectorAll('[data-note-chapter]')];
   const panels = [...root.querySelectorAll('[data-note-panel]')];
   const skillButtons = [...root.querySelectorAll('[data-note-skill]')];

@@ -149,6 +149,7 @@ window.SatyaPortfolio.features['intro'] = function () {
       document.getElementById('transition-grid').hidden = true;
       overlay.style.display = 'none';
       wrapper.removeAttribute('inert');
+      document.getElementById('navbar')?.classList.remove('hidden-on-load');
       if (window.snapLanyardToZero) {
         window.snapLanyardToZero();
       }

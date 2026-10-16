@@ -241,6 +241,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     'satya-portfolio': {
       docId: 'CASE STUDY // #04',
       title: 'My Portofolio',
+      status: 'current',
       category: 'Personal Creative Portfolio',
       year: '2024',
       role: 'Creative Direction & Fullstack',
@@ -399,9 +400,10 @@ window.SatyaPortfolio.features['lightbox'] = function () {
   function updateLiveLink(link, data, liveLabel) {
     if (!link) return;
     const developing = data.status === 'development';
-    (link.querySelector('span') || link).textContent = developing ? 'In Development' : liveLabel;
+    const currentSite = data.status === 'current';
+    (link.querySelector('span') || link).textContent = currentSite ? 'You are viewing this website' : developing ? 'In Development' : liveLabel;
     link.classList.toggle('project-in-development', developing);
-    if (developing) {
+    if (developing || currentSite) {
       link.removeAttribute('href');
       link.setAttribute('aria-disabled', 'true');
       link.setAttribute('role', 'status');
@@ -486,6 +488,9 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     container.scrollTop = 0;
   }
 
+  let dossierReturnFocus = null;
+  let dossierBackgroundState = [];
+  let dossierBodyOverflow = '';
   function openDossier(projectId) {
     const folder = document.getElementById('portfolio-folder');
     if (!folder || !folder.classList.contains('is-open')) return;
@@ -705,6 +710,15 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     document.querySelectorAll('[data-extension-card]').forEach(card => { card.hidden = false; });
     renderProjectSearch('');
 
+    // Preserve keyboard position and keep background controls out of the modal focus order.
+    if (!dossierModal.classList.contains('active')) {
+      dossierReturnFocus = document.activeElement;
+      dossierBodyOverflow = document.body.style.overflow;
+      dossierBackgroundState = [document.getElementById('main-wrapper'), document.getElementById('navbar')]
+        .filter(Boolean).map(element => ({ element, inert: element.inert }));
+      document.getElementById('main-wrapper')?.classList.add('modal-background');
+      dossierBackgroundState.forEach(({ element }) => { element.inert = true; });
+    }
     // Show modal
     dossierModal.classList.remove('overview-opening');
     dossierModal.classList.add('active');
@@ -712,15 +726,20 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     document.body.style.overflow = 'hidden';
     void dossierModal.offsetWidth;
     dossierModal.classList.add('overview-opening');
+    (dossierCloseBtn || dossierModal).focus({ preventScroll: true });
     if (catExtensionEnabled) startCatCompanion();
   }
 
   function closeDossier() {
-    if (!dossierModal) return;
+    if (!dossierModal?.classList.contains('active')) return;
     dossierModal.classList.remove('active');
     dossierModal.classList.remove('overview-opening');
     dossierModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    document.body.style.overflow = dossierBodyOverflow;
+    dossierBackgroundState.forEach(({ element, inert }) => { element.inert = inert; });
+    dossierBackgroundState = [];
+    document.getElementById('main-wrapper')?.classList.remove('modal-background');
+    if (dossierReturnFocus?.isConnected) dossierReturnFocus.focus({ preventScroll: true });
     stopCatCompanion();
     releaseMusicAudio();
   }
@@ -1045,10 +1064,11 @@ window.SatyaPortfolio.features['lightbox'] = function () {
   const editorCatTrack = document.getElementById('editorCatTrack');
   const editorCat = document.getElementById('editorCat');
   const editorCatSpeech = document.getElementById('editorCatSpeech');
+  const editorReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const catPoseMessages = { walk: '', sit: '…', sleep: 'z z', eat: 'nom' };
 
   function catRouteIsCurrent(token) {
-    return catExtensionEnabled && token === catCycleToken && dossierModal?.classList.contains('active');
+    return catExtensionEnabled && !document.hidden && !editorReducedMotion.matches && token === catCycleToken && dossierModal?.classList.contains('active');
   }
 
   function catMaxX() {
@@ -1176,7 +1196,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
   }
 
   function startCatCompanion() {
-    if (!catExtensionEnabled || !editorCatTrack || !dossierModal?.classList.contains('active')) return;
+    if (!catExtensionEnabled || !editorCatTrack || document.hidden || !dossierModal?.classList.contains('active')) return;
     window.clearTimeout(catRoutineTimeout);
     cancelCatMotion();
     catCycleToken += 1;
@@ -1190,6 +1210,10 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     dossierModal.classList.remove('cat-extension-enabled');
     void editorCatTrack.offsetWidth;
     dossierModal.classList.add('cat-extension-enabled');
+    if (editorReducedMotion.matches) {
+      setCatPose('sleep');
+      return;
+    }
     const catParts = [...editorCat.querySelectorAll('.cat-part')];
     Promise.all(catParts.map(part => part.decode?.().catch(() => null) || Promise.resolve()))
       .then(() => {
@@ -1213,6 +1237,15 @@ window.SatyaPortfolio.features['lightbox'] = function () {
       editorCatTrack.classList.remove('cat-lane-upper', 'cat-lane-lower');
     }
   }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopCatCompanion();
+    else if (catExtensionEnabled) startCatCompanion();
+  });
+  editorReducedMotion.addEventListener?.('change', () => {
+    stopCatCompanion();
+    if (catExtensionEnabled) startCatCompanion();
+  });
 
   catExtensionToggle?.addEventListener('click', () => {
     catExtensionEnabled = !catExtensionEnabled;
@@ -1295,6 +1328,14 @@ window.SatyaPortfolio.features['lightbox'] = function () {
   }
 
   window.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab' && dossierModal?.classList.contains('active')) {
+      const focusable = [...dossierModal.querySelectorAll('a[href], button, input, select, textarea, [tabindex]')]
+        .filter(element => !element.disabled && element.tabIndex >= 0 && !element.closest('[inert]') && element.getClientRects().length && getComputedStyle(element).visibility !== 'hidden');
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (!first) { e.preventDefault(); dossierModal.focus(); }
+      else if (e.shiftKey && (document.activeElement === first || !dossierModal.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && (document.activeElement === last || !dossierModal.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+    }
     if (e.key === 'Escape' && dossierModal && dossierModal.classList.contains('active')) {
       closeDossier();
     }

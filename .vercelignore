@@ -1,0 +1,10 @@
+.git/
+.savepoints/
+archive/
+work/
+tmp/
+release/
+dist/
+docs/
+.env
+.env.*

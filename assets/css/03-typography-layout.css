@@ -68,7 +68,7 @@
   transform: translateY(-300vh);
 }
 
-body:has(.main-wrapper[inert]) {
+body:has(.main-wrapper[inert]:not(.modal-background)) {
   overflow: hidden;
   height: 100vh;
 }
@@ -101,3 +101,6 @@ body:has(.main-wrapper[inert]) {
   transition: none !important;
 }
 
+
+/* A modal uses inert for focus control without replaying the intro transition. */
+.main-wrapper.modal-background { opacity: 1; transform: none; }

@@ -42,6 +42,10 @@ window.SatyaPortfolio.features['portfolio'] = function () {
     folderBtn.classList.add('is-open');
     portfolioSection?.classList.add('is-open');
     syncPaperAccess();
+    if (swipeThumb) {
+      swipeThumb.tabIndex = -1;
+      swipeThumb.setAttribute('aria-expanded', 'true');
+    }
     if (!desktopMotion) return;
     folderBtn.classList.add('is-opening');
     const offsets = following.map((element, index) => before[index] - element.getBoundingClientRect().top);
@@ -78,6 +82,13 @@ window.SatyaPortfolio.features['portfolio'] = function () {
   const swipeThumb = document.getElementById('swipe-thumb');
   
   if (swipeContainer && swipeThumb) {
+    swipeThumb.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openFolder();
+        folderPapers[0]?.focus({ preventScroll: true });
+      }
+    });
     let isDragging = false;
     let startX = 0;
     let currentX = 0;

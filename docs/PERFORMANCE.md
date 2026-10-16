@@ -180,3 +180,10 @@ style recalculation, dan paint. Ini perbandingan satu run, bukan jaminan FPS.
 Profil mobile dan `cabinet-theme-desktop.json` lolos pemeriksaan resize,
 buka ulang cepat, panel tertutup nol tinggi, overflow, kedua arah pergantian
 tema, ketersediaan logo Lucide, dan ketiadaan nama proyek di cabinet.
+
+
+## Audit 16 Oktober 2026
+
+Animasi kucing cabinet dipindahkan dari grup SVG bergerak ke layer HTML dengan SVG statis. Profil idle sekitar 2 detik (CPU 4x) berubah dari 168 layout/336 paint menjadi 0/0 di desktop, dan 167/334 menjadi 0/0 di mobile. Napas dan ekor tetap berjalan saat terlihat; lifecycle kini memantau kucing sendiri. Style recalculation dan lonjakan frame pada pembukaan laci pertama masih ada. Kondisi run sebelum/sesudah berbeda, sehingga tidak diklaim sebagai perbandingan FPS terkontrol.
+
+Lihat [laporan audit](AUDIT_2026-10-16.md) untuk bukti, keamanan, batasan, dan perintah pengujian.

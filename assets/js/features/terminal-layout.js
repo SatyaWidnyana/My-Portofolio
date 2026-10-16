@@ -12,7 +12,7 @@ window.SatyaPortfolio.features['terminal-layout'] = function () {
         fixTermV2.style.maxWidth = '';
         return;
       }
-      
+
       // Ambil ukuran spesifik HANYA dari teks WIDNYANA
       const widnyanaDummy = document.getElementById('widnyana-dummy');
       if (widnyanaDummy) {
@@ -25,43 +25,46 @@ window.SatyaPortfolio.features['terminal-layout'] = function () {
         }
       }
     };
-    
+
     // Setel awal (mungkin menggunakan font fallback yang lebih lebar)
     lockTerminalWidth();
-    
+
     // Setel ulang SETELAH semua font (termasuk Anton) selesai dimuat!
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => {
         lockTerminalWidth();
       });
     }
-    
+
     // Fallback tambahan saat seluruh halaman benar-benar selesai dimuat
     window.addEventListener('load', lockTerminalWidth);
-    
+
     // Sistem Morph & Auto-Reload saat pindah view (Desktop <-> Mobile)
     let currentView = window.innerWidth <= 992 ? 'mobile' : 'desktop';
     let resizeTimer;
-    
+    let reloadPending = false;
+
     window.addEventListener('resize', () => {
+      if (reloadPending) return;
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         const newView = window.innerWidth <= 992 ? 'mobile' : 'desktop';
-        
+
         // Jika user melakukan drag dari desktop ke mobile atau sebaliknya
-        if (currentView !== newView) {
-          currentView = newView; 
-          
+        if (currentView !== newView && !reloadPending) {
+          reloadPending = true;
+          currentView = newView;
+
           // Memulai transisi blur morphing layar penuh
           document.body.classList.add('view-changing');
-          
+
           // Penuh 100% Reload bersih untuk menjamin layout tidak nyangkut!
           setTimeout(() => {
             window.location.reload();
-          }, 450); 
+          }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 450);
           return;
         }
-        
+
         // Jika resize biasa (masih dalam view yang sama), jalankan kalkulasi seperti biasa
         lockTerminalWidth();
       }, 50);
