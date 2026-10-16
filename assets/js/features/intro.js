@@ -170,28 +170,23 @@ window.SatyaPortfolio.features['intro'] = function () {
     const loadingWrapper = document.getElementById('intro-loading-wrapper');
     const percentEl = document.getElementById('intro-percent');
 
-    // Start loading bar animation
+    // One clock drives both the number and the composited bar fill.
     const totalDuration = greetings.reduce((sum, item) => sum + item.delay, 0) + 500;
-    if (progressEl) {
-      progressEl.style.transition = `width ${totalDuration}ms linear`;
-      // Trigger reflow
-      void progressEl.offsetWidth; 
-      progressEl.style.width = '100%';
-
-      if (percentEl) {
-        let startTime = null;
-        function updatePercent(timestamp) {
-          if (overlay.style.display === 'none') return; // Stop if skipped
-          if (!startTime) startTime = timestamp;
-          const progress = Math.min((timestamp - startTime) / totalDuration, 1);
-          percentEl.textContent = Math.floor(progress * 100) + '%';
-          if (progress < 1) {
-            requestAnimationFrame(updatePercent);
-          }
-        }
-        requestAnimationFrame(updatePercent);
+    const progressFinished = new Promise(resolve => {
+      let startTime = null, lastPercent = -1;
+      function updateProgress(timestamp) {
+        if (overlay.style.display === 'none') return resolve();
+        startTime ??= timestamp;
+        const progress = Math.min((timestamp - startTime) / totalDuration, 1);
+        if (progressEl) progressEl.style.transform = 'scaleX(' + progress + ')';
+        const percent = Math.floor(progress * 100);
+        if (percentEl && percent !== lastPercent) percentEl.textContent = percent + '%';
+        lastPercent = percent;
+        if (progress < 1) requestAnimationFrame(updateProgress);
+        else resolve();
       }
-    }
+      requestAnimationFrame(updateProgress);
+    });
 
     for (const item of greetings) {
       greeting.textContent = item.text;
@@ -202,6 +197,8 @@ window.SatyaPortfolio.features['intro'] = function () {
         { opacity: 0, filter: 'blur(5px)', transform: 'translateY(-50%) scale(1.04)', offset: 1 }
       ], { duration: item.delay, easing: 'ease-in-out' });
     }
+
+    await progressFinished;
 
     // Hide loading bar smoothly
     if (loadingWrapper) {

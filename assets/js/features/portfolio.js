@@ -9,6 +9,12 @@ window.SatyaPortfolio.features['portfolio'] = function () {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             portfolioSection.classList.add('in-view');
+            if (window.matchMedia('(max-width: 768px)').matches) {
+              portfolioSection.querySelectorAll('.folder-paper img').forEach(image => {
+                image.loading = 'eager';
+                image.decode?.().catch(() => {});
+              });
+            }
             folderObserver.disconnect();
           }
         });
@@ -44,6 +50,7 @@ window.SatyaPortfolio.features['portfolio'] = function () {
     folderBtn.classList.add('is-open');
     portfolioSection?.classList.add('is-open');
     syncPaperAccess();
+    folderBtn.classList.remove('is-preparing');
     if (swipeThumb) {
       swipeThumb.tabIndex = -1;
       swipeThumb.setAttribute('aria-expanded', 'true');
@@ -123,10 +130,12 @@ window.SatyaPortfolio.features['portfolio'] = function () {
     };
 
     const cleanupListeners = () => {
+      folderBtn?.classList.remove('is-preparing');
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onEnd);
       window.removeEventListener('touchmove', onMove);
       window.removeEventListener('touchend', onEnd);
+      window.removeEventListener('touchcancel', onEnd);
     };
 
     const onEnd = () => {
@@ -146,6 +155,7 @@ window.SatyaPortfolio.features['portfolio'] = function () {
     const onStart = (e) => {
       if (e.target.closest('#swipe-thumb')) {
         isDragging = true;
+        if (window.matchMedia('(max-width: 768px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) folderBtn?.classList.add('is-preparing');
         swipeThumb.classList.add('swiping');
         swipeThumb.style.transition = 'none';
         
@@ -156,6 +166,7 @@ window.SatyaPortfolio.features['portfolio'] = function () {
         window.addEventListener('mouseup', onEnd);
         window.addEventListener('touchmove', onMove, { passive: false });
         window.addEventListener('touchend', onEnd);
+        window.addEventListener('touchcancel', onEnd);
       }
     };
 

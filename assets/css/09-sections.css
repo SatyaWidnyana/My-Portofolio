@@ -836,3 +836,27 @@ body:not([data-theme="dark"]) #about.about-cabinet .cabinet-case {
 @media (max-width: 768px) { .cabinet-cat-rig { transform: none; } }
 
 .contact-signoff .contact-socials .contact-social-static { display: grid; place-items: center; min-width: 44px; min-height: 44px; color: var(--post-muted); cursor: default; }
+
+/* Reserve letter layout once; animate a fixed paper surface. */
+  .contact-letter-tray.contact-composite-motion { transition: none; }
+  .contact-composite-motion[data-state="opening"] .contact-letter,
+  .contact-composite-motion[data-state="closing"] .contact-letter {
+    top: 0; left: var(--paper-open-left); width: calc(100% + var(--paper-open-extra)); height: var(--contact-paper-height);
+    transform-origin: center 65%; will-change: transform; z-index: 1;
+  }
+  .contact-composite-motion.paper-raised .contact-letter { z-index: 4; }
+  .contact-composite-motion[data-state="opening"] .contact-letter { animation-name: contact-mobile-out; }
+  .contact-composite-motion[data-state="closing"] .contact-letter { animation-name: contact-mobile-in; }
+  .contact-composite-motion[data-state="opening"] .contact-letter-form { opacity: 0; visibility: hidden; transition: none; }
+  .contact-composite-motion[data-state="open"] .contact-letter-form { transition-delay: 0s; }
+  .contact-composite-motion[data-state="closing"] .contact-letter-invitation { opacity: 0; transition: none; }
+  @keyframes contact-mobile-out {
+    0% { transform: translateY(var(--paper-start-y)) rotate(-3deg) scale(var(--paper-start-sx), var(--paper-start-sy)); }
+    44% { transform: translateY(var(--paper-lift-y)) rotate(-1deg) scale(var(--paper-lift-sx), var(--paper-lift-sy)); }
+    100% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+  }
+  @keyframes contact-mobile-in {
+    0% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+    55% { transform: translateY(var(--paper-lift-y)) rotate(-1deg) scale(var(--paper-lift-sx), var(--paper-lift-sy)); }
+    100% { transform: translateY(var(--paper-start-y)) rotate(-3deg) scale(var(--paper-start-sx), var(--paper-start-sy)); }
+  }

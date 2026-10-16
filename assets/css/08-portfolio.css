@@ -770,6 +770,10 @@
   }
   [data-theme="dark"] .projects { --folder-noise: url('../images/folder-grain-dark.png'); }
   .portfolio-folder { --w: inherit; }
+  .portfolio-folder.is-preparing,
+  .portfolio-folder.is-preparing .folder-front,
+  .portfolio-folder.is-preparing .folder-back-right,
+  .portfolio-folder.is-preparing .folder-back-left,
   .portfolio-folder.is-opening,
   .portfolio-folder.is-opening .folder-front,
   .portfolio-folder.is-opening .folder-back-right,

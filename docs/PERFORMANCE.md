@@ -232,3 +232,14 @@ Urutan 3 lipatan, durasi 3.5 detik + slide foto 1.5 detik, bayangan akhir, jarak
 Run 390px CPU 4x, jendela awal 1.2 detik: LayoutCount 41 -> 1, Paint 220 -> 17, LayoutDuration 69.34 -> 1.23ms, Paint duration 378.10 -> 18.31ms, dan daftar kegagalan compositing menjadi kosong. Run seluruh 5.2 detik mencatat satu layout dan 20 paint; scroll sesudahnya nol layout dan nol paint. Masih ada style recalculation serta lonjakan frame awal; angka ini bukan jaminan FPS ponsel. Pengujian browser/headless berbeda dari perangkat fisik. Laporan tersimpan sementara di tmp/folder-folder-mobile-before2.json, tmp/folder-folder-mobile-after2.json, dan tmp/folder-mobile-full-light.json.
 
 Audit fungsi mobile lolos: menu, semua proyek, fokus modal, draft Gmail, terminal, breakpoint reload, serta nol overflow atau error runtime.
+
+
+### Loading, surat, dan awal swipe — 17 Oktober 2026
+
+Bar loading intro kini menggunakan scaleX, dengan angka dan fill dari timestamp requestAnimationFrame yang sama. Intro menunggu angka mencapai 100 sebelum menyembunyikan loading. Ini juga menghindari transisi width yang terputus ketika bootstrap tema menyuppress transisi. Uji per-frame mencatat 649 sampel: fill tidak pernah penuh di bawah 100%, selisih maksimal terhadap angka di bawah 1% (pembulatan), dan sampel akhir 100% / fill 1. Lanyard hanya turun 20px lagi, top mobile -490px -> -470px; ukuran dan physics tetap save-16.
+
+Surat di mobile dan desktop memakai ukuran permukaan tetap selama animasi, lalu transform translate/rotate/scale untuk jalur keluar-masuk. Ruang tray berubah sekali. Perpindahan lapisan depan/belakang dilakukan sekali melalui timer, sehingga keyframe hanya berisi transform. Form baru muncul setelah surat mencapai posisi akhir; inert, validasi dan draft Gmail tetap bekerja. Ukuran dan posisi akhir mobile identik dengan baseline (331x690 pada viewport 390px), serta tray tertutup tetap 450px.
+
+Profil CPU 4x pada 390px: LayoutCount membuka 87 -> 2, menutup 99 -> 4; paint membuka 244 -> 14, menutup 255 -> 15. Ini pengukuran headless, bukan jaminan FPS perangkat fisik. Desktop 1440px juga lolos buka/tutup dan overflow. Audit fungsi mobile lolos tanpa error runtime. Laporan baseline/hasil ada di tmp/cabinet-letter-before.json, tmp/cabinet-letter-after.json dan tmp/cabinet-letter-desktop-final.json.
+
+Folder menyiapkan layer transform sejak awal swipe (sebelum ambang buka tercapai), membersihkannya ketika swipe dibatalkan termasuk touchcancel, dan meminta decode gambar proyek ketika section terlihat. Uji browser memastikan layer siap saat swipe dan dilepas saat pembatalan; belum ada klaim perbandingan FPS tambahan untuk perubahan ini.

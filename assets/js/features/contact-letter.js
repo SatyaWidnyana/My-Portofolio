@@ -7,11 +7,14 @@ window.SatyaPortfolio.features['contact-letter'] = function () {
   const form = tray.querySelector('form');
   const label = toggle.querySelector('.contact-toggle-label');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let settleTimer;
+  tray.classList.add('contact-composite-motion');
+  let settleTimer, layerTimer;
   toggle.hidden = false;
 
   function settle(open) {
     clearTimeout(settleTimer);
+    clearTimeout(layerTimer);
+    tray.classList.toggle('paper-raised', open);
     tray.dataset.state = open ? 'open' : 'closed';
     toggle.disabled = false;
     if (open) {
@@ -25,6 +28,22 @@ window.SatyaPortfolio.features['contact-letter'] = function () {
   }
   function setOpen(open) {
     if (toggle.disabled || open === (tray.dataset.open === 'true')) return;
+    {
+      const mobileMotion = window.matchMedia('(max-width: 768px)').matches;
+      const width = tray.clientWidth, height = parseFloat(getComputedStyle(tray).getPropertyValue('--contact-paper-height'));
+      const props = {
+        '--paper-open-left': mobileMotion ? '-8px' : '-36px',
+        '--paper-open-extra': mobileMotion ? '16px' : '72px',
+        '--paper-start-sx': (width - (mobileMotion ? 32 : 48)) / (width + (mobileMotion ? 16 : 72)), '--paper-start-sy': 350 / height,
+        '--paper-lift-sx': (width - (mobileMotion ? 24 : 32)) / (width + (mobileMotion ? 16 : 72)), '--paper-lift-sy': 410 / height,
+        '--paper-start-y': (30 + .65 * (350 - height)) + 'px',
+        '--paper-lift-y': ((mobileMotion ? -175 : -200) + .65 * (410 - height)) + 'px'
+      };
+      for (const [key, value] of Object.entries(props)) tray.style.setProperty(key, value);
+      clearTimeout(layerTimer);
+      tray.classList.toggle('paper-raised', !open);
+      if (!reducedMotion.matches) layerTimer = setTimeout(() => tray.classList.toggle('paper-raised', open), open ? 495 : 560);
+    }
     toggle.disabled = true;
     tray.dataset.open = String(open);
     tray.dataset.state = open ? 'opening' : 'closing';
