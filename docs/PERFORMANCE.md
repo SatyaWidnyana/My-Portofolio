@@ -243,3 +243,12 @@ Surat di mobile dan desktop memakai ukuran permukaan tetap selama animasi, lalu 
 Profil CPU 4x pada 390px: LayoutCount membuka 87 -> 2, menutup 99 -> 4; paint membuka 244 -> 14, menutup 255 -> 15. Ini pengukuran headless, bukan jaminan FPS perangkat fisik. Desktop 1440px juga lolos buka/tutup dan overflow. Audit fungsi mobile lolos tanpa error runtime. Laporan baseline/hasil ada di tmp/cabinet-letter-before.json, tmp/cabinet-letter-after.json dan tmp/cabinet-letter-desktop-final.json.
 
 Folder menyiapkan layer transform sejak awal swipe (sebelum ambang buka tercapai), membersihkannya ketika swipe dibatalkan termasuk touchcancel, dan meminta decode gambar proyek ketika section terlihat. Uji browser memastikan layer siap saat swipe dan dilepas saat pembatalan; belum ada klaim perbandingan FPS tambahan untuk perubahan ini.
+
+
+### Terminal dan lima tahap proyek — 17 Oktober 2026
+
+Tombol Enter/Delete mobile dipindahkan dari posisi absolute ke baris grid tersendiri dengan tinggi minimum 40px. Prompt/perintah memakai font responsif 11–14px, kursor dikelompokkan bersama perintah; wrapper display: contents mempertahankan flex desktop. Uji geometri pada 320/390/768px memastikan kedua tombol berjarak 10px dari baris perintah tanpa overlap atau potongan teks. Audit browser juga menguji alur Enter, pengetikan bio, Delete dan reset.
+
+Pada journey mobile (sampai 900px), pergantian tahap tidak lagi menganimasikan max-height, margin, min-height, max-width atau box-shadow. Layout dipasang sekali; posisi kartu berikutnya memakai FLIP 180ms dan isi memakai fade/translate 160ms. Animasi sebelumnya dibatalkan dengan posisi saat ini sebagai awal ketika diklik cepat. Desktop mempertahankan interaksi panelnya. Kartu tahap menonaktifkan native tap highlight serta user-select untuk menghilangkan blok biru; fokus keyboard merah tetap tersedia.
+
+Profil 390px CPU 4x untuk rangkaian lima tahap: LayoutCount 150 -> 73; Paint 650 -> 233; Paint duration 1500.19 -> 158.54ms. Angka headless ini bukan jaminan FPS ponsel; masih ada pekerjaan rendering animasi dekorasi modal. Uji fungsi memeriksa kelima isi tidak terpotong, satu tahap aktif, Enter untuk menutup, klik cepat, CSS tap highlight transparan, serta nol error runtime. Laporan sementara di tmp/cabinet-journey-before.json dan tmp/cabinet-journey-after.json.

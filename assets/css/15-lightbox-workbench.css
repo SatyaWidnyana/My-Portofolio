@@ -2177,3 +2177,17 @@ body[data-theme="dark"] .dossier-modal-container.mode-lightbox {
     transition: none;
   }
 }
+
+/* Journey stops are controls: suppress native touch highlighting and selection. */
+.dossier-modal-container.mode-lightbox .lb-features-grid.is-journey .lb-feature-card,
+.dossier-modal-container.mode-lightbox .lb-features-grid.is-journey .lb-feature-card * {
+  -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
+}
+@media (max-width: 900px) {
+  .dossier-modal-container.mode-lightbox .lb-features-grid.is-journey .lb-feature-card { transition-property: opacity, translate; }
+  .dossier-modal-container.mode-lightbox .lb-features-grid.is-journey .lb-feature-copy { transition: none; }
+  .dossier-modal-container.mode-lightbox .lb-features-grid.is-journey .lb-feature-card.is-active .lb-feature-copy { min-height: 54px; box-shadow: none; }
+  .dossier-modal-container.mode-lightbox .lb-features-grid.is-journey .lb-feature-copy p { display: none; max-height: none; margin: 0; transition: none; }
+  .dossier-modal-container.mode-lightbox .lb-features-grid.is-journey .lb-feature-card.is-active .lb-feature-copy p { display: block; max-height: none; margin-top: 9px; }
+  .dossier-modal-container.mode-lightbox .lb-features-grid.is-journey .lb-feature-icon { transition: transform 160ms ease; }
+}

@@ -218,3 +218,15 @@
 .stat-item h3 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 400; line-height: 1; color: var(--text); }
 .stat-item p { font-size: 0.8rem; letter-spacing: 2px; color: var(--text-muted); margin-top: 10px; font-weight: 500;}
 
+
+/* Keep the cursor attached to the command; desktop keeps its existing flex items. */
+.term-command-group { display: contents; }
+/* Give mobile terminal actions their own row, clear of the command. */
+@media (max-width: 768px) {
+  .term-input-line { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 6px; text-align: left; font-size: clamp(11px, 3.1vw, 14px); }
+  .term-prompt, .term-cmd { white-space: nowrap; }
+  .term-command-group { display: inline-flex; align-items: center; justify-self: start; gap: 4px; }
+  .term-cursor { margin-left: 0; }
+  .term-btn-group { position: static; grid-column: 1 / -1; justify-self: end; margin: 0; padding-bottom: 4px; }
+  .term-run-btn, .term-del-btn { min-height: 40px; padding: 7px 15px; font-size: .75rem; line-height: 1.2; white-space: nowrap; }
+}

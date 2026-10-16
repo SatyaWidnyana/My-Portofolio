@@ -623,7 +623,12 @@ window.SatyaPortfolio.features['lightbox'] = function () {
       });
       lbFeaturesGrid.replaceChildren(...featureCards);
       if (lbFeaturesGrid.classList.contains('is-journey')) {
+        const stopAnimations = new Map();
         const setActiveJourneyStop = selectedCard => {
+          const mobileMotion = window.matchMedia('(max-width: 900px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const before = mobileMotion ? featureCards.map(card => card.getBoundingClientRect().top) : [];
+          stopAnimations.forEach(animation => animation.cancel());
+          stopAnimations.clear();
           featureCards.forEach(card => {
             const isActive = card === selectedCard;
             const title = card.querySelector('h4')?.textContent || 'Journey stop';
@@ -632,6 +637,22 @@ window.SatyaPortfolio.features['lightbox'] = function () {
             card.setAttribute('aria-label', `${title}. Select to ${isActive ? 'hide' : 'reveal'} details.`);
             card.querySelector('p')?.setAttribute('aria-hidden', String(!isActive));
           });
+          if (mobileMotion) {
+            const after = featureCards.map(card => card.getBoundingClientRect().top);
+            featureCards.forEach((card, index) => {
+              const offset = before[index] - after[index];
+              if (Math.abs(offset) < .5 || !card.animate) return;
+              const animation = card.animate([{ transform: 'translateY(' + offset + 'px)' }, { transform: 'translateY(0)' }], { duration: 180, easing: 'cubic-bezier(.2,.72,.2,1)' });
+              stopAnimations.set(card, animation);
+              animation.finished.then(() => { if (stopAnimations.get(card) === animation) stopAnimations.delete(card); }).catch(() => {});
+            });
+            const detail = selectedCard?.querySelector('p');
+            if (detail?.animate) {
+              const animation = detail.animate([{ opacity: 0, transform: 'translateY(-4px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 160, easing: 'ease-out' });
+              stopAnimations.set(detail, animation);
+              animation.finished.then(() => { if (stopAnimations.get(detail) === animation) stopAnimations.delete(detail); }).catch(() => {});
+            }
+          }
         };
         featureCards.forEach(card => {
           const toggleStop = () => setActiveJourneyStop(card.classList.contains('is-active') ? null : card);
