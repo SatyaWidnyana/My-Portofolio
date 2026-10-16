@@ -12,9 +12,11 @@ window.SatyaPortfolio.createCabinetMotion = function (root) {
   cabinet.prepend(shell, feet);
   root.classList.add('cabinet-composite-motion');
   const panels = [...cabinet.querySelectorAll('.cabinet-panel')];
-  const moving = [...cabinet.querySelectorAll('.cabinet-heading, .cabinet-panel, .cabinet-inventory, .cabinet-plinth')];
+  const moving = [...cabinet.querySelectorAll('.cabinet-heading, .cabinet-panel, .cabinet-inventory, .cabinet-plinth, .cabinet-cat')];
   const heading = root.querySelector('.notes-header');
   if (heading) moving.push(heading);
+  const ground = root.querySelector('.cabinet-ground');
+  if (ground) moving.push(ground);
   ['.contact', '.footer'].forEach(selector => {
     const element = document.querySelector(selector);
     if (element) moving.push(element);

@@ -441,13 +441,17 @@
   padding: 9px 12px;
   border-radius: 3px;
   background: #0e639c;
-  color: #fff;
+  color: #f7f0e2;
   font: 500 0.75rem/1.2 Inter, sans-serif;
+}
+
+#dossierModal :is(#lbLiveBtn, #dossierLiveBtnImg):not(.project-in-development) {
+  color: #f7f0e2;
 }
 
 #dossierModal .project-in-development {
   background: #e9dfc6;
-  color: #6a5427;
+  color: #c84739;
   border: 1px solid #c6b58c;
   box-shadow: none;
   cursor: default;
