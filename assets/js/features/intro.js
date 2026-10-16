@@ -66,6 +66,12 @@ window.SatyaPortfolio.features['intro'] = function () {
     scrambleHasRun = true;
     
     if (reduced.matches) return;
+    // Keep mobile text stable instead of repeatedly rebuilding and repainting letters.
+    if (matchMedia('(max-width: 992px)').matches) {
+      if (window.triggerLanyardDrop) window.triggerLanyardDrop();
+      document.querySelector('.hero-subtitle')?.classList.add('glitch-ready');
+      return;
+    }
 
     // Referensi teks Hello I'm
     const scriptFont = document.querySelector('.script-font');
@@ -139,6 +145,8 @@ window.SatyaPortfolio.features['intro'] = function () {
   }
 
   function animate(el, frames, options) {
+    // Animated blur repeatedly rasterizes text on mobile GPUs.
+    if (matchMedia('(max-width: 992px)').matches) frames = frames.map(({ filter, ...frame }) => frame);
     const a = el.animate(frames, { easing, fill: 'both', ...options });
     animations.add(a);
     return a.finished.catch(() => {}).then(() => { animations.delete(a); a.cancel(); });
@@ -255,6 +263,14 @@ window.SatyaPortfolio.features['intro'] = function () {
     timers.forEach((resolve, id) => { clearTimeout(id); resolve(); });
     animations.forEach(a => a.cancel());
   });
+
+  // Pause the mobile ticker when it is outside the viewport or tab is hidden.
+  const marquee = document.querySelector('.marquee-container');
+  if (marquee && matchMedia('(max-width: 992px)').matches) {
+    window.SatyaPortfolio.observeMotion(marquee, visible => {
+      marquee.classList.toggle('motion-paused', !visible);
+    });
+  }
 
   // Start the animation
   playIntro();

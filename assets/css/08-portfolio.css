@@ -2,6 +2,8 @@
 
 .projects {
   min-height: 100vh;
+  /* Theme colors switch immediately, independent of the body color fade. */
+  color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,7 +147,7 @@
 .folder-tab::after,
 .folder-front::before,
 .folder-front::after {
-  transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+  transition: none;
 }
 
 /* Back panel + tab */
@@ -189,7 +191,7 @@
   /* Travel with the front cover until this panel unfolds to the right. */
   transform-origin: calc(100% + 15px) 100%;
   transform: translateZ(24px) rotateX(-5deg) translateY(0px) rotateY(0deg);
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease, background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease;
 }
 .portfolio-folder:hover:not(.is-open) .folder-back-left {
   transform: translateZ(24px) rotateX(-10deg) translateY(0px) rotateY(0deg);
@@ -335,7 +337,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 -1px 2px rgba(0, 0, 0, 0.3),
     0 15px 30px -5px var(--folder-ground-shadow);
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), left 0.7s ease, right 0.7s ease, box-shadow 0.7s ease, background-color 0.1s ease-out;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), left 0.7s ease, right 0.7s ease;
   overflow: hidden;
   padding: calc(var(--w) * 0.015);
   display: flex;
@@ -520,7 +522,7 @@
   box-shadow: var(--shadow-3d-base);
   transform-origin: 50% 100%;
   transform: translateZ(24px) rotateX(-5deg);
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease, background-color 0.1s ease-out;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease;
   padding: calc(var(--w) * 0.06) calc(var(--w) * 0.07);
   box-sizing: border-box;
   transform-style: preserve-3d;
@@ -661,7 +663,7 @@
     inset 0 -1px 1px rgba(0, 0, 0, 0.12),
     0 1px 2px var(--raise-lo),
     0 4px 10px var(--raise-soft);
-  transition: transform 0.1s ease-out, box-shadow 0.25s ease;
+  transition: transform 0.1s ease-out;
 }
 .swipe-thumb:hover {
   box-shadow:
@@ -701,7 +703,7 @@
   .portfolio-folder.is-opening .folder-back-right,
   .portfolio-folder.is-opening .folder-back-left { will-change: transform; }
   .portfolio-folder .folder-front,
-  .portfolio-folder .folder-back-left { transition: transform .7s cubic-bezier(.22,1,.36,1), background-color .1s ease-out; }
+  .portfolio-folder .folder-back-left { transition: transform .7s cubic-bezier(.22,1,.36,1); }
   .portfolio-folder .folder-front,
   .portfolio-folder .folder-back-right,
   .portfolio-folder .folder-back-left { box-shadow: none !important; }
@@ -837,7 +839,7 @@
     transform-origin: 50% 100%;
     transform-style: preserve-3d;
     transform: translateZ(22px) rotateX(-5deg);
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease, background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease;
   }
   .portfolio-folder:hover:not(.is-open) .folder-back-right,
   .portfolio-folder:hover:not(.is-open) .folder-back-left {

@@ -187,3 +187,28 @@ tema, ketersediaan logo Lucide, dan ketiadaan nama proyek di cabinet.
 Animasi kucing cabinet dipindahkan dari grup SVG bergerak ke layer HTML dengan SVG statis. Profil idle sekitar 2 detik (CPU 4x) berubah dari 168 layout/336 paint menjadi 0/0 di desktop, dan 167/334 menjadi 0/0 di mobile. Napas dan ekor tetap berjalan saat terlihat; lifecycle kini memantau kucing sendiri. Style recalculation dan lonjakan frame pada pembukaan laci pertama masih ada. Kondisi run sebelum/sesudah berbeda, sehingga tidak diklaim sebagai perbandingan FPS terkontrol.
 
 Lihat [laporan audit](AUDIT_2026-10-16.md) untuk bukti, keamanan, batasan, dan perintah pengujian.
+
+
+## Perbaikan hero mobile dan grid — 16 Oktober 2026
+
+Grid semula berada di belakang background root yang dipasang theme bootstrap. Body kini memiliki stacking context sendiri; grid dan gradient memakai satu layer fixed. Kotak 56px, garis 1px, opacity light .09 / dark .075. Root dan body memakai overflow-x: clip agar ayunan tidak memperluas area scroll horizontal.
+
+Stage kartu mobile mengikuti proporsi PNG, menggantikan offset tetap -580px dan spacer teks 420px. Desktop memakai display: contents pada wrapper stage sehingga layout lama tetap berlaku. Mobile menampilkan satu layer gambar sesuai tema, tanpa duplikasi strap, animated filter, atau backdrop blur navbar. Rotasi drag dibatasi sekitar 10 derajat; pointer capture serta pointercancel/lostpointercapture menangani pelepasan, dan touch-action: pan-y mempertahankan scroll vertikal. Spring berhenti setelah kembali tenang.
+
+Mobile tidak lagi membangun ulang huruf nama untuk scramble/math flow, logo dan tombol Enter tidak memicu pulse paint terus menerus, animasi blur intro dihapus, dan marquee berhenti di luar viewport atau tab tersembunyi. Cursor dan greeting tetap berjalan.
+
+Validasi: node tools/verify-mobile-hero.cjs final memeriksa 320, 390, 768, 992, dan 1440px, struktur section, clearance kartu, overflow, horizontal touch drag, spring settle, serta scroll vertikal di atas kartu. Screenshot light/dark diperiksa pada 390 dan 1440px. Audit browser memeriksa menu, proyek, modal, draft Gmail, terminal, dan breakpoint reload.
+
+Profil lokal headless 390px CPU 4x: run awal mencatat 1084 Paint, run setelah perbaikan 50 Paint dalam jendela sampling 2.5 detik. Animated marquee di luar layar kini tidak muncul dalam daftar animasi berjalan. Tema, waktu sesudah intro, dan beban proses antar-run berbeda; ini bukti berkurangnya pekerjaan rendering, bukan benchmark FPS terkontrol atau jaminan untuk semua ponsel. Laporan sementara ada di tmp/cabinet-mobile-before.json dan tmp/cabinet-mobile-settled.json.
+
+
+### Koreksi ukuran dan sumbu lanyard mobile — 17 Oktober 2026
+
+Lebar canvas kembali min(90vw, 500px), sesuai lebar container mobile lama; sebelumnya 128vw membuat kartu terlalu besar. Transform origin berada di titik tengah atas halaman, bukan 55% tinggi gambar. Selama drag mobile, transform hanya rotasi tanpa translasi vertikal sehingga pangkal tali tidak bergeser. Damping sudut kembali .94 dengan spring .012 untuk ayunan yang lebih lentur; delta waktu diterapkan khusus mobile untuk menyamakan tempo layar 60/120Hz. Batas sudut 18 derajat hanya melindungi drag ekstrem. Reveal mobile menggunakan posisi akhir tetap agar pangkal tidak terangkat pada animasi turun awal.
+
+Pemeriksaan browser verify-mobile-hero kini menguji lebar canvas, probe posisi sumbu sebelum/saat drag (pergeseran maksimal 1px), drag mouse tanpa seleksi, drag sentuh, kembalinya ayunan ke posisi istirahat, scroll vertikal dan overflow pada 320–992px. Tampilan 1440px juga diperiksa. Run anchored-debug2 lolos tanpa error runtime.
+
+
+### Kondisi final sebelum push — 17 Oktober 2026
+
+Atas permintaan pengguna, perubahan ukuran, pivot, physics, seleksi, dan struktur lanyard di atas telah dikembalikan ke save-16-vercel-deploy-ready. Satu-satunya perubahan posisi lanyard dari save point adalah top mobile -580px menjadi -550px (turun 30px). Hasil pengujian pivot dan drag versi eksperimen di atas merupakan catatan historis, bukan perilaku versi final. Pemeriksaan khusus eksperimen dipindahkan ke tmp. Grid, pengurangan efek navbar/intro mobile, jeda marquee di luar layar, dan pergantian warna folder/cabinet tanpa transisi tetap dipertahankan. Build dan verifikasi deploy versi final lolos.

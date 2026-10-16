@@ -1,46 +1,32 @@
 /* Reset & Fonts */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   font-family: 'Outfit', sans-serif;
   background-color: var(--bg);
-  background-image: var(--bg-gradient);
-  background-attachment: fixed;
   color: var(--text);
   line-height: 1.6;
-  overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: clip;
+  isolation: isolate;
+  transition: background-color .3s ease, color .3s ease;
 }
-
+/* Keep the grid above the opaque root background, behind page content.
+   A single composited layer avoids fixed-background repainting on mobile. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;
-  background-image: 
-    linear-gradient(to right, rgba(128, 128, 128, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(128, 128, 128, 0.15) 1px, transparent 1px);
-  background-size: 30px 30px;
+  z-index: -1;
+  --grid-line: rgba(65, 65, 60, .09);
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
+    var(--bg-gradient);
+  background-size: 56px 56px, 56px 56px, 100% 100%;
   pointer-events: none;
+  transform: translateZ(0);
 }
-[data-theme="dark"] body::before {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.25) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
-}
-
-/* A single fixed background layer avoids repainting the page gradient on scroll. */
-@media (min-width: 769px) {
-  body { background-image: none; background-attachment: scroll; }
-  body::before {
-    background-image:
-      linear-gradient(to right, rgba(128,128,128,.15) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(128,128,128,.15) 1px, transparent 1px),
-      var(--bg-gradient);
-    background-size: 30px 30px, 30px 30px, 100% 100%;
-    transform: translateZ(0);
-  }
-}
+[data-theme="dark"] body::before { --grid-line: rgba(238, 232, 214, .075); }
 
 :root {
   --bg: #fafafa;
