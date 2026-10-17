@@ -94,3 +94,16 @@ html.theme-switching,
 html.theme-switching *,
 html.theme-switching *::before,
 html.theme-switching *::after { transition: none !important; }
+
+/* Disable native tap rectangles throughout the UI, including nested icons. */
+html { -webkit-tap-highlight-color: transparent; }
+:where(button, a, [role="button"], [role="tab"]) {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+:where(button, a, [role="button"], [role="tab"]):focus:not(:focus-visible) { outline: none; }
+:where(button, a, [role="button"], [role="tab"]):focus-visible {
+  outline: 2px solid #cd4438;
+  outline-offset: 3px;
+}
