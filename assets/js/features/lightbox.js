@@ -491,6 +491,39 @@ window.SatyaPortfolio.features['lightbox'] = function () {
   let dossierReturnFocus = null;
   let dossierBackgroundState = [];
   let dossierBodyOverflow = '';
+  let dossierMobileScroll = null;
+  const mobileDossierQuery = window.matchMedia('(max-width: 760px)');
+
+  function syncDossierViewport() {
+    if (!dossierModal?.classList.contains('active') || !mobileDossierQuery.matches) return;
+    const viewport = window.visualViewport;
+    dossierModal.style.setProperty('--dossier-viewport-height', `${viewport?.height ?? window.innerHeight}px`);
+    dossierModal.style.setProperty('--dossier-viewport-top', `${viewport?.offsetTop ?? 0}px`);
+  }
+  window.visualViewport?.addEventListener('resize', syncDossierViewport);
+  window.visualViewport?.addEventListener('scroll', syncDossierViewport);
+  window.addEventListener('resize', syncDossierViewport);
+
+  function lockDossierMobileScroll() {
+    if (!mobileDossierQuery.matches) return;
+    const body = document.body;
+    dossierMobileScroll = {
+      x: window.scrollX, y: window.scrollY,
+      styles: Object.fromEntries(['position', 'top', 'left', 'right', 'width'].map(key => [key, body.style[key]])),
+      rootOverflow: document.documentElement.style.overflow
+    };
+    Object.assign(body.style, { position: 'fixed', top: `-${dossierMobileScroll.y}px`, left: '0', right: '0', width: '100%' });
+    document.documentElement.style.overflow = 'hidden';
+  }
+
+  function unlockDossierMobileScroll() {
+    if (!dossierMobileScroll) return;
+    const saved = dossierMobileScroll;
+    dossierMobileScroll = null;
+    Object.assign(document.body.style, saved.styles);
+    document.documentElement.style.overflow = saved.rootOverflow;
+    window.scrollTo({ left: saved.x, top: saved.y, behavior: 'instant' });
+  }
   function openDossier(projectId) {
     const folder = document.getElementById('portfolio-folder');
     if (!folder || !folder.classList.contains('is-open')) return;
@@ -735,6 +768,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     if (!dossierModal.classList.contains('active')) {
       dossierReturnFocus = document.activeElement;
       dossierBodyOverflow = document.body.style.overflow;
+      lockDossierMobileScroll();
       dossierBackgroundState = [document.getElementById('main-wrapper'), document.getElementById('navbar')]
         .filter(Boolean).map(element => ({ element, inert: element.inert }));
       document.getElementById('main-wrapper')?.classList.add('modal-background');
@@ -744,19 +778,30 @@ window.SatyaPortfolio.features['lightbox'] = function () {
     dossierModal.classList.remove('overview-opening');
     dossierModal.classList.add('active');
     dossierModal.setAttribute('aria-hidden', 'false');
+    syncDossierViewport();
     document.body.style.overflow = 'hidden';
     void dossierModal.offsetWidth;
     dossierModal.classList.add('overview-opening');
     (dossierCloseBtn || dossierModal).focus({ preventScroll: true });
+    // Mobile viewport updates from the body lock can reset focus during this frame.
+    setTimeout(() => {
+      if (dossierModal.classList.contains('active') && !dossierModal.contains(document.activeElement)) {
+        (dossierCloseBtn || dossierModal).focus({ preventScroll: true });
+      }
+    }, 0);
     if (catExtensionEnabled) startCatCompanion();
   }
 
   function closeDossier() {
     if (!dossierModal?.classList.contains('active')) return;
+    if (dossierModal.contains(document.activeElement)) document.activeElement.blur();
     dossierModal.classList.remove('active');
     dossierModal.classList.remove('overview-opening');
     dossierModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = dossierBodyOverflow;
+    unlockDossierMobileScroll();
+    dossierModal.style.removeProperty('--dossier-viewport-height');
+    dossierModal.style.removeProperty('--dossier-viewport-top');
     dossierBackgroundState.forEach(({ element, inert }) => { element.inert = inert; });
     dossierBackgroundState = [];
     document.getElementById('main-wrapper')?.classList.remove('modal-background');
@@ -890,7 +935,7 @@ window.SatyaPortfolio.features['lightbox'] = function () {
         document.querySelectorAll('[data-editor-view]').forEach(view => {
           view.hidden = view.getAttribute('data-editor-view') !== panel;
         });
-        if (panel === 'search') document.getElementById('editorSearchInput')?.focus();
+        if (panel === 'search') document.getElementById('editorSearchInput')?.focus({ preventScroll: true });
       }
     });
   });
